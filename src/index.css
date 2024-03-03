@@ -1,0 +1,14 @@
+body {
+  background-color: #fff;
+}
+
+:root {
+  --main-color: #54a6ff;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Nunito";
+  margin: 0;
+  padding: 0;
+}

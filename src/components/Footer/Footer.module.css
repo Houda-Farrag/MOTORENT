@@ -1,0 +1,22 @@
+.footer {
+  padding: 40px 80px 0;
+  background-color: #fff;
+}
+
+.upper {
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+}
+
+.about li,
+.community li,
+.socials li {
+  list-style: none;
+  margin-bottom: 20px;
+  color: #90a3bf;
+}
+
+.lower {
+  margin-top: 10px;
+  padding: 20px;
+}
