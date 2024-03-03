@@ -1,0 +1,54 @@
+.adv {
+  position: relative;
+  width: 640px;
+  height: 360px;
+  background-color: #54a6ff;
+  padding: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: "Nunito";
+}
+
+.text {
+  color: #fff;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.button {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.image {
+  position: absolute;
+  top: 234px;
+  left: 137px;
+  width: 406px;
+  height: 116px;
+}
+
+.header {
+  font-size: 32px;
+}
+
+@media (max-width: 768px) {
+  .adv {
+    position: relative;
+    width: 327px;
+    height: 232px;
+    top: 127px;
+    left: 53px;
+  }
+  .image {
+    position: absolute;
+    width: 100%;
+    height: 57px;
+    top: 172px;
+    left: 120px;
+  }
+
+  .header {
+    font-size: 24px;
+  }
+}
