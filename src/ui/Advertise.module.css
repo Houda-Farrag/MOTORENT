@@ -5,7 +5,6 @@
   background-color: #54a6ff;
   padding: 30px;
   border-radius: 10px;
-  overflow: hidden;
   font-family: "Nunito";
 }
 
@@ -37,15 +36,13 @@
     position: relative;
     width: 327px;
     height: 232px;
-    top: 127px;
-    left: 53px;
   }
   .image {
     position: absolute;
-    width: 100%;
+    width: 120px;
     height: 57px;
     top: 172px;
-    left: 120px;
+    left: 190px;
   }
 
   .header {

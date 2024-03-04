@@ -25,7 +25,10 @@ function Location() {
         <Stack direction="row" spacing={10}>
           <Box
             sx={{
-              width: "120px",
+              width: {
+                lg: "120px",
+                sm: "50px",
+              },
             }}
           >
             {/* <Typography variant="body1" gutterBottom>
@@ -45,7 +48,10 @@ function Location() {
           </Box>
           <Box
             sx={{
-              width: "120px",
+              width: {
+                lg: "120px",
+                sm: "50px",
+              },
             }}
           >
             {/* <Typography variant="body1" gutterBottom>
@@ -65,7 +71,10 @@ function Location() {
           </Box>
           <Box
             sx={{
-              width: "120px",
+              width: {
+                lg: "120px",
+                sm: "50px",
+              },
             }}
           >
             {/* <Typography variant="body1" gutterBottom>
