@@ -5,7 +5,7 @@ const emailRegex = /^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/gi;
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$/gi;
 
 function Login() {
-  const { register, getValues, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
 
   function submit(data) {
