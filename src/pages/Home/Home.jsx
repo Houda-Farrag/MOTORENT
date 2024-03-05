@@ -3,13 +3,18 @@ import Location from "../../components/Location/Location";
 import Advertise from "../../ui/Advertise";
 import CarCard from "../../components/CarCard/CarCard";
 import { Box, Grid } from "@mui/material";
-
 import styles from "./Home.module.css";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
+import NavBar from "../../components/NavBar/NavBar";
+import useUser from "../Auth/useUser";
 
 function Home() {
+  const { data, isLoading } = useUser();
+
+  if (isLoading) return;
   return (
     <Box className={styles.home}>
+      <NavBar data={data} />
       <Box>
         <Grid container gap="10px" className={styles.loc}>
           <Advertise item sm={6} />
