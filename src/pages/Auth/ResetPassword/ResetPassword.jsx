@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
 import { Box, Stack, TextField, Button, Typography } from "@mui/material";
 
-const emailRegex = /^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/gi;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$/gi;
+const passwordRegex = /^[A-Z][a-z0-9]{3,}$/gi;
 
-function Login() {
-  const { register, handleSubmit, formState } = useForm();
+function ResetPassword() {
+  const { register, handleSubmit, getValues, formState } = useForm({
+    mode: "all",
+  });
   const { errors } = formState;
 
-  function submit(data) {
-    console.log(data);
-  }
+  function submit(value) {}
 
   function onError(errors) {
     console.log(errors);
@@ -32,7 +31,7 @@ function Login() {
       autoComplete="off"
     >
       <Typography variant="h4" textAlign="center" gutterBottom>
-        Login
+        Create New Password
       </Typography>
       <Stack
         sx={{
@@ -40,19 +39,24 @@ function Login() {
         }}
       >
         <TextField
-          gutterBottom
           required
           size="small"
-          id="email"
-          label="Email"
-          {...register("email", {
-            required: "Email is Required",
-            validate: (value) =>
-              value.toLowerCase().match(emailRegex) ||
-              "Please Enter a valid Email",
+          id="password"
+          label="Password"
+          type="password"
+          {...register("password", {
+            required: "Password is Required",
+            pattern: {
+              value: passwordRegex,
+              message: "Please Enter a Valid Password",
+            },
           })}
-          error={errors?.email?.message}
-          helperText={!errors?.email?.message ? "" : errors?.email?.message}
+          error={errors?.password?.message}
+          helperText={
+            !errors?.password?.message
+              ? "Password should start with Capital Letter and by max 8 chars"
+              : errors?.password?.message
+          }
         />
       </Stack>
       <Stack
@@ -61,31 +65,31 @@ function Login() {
         }}
       >
         <TextField
-          gutterBottom
           required
           size="small"
-          id="password"
-          label="Password"
+          id="passwordConfirm"
+          label="Confirm Password"
           type="password"
-          {...register("password", {
+          {...register("passwordConfirm", {
             required: "Password is Required",
             validate: (value) =>
-              value.toLowerCase().match(passwordRegex) ||
-              "Please Enter a valid Password",
+              value === getValues().password || "Passwords do not match",
           })}
-          error={errors?.password?.message}
+          error={errors?.passwordConfirm?.message}
           helperText={
-            !errors?.password?.message ? "" : errors?.password?.message
+            !errors?.passwordConfirm?.message
+              ? ""
+              : errors?.passwordConfirm?.message
           }
         />
       </Stack>
       <Stack>
         <Button type="submit" variant="contained">
-          Login
+          Submit
         </Button>
       </Stack>
     </Box>
   );
 }
 
-export default Login;
+export default ResetPassword;
