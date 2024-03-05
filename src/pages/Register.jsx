@@ -1,17 +1,20 @@
 import { useForm } from "react-hook-form";
 import { Box, Stack, TextField, Button, Typography } from "@mui/material";
+import { useSignup } from "./Auth/useSignup";
 
-const emailRegex = /^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/gi;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$/gi;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
+const passwordRegex = /^[A-Z][a-z0-9]{3,}$/gi;
 
 function Register() {
-  const { register, getValues, handleSubmit, formState } = useForm();
+  const { signup, isLoading } = useSignup();
+  const { register, getValues, handleSubmit, formState } = useForm({
+    mode: "onChange",
+  });
   const { errors } = formState;
 
-  function submit(data) {
-    console.log(data);
+  function submit(values) {
+    signup(values);
   }
-
   function onError(errors) {
     console.log(errors);
   }
@@ -44,27 +47,27 @@ function Register() {
         <TextField
           required
           size="small"
-          id="firstname"
+          id="firstName"
           label="First Name"
-          {...register("firstname", {
+          {...register("firstName", {
             required: "First Name is Required",
             minLength: {
               value: 3,
               message: "At least 3 chars",
             },
           })}
-          error={errors?.firstname?.message}
+          error={errors?.firstName?.message}
           helperText={
-            !errors?.firstname?.message ? "" : errors?.firstname?.message
+            !errors?.firstName?.message ? "" : errors?.firstName?.message
           }
         />
 
         <TextField
           required
           size="small"
-          id="lastname"
+          id="lastName"
           label="Last Name"
-          {...register("lastname", {
+          {...register("lastName", {
             required: "Last Name is Required",
             minLength: {
               value: 3,
@@ -89,9 +92,10 @@ function Register() {
           label="Email"
           {...register("email", {
             required: "Email is Required",
-            validate: (value) =>
-              value.toLowerCase().match(emailRegex) ||
-              "Please Enter a valid Email",
+            pattern: {
+              value: emailRegex,
+              message: "Please Enter a Valid Email",
+            },
           })}
           error={errors?.email?.message}
           helperText={!errors?.email?.message ? "" : errors?.email?.message}
@@ -110,13 +114,16 @@ function Register() {
           type="password"
           {...register("password", {
             required: "Password is Required",
-            validate: (value) =>
-              value.toLowerCase().match(passwordRegex) ||
-              "Please Enter a valid Password",
+            pattern: {
+              value: passwordRegex,
+              message: "Please Enter a Valid Password",
+            },
           })}
           error={errors?.password?.message}
           helperText={
-            !errors?.password?.message ? "" : errors?.password?.message
+            !errors?.password?.message
+              ? "Password should start with Capital Letter and by max 8 chars"
+              : errors?.password?.message
           }
         />
       </Stack>
@@ -128,24 +135,60 @@ function Register() {
         <TextField
           required
           size="small"
-          id="confirmpassword"
+          id="passwordConfirm"
           label="Confirm Password"
           type="password"
-          {...register("confirmpassword", {
+          {...register("passwordConfirm", {
             required: "Password is Required",
             validate: (value) =>
               value === getValues().password || "Passwords do not match",
           })}
-          error={errors?.confirmpassword?.message}
+          error={errors?.passwordConfirm?.message}
           helperText={
-            !errors?.confirmpassword?.message
+            !errors?.passwordConfirm?.message
               ? ""
-              : errors?.confirmpassword?.message
+              : errors?.passwordConfirm?.message
           }
         />
       </Stack>
+      <Stack
+        sx={{
+          marginBottom: "20px",
+        }}
+      >
+        <TextField
+          required
+          size="small"
+          id="address"
+          label="address"
+          type="text"
+          {...register("address", {
+            required: "address is Required",
+          })}
+          error={errors?.address?.message}
+          helperText={!errors?.address?.message ? "" : errors?.address?.message}
+        />
+      </Stack>
+      <Stack
+        sx={{
+          marginBottom: "20px",
+        }}
+      >
+        <TextField
+          required
+          size="small"
+          id="phone"
+          label="phone"
+          type="text"
+          {...register("phone", {
+            required: "phone is Required",
+          })}
+          error={errors?.phone?.message}
+          helperText={!errors?.phone?.message ? "" : errors?.phone?.message}
+        />
+      </Stack>
       <Stack>
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" disabled={isLoading}>
           Register
         </Button>
       </Stack>
