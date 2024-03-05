@@ -1,11 +1,13 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Register from "../src/pages/Register";
+import Register from "./pages/Auth/Register/Register";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
+import Login from "./pages/Auth/Login/Login";
+import ForgetPassword from "./pages/Auth/ForgetPassword/ForgetPassword";
 import CarCard from "./components/CarCard/CarCard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
   {
     path: "card",
     element: <CarCard />,
+  },
+  {
+    path: "forgotpassword",
+    element: <ForgetPassword />,
+  },
+  {
+    path: "resetPassword",
+    element: <ResetPassword />,
   },
 ]);
 
