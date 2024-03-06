@@ -60,3 +60,22 @@ export async function getUser(token) {
 
   return data;
 }
+
+export async function logout(token) {
+  console.log("**********", token);
+  const { error, data } = await axios.post(
+    `http://localhost:3000/api/v1/users/logout`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  console.log(data);
+
+  if (error) return error;
+
+  return data;
+}

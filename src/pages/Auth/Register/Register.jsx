@@ -20,7 +20,7 @@ function Register() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { register, getValues, handleSubmit, formState } = useForm({
-    mode: "onChange",
+    mode: "all",
   });
   const { errors } = formState;
 
@@ -223,6 +223,28 @@ function Register() {
             })}
             error={errors?.phone?.message}
             helperText={!errors?.phone?.message ? "" : errors?.phone?.message}
+          />
+        </Stack>
+        <Stack
+          sx={{
+            marginBottom: "20px",
+          }}
+        >
+          <TextField
+            required
+            size="small"
+            id="driverLicense"
+            label="Driver License"
+            type="text"
+            {...register("driverLicense", {
+              required: "Driver License is Required",
+            })}
+            error={errors?.driverLicense?.message}
+            helperText={
+              !errors?.driverLicense?.message
+                ? ""
+                : errors?.driverLicense?.message
+            }
           />
         </Stack>
         <Stack>
