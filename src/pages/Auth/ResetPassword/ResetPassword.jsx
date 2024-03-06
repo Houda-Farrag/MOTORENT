@@ -83,6 +83,13 @@ function ResetPassword() {
           }
         />
       </Stack>
+      <Stack
+        sx={{
+          marginBottom: "20px",
+        }}
+      >
+        <TextField required type="text" id="code" label="code" />
+      </Stack>
       <Stack>
         <Button type="submit" variant="contained">
           Submit
