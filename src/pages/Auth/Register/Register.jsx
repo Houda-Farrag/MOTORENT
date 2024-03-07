@@ -1,16 +1,10 @@
 import { useForm } from "react-hook-form";
-import {
-  Box,
-  Stack,
-  TextField,
-  Typography,
-  Button,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Stack, TextField, Typography, Button } from "@mui/material";
 import { signup } from "../../../service/userApi";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import LoadingIndicator from "../../../ui/LoadingIndicator";
 // import { useSignup } from "../Register/useSignup";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
@@ -20,7 +14,7 @@ function Register() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { register, getValues, handleSubmit, formState } = useForm({
-    mode: "onChange",
+    mode: "all",
   });
   const { errors } = formState;
 
@@ -42,19 +36,7 @@ function Register() {
   }
   return (
     <Box>
-      {isLoading && (
-        <Box
-          position="fixed"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          zIndex={5}
-          color="#000"
-          opacity="0.5" // Set the desired opacity
-        >
-          <CircularProgress color="primary" />
-        </Box>
-      )}
+      {isLoading && <LoadingIndicator />}
       <Box
         onSubmit={handleSubmit(submit, onError)}
         component="form"
@@ -223,6 +205,28 @@ function Register() {
             })}
             error={errors?.phone?.message}
             helperText={!errors?.phone?.message ? "" : errors?.phone?.message}
+          />
+        </Stack>
+        <Stack
+          sx={{
+            marginBottom: "20px",
+          }}
+        >
+          <TextField
+            required
+            size="small"
+            id="driverLicense"
+            label="Driver License"
+            type="text"
+            {...register("driverLicense", {
+              required: "Driver License is Required",
+            })}
+            error={errors?.driverLicense?.message}
+            helperText={
+              !errors?.driverLicense?.message
+                ? ""
+                : errors?.driverLicense?.message
+            }
           />
         </Stack>
         <Stack>

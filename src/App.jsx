@@ -8,11 +8,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Cars from "./pages/Cars/Cars";
+// import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "register",
@@ -34,6 +41,14 @@ const router = createBrowserRouter([
     path: "resetPassword",
     element: <ResetPassword />,
   },
+  {
+    path : "cars",
+    element : (
+      <ProtectedRoute>
+        <Cars />
+      </ProtectedRoute>
+    )
+  }
 ]);
 
 const queryClient = new QueryClient({
