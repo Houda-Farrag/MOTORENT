@@ -33,8 +33,8 @@ export async function forgetPassword(values) {
 
 export async function resetPassword(values) {
   const { password, passwordConfirm, code } = values;
-  const { error, data } = await axios.post(
-    `http://localhost:3000/api/v1/users/resetPassword/${code}`,
+  const { error, data } = await axios.patch(
+    `http://localhost:3000/api/v1/users/resetPassword/${code.trim()}`,
     {
       password,
       passwordConfirm,
@@ -62,18 +62,15 @@ export async function getUser(token) {
 }
 
 export async function logout(token) {
-  console.log("**********", token);
   const { error, data } = await axios.post(
     `http://localhost:3000/api/v1/users/logout`,
+    null,
     {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }
   );
-
-  console.log(data);
 
   if (error) return error;
 

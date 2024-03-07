@@ -9,11 +9,12 @@ import NavBar from "../../components/NavBar/NavBar";
 import useUser from "../Auth/useUser";
 
 function Home() {
-  const { data, isLoading } = useUser();
+  // const token = localStorage.getItem("token");
+  const { data: user, isLoading } = useUser();
 
   return (
     <Box>
-      {isLoading ? (
+      {isLoading && (
         <Box
           position="absolute"
           top="50%"
@@ -25,26 +26,25 @@ function Home() {
         >
           <CircularProgress color="primary" />
         </Box>
-      ) : (
-        <Box className={styles.home}>
-          <NavBar data={data} />
-          <Box>
-            <Grid container gap="10px" className={styles.loc}>
-              <Advertise item sm={6} />
-              <Advertise item sm={6} />
-            </Grid>
-          </Box>
-
-          <Grid container className={styles.loc}>
-            <Location item sm={5} />
-            <SwapHorizOutlinedIcon item sm={2} className={styles.swap} />
-            <Location item sm={5} />
-          </Grid>
-
-          <CarCard />
-          <Footer />
-        </Box>
       )}
+      <Box className={styles.home}>
+        {(user || !isLoading) && <NavBar user={user} />}
+        <Box>
+          <Grid container gap="10px" className={styles.loc}>
+            <Advertise item sm={6} />
+            <Advertise item sm={6} />
+          </Grid>
+        </Box>
+
+        <Grid container className={styles.loc}>
+          <Location item sm={5} />
+          <SwapHorizOutlinedIcon item sm={2} className={styles.swap} />
+          <Location item sm={5} />
+        </Grid>
+
+        <CarCard />
+        <Footer />
+      </Box>
     </Box>
   );
 }

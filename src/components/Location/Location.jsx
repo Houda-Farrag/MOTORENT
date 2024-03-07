@@ -26,7 +26,7 @@ function Location() {
           <Box
             sx={{
               width: {
-                lg: "120px",
+                lg: "100%",
                 sm: "50px",
               },
             }}
@@ -35,7 +35,7 @@ function Location() {
               Location
             </Typography> */}
             <TextField
-              size="small"
+              size="normal"
               label="Select..."
               variant="standard"
               select
@@ -49,7 +49,7 @@ function Location() {
           <Box
             sx={{
               width: {
-                lg: "120px",
+                lg: "100%",
                 sm: "50px",
               },
             }}
@@ -58,7 +58,7 @@ function Location() {
               Date
             </Typography> */}
             <TextField
-              size="small"
+              size="large"
               label="Date"
               select
               fullWidth

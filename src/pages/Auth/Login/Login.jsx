@@ -1,16 +1,10 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Box,
-  Stack,
-  TextField,
-  Button,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Stack, TextField, Button, Typography } from "@mui/material";
 import { login } from "../../../service/userApi";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import LoadingIndicator from "../../../ui/LoadingIndicator";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
 const passwordRegex = /^[A-Z][a-z0-9]{8,}$/gi;
@@ -26,7 +20,6 @@ function Login() {
     try {
       setIsLoading(true);
       const response = await login(values);
-      console.log(response);
       toast.success("You logged in successfully");
       localStorage.setItem("token", response.token);
       navigate("/");
@@ -54,19 +47,7 @@ function Login() {
         borderRadius: "5px",
       }}
     >
-      {isLoading && (
-        <Box
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          zIndex={5}
-          color="#000"
-          opacity="0.5" // Set the desired opacity
-        >
-          <CircularProgress color="primary" />
-        </Box>
-      )}
+      {isLoading && <LoadingIndicator />}
       <Box onSubmit={handleSubmit(submit, onError)} component="form">
         <Typography variant="h4" textAlign="center" gutterBottom>
           Login

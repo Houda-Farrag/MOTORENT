@@ -1,15 +1,34 @@
 import { useForm } from "react-hook-form";
 import { Box, Stack, TextField, Button, Typography } from "@mui/material";
+// import useResetPassword from "./useResetPassword";
+import LoadingIndicator from "../../../ui/LoadingIndicator";
+import { resetPassword } from "../../../service/userApi";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const passwordRegex = /^[A-Z][a-z0-9]{3,}$/gi;
 
 function ResetPassword() {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, getValues, formState } = useForm({
     mode: "all",
   });
   const { errors } = formState;
 
-  function submit(value) {}
+  async function submit(values) {
+    try {
+      setIsLoading(true);
+      const response = await resetPassword(values);
+      toast.success(response.message);
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   function onError(errors) {
     console.log(errors);
@@ -30,6 +49,7 @@ function ResetPassword() {
       }}
       autoComplete="off"
     >
+      {isLoading && <LoadingIndicator />}
       <Typography variant="h4" textAlign="center" gutterBottom>
         Create New Password
       </Typography>
@@ -88,7 +108,13 @@ function ResetPassword() {
           marginBottom: "20px",
         }}
       >
-        <TextField required type="text" id="code" label="code" />
+        <TextField
+          required
+          type="text"
+          id="code"
+          label="code"
+          {...register("code", { required: "Code is required" })}
+        />
       </Stack>
       <Stack>
         <Button type="submit" variant="contained">
