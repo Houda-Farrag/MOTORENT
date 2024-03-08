@@ -48,7 +48,8 @@ function CarCard(){
        <Box className={styles.shadow}></Box> 
     </Box>
     <CardContent>
-      <Stack direction="row" spacing={2} color="#90A3BF">
+
+      <Box display="flex" justifyContent="space-between" width="100%" color="#90A3BF">
         <Box display="flex">
           <EvStationIcon fontSize="small" />
           <Typography>90L</Typography>
@@ -61,22 +62,21 @@ function CarCard(){
           <PersonIcon fontSize="small" />
           <Typography>2 persons</Typography>
         </Box>
-      </Stack>
+      </Box>
     </CardContent>
     <CardContent>
-      <Stack
-        direction="row"
-        spacing={5}
+      <Box
         display="flex"
+        justifyContent="space-between"
         alignItems="center"
       >
         <Box>
           $<strong>99.00</strong>/day
         </Box>
         <Box>
-          <Button variant="contained">Rent Now</Button>
+          <Button variant="contained">Rent NOW</Button>
         </Box>
-      </Stack>
+      </Box>
     </CardContent>
     <CardActions disableSpacing></CardActions>
   </Card>
