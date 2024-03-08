@@ -31,7 +31,26 @@
   font-size: 32px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1115px) {
+  .adv {
+    position: relative;
+    width: 450px;
+    height: 300px;
+  }
+  .image {
+    position: absolute;
+    width: 250px;
+    height: 80pxpx;
+    top: 172px;
+    left: 190px;
+  }
+
+  .header {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 668px) {
   .adv {
     position: relative;
     width: 327px;

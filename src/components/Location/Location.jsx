@@ -22,21 +22,10 @@ function Location() {
             value="pickup"
           />
         </RadioGroup>
-        <Stack direction="row" spacing={10}>
-          <Box
-            sx={{
-              width: {
-                lg: "100%",
-                sm: "50px",
-              },
-            }}
-          >
-            {/* <Typography variant="body1" gutterBottom>
-              Location
-            </Typography> */}
+        <Box className={styles.container}>
+          <Box className={styles.field}>
             <TextField
-              size="normal"
-              label="Select..."
+              label="Location"
               variant="standard"
               select
               fullWidth
@@ -46,19 +35,8 @@ function Location() {
               <MenuItem value="BS">Beni-Sweif</MenuItem>
             </TextField>
           </Box>
-          <Box
-            sx={{
-              width: {
-                lg: "100%",
-                sm: "50px",
-              },
-            }}
-          >
-            {/* <Typography variant="body1" gutterBottom>
-              Date
-            </Typography> */}
+          <Box className={styles.field}>
             <TextField
-              size="large"
               label="Date"
               select
               fullWidth
@@ -69,19 +47,8 @@ function Location() {
               <MenuItem value="aug">August</MenuItem>
             </TextField>
           </Box>
-          <Box
-            sx={{
-              width: {
-                lg: "120px",
-                sm: "50px",
-              },
-            }}
-          >
-            {/* <Typography variant="body1" gutterBottom>
-              Time
-            </Typography> */}
+          <Box className={styles.field}>
             <TextField
-              size="small"
               label="Time"
               select
               fullWidth
@@ -92,7 +59,7 @@ function Location() {
               <MenuItem value="3">3</MenuItem>
             </TextField>
           </Box>
-        </Stack>
+        </Box>
       </FormControl>
     </form>
   );

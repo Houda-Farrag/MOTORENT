@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .home {
   background-color: #eee;
   padding: 20px;
@@ -9,7 +14,3 @@
   align-items: center;
 }
 
-/* .swap {
-  border-radius: 5px;
-  padding: 30px;
-} */

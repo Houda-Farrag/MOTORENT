@@ -24,7 +24,7 @@ export default function PriceFliterButton () {
   };
 
   return (
-    <Box sx={{ width: 250 }}>
+    <Box sx={{ width: "90%" }}>
         <Typography sx={{color:'#90A3BF',font:"Plus Jakarta Sans",lineHeight:'30px',
     fontWeight:600, fontSize:"12px"}}>
 P R I C E
