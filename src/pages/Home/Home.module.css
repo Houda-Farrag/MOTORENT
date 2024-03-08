@@ -5,12 +5,18 @@
 
 .home {
   background-color: #eee;
-  padding: 20px;
 }
 
 .loc {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  margin: 20px 0;
+  padding: 10px;
 }
 
+@media (max-width : 668px) {
+  .loc {
+    flex-direction: column;
+  }
+}

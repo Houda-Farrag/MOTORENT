@@ -13,11 +13,10 @@ function Home() {
   const { data: user, isLoading } = useUser();
 
   return (
-    <>
+      <Box className={styles.home}> 
       {isLoading && (
         <LoadingIndicator />
       )}
-      <Box className={styles.home}>
         <NavBar user={user} />
         <Box>
           <Grid container gap="15px" className={styles.loc}>
@@ -25,7 +24,6 @@ function Home() {
             <Advertise item sm={6} />
           </Grid>
         </Box>
-
         <Grid container className={styles.loc}>
           <Location item sm={5} />
           <SwapHorizOutlinedIcon item sm={2} className={styles.swap} />
@@ -34,7 +32,6 @@ function Home() {
         <CarCard />
         <Footer />
       </Box>
-    </>
   );
 }
 

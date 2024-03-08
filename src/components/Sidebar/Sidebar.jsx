@@ -3,14 +3,14 @@ import CapacityCheckBoxButton from '../CapacityCheckBoxButton/CapacityCheckBoxBu
 import PriceFliterButton from '../PriceFliterButton/PriceFliterButton';
 import TypeSelectedCheckBoxButton from "../TypeSelectedCheckBoxButton/TypeSelectedCheckBoxButton"
 import Box from '@mui/material/Box';
+import styles from "./Sidebar.module.css"
 
 export default function Sidebar(){
-
-    return <>
-    <Box sx={{ml:2}}>
+    return (
+    <Box sx={{ml:2}} className={styles.sidebar}>
     <TypeSelectedCheckBoxButton></TypeSelectedCheckBoxButton>
     <CapacityCheckBoxButton></CapacityCheckBoxButton>
     <PriceFliterButton></PriceFliterButton> 
-</Box>
-</>
+    </Box>
+        )
 }

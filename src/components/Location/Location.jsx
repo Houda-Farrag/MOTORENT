@@ -11,7 +11,7 @@ import {
   TextField,
 } from "@mui/material";
 
-function Location() {
+function  Location() {
   return (
     <form className={styles.form}>
       <FormControl>
