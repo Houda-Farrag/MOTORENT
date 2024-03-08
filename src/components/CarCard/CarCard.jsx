@@ -27,6 +27,7 @@ function CarCard(){
       maxHeight: "388px",
       padding: "10px !important",
     }}
+    className={styles.slider}
   >
     <CardHeader action={<FavouriteICon />} title="Car title" />
     <Box
