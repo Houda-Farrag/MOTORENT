@@ -278,7 +278,7 @@ function Navbar({user}) {
             </IconButton>
           </Box>
         </Toolbar>
-        <Link to={"/cars"}>Cars</Link>
+        {/* <Link to={"/cars"}>Cars</Link> */}
       </AppBar>
       {renderMobileMenu}
       {renderMenu}

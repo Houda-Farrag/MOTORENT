@@ -8,13 +8,15 @@ import styles from "./Home.module.css";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import NavBar from "../../components/NavBar/NavBar";
 import useUser from "../Auth/useUser";
+import useCars from "../../useCars"
 
 function Home() {
-  const { data: user, isLoading } = useUser();
+  const { data: user, isLoading : LoadingUser } = useUser();
+  // const {data : cars , isLoading : LoadingCars} = useCars();
 
   return (
       <Box className={styles.home}> 
-      {isLoading && (
+      {LoadingUser  && (
         <LoadingIndicator />
       )}
         <NavBar user={user} />

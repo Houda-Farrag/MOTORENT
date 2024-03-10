@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Cars from "./pages/Cars/Cars";
+import Profile from "./pages/Profile/Profile";
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -46,6 +47,14 @@ const router = createBrowserRouter([
     element : (
       <ProtectedRoute>
         <Cars />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path : "profile",
+    element : (
+      <ProtectedRoute>
+        <Profile />
       </ProtectedRoute>
     )
   }
