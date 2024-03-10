@@ -8,7 +8,7 @@ import LoadingIndicator from "../../../ui/LoadingIndicator";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
 const passwordRegex = /^[A-Z][a-z0-9]{8,}$/gi;
-
+  
 function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
