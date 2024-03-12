@@ -13,6 +13,34 @@ import Cars from "./pages/Cars/Cars";
 import Profile from "./pages/Profile/Profile";
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
+const rental = {
+  name: 'Nissan GT-R',
+  reviewer: 440,
+  image: "car1",
+  price: {
+    subtotal: 80,
+    tax: 0,
+  },
+};
+
+const car = {
+  name: 'Nissan GT-R',
+  reviewer: 440,
+  image: "car1",
+  priceAferDiscount: {
+    subtotal: 80,
+    tax: 0,
+
+  },
+  priceBerforeDiscount:{
+    subtotal: 100,
+  },
+  TypeCar:"Sport",
+  capacity:'2 Person',
+  Streening:"Manual",
+  Gasoline:"70L",
+  discripstion:"NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving"
+}
 const router = createBrowserRouter([
   {
     path: "/",
