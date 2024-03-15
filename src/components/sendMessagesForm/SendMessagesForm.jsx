@@ -34,34 +34,16 @@ import {
 </FormHelperText>
         <form noValidate>
         <Grid container spacing={2}>
-        <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
-              <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Email</FormLabel>
-              <OutlinedInput
-                id="input-email-user-info"
-                placeholder="Email"
-                type="email"
-                {...register('email',{required:{value:true,
-              message:"This Filed is required"},pattern:{value:/^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/,message:"Invalid email"
-              }})}
-  
-                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
-                error={!!errors.message}
-  
-              />
-              <FormHelperText sx={{color:"red"}}>{errors.email?.message}</FormHelperText>
-            </FormControl>
-          </Grid>
+       
           <Grid item xs={12} sm={12}>
             <FormControl fullWidth>
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>First Name</FormLabel>
+      fontWeight:600, fontSize:"16px"}}>Name</FormLabel>
               <OutlinedInput
                 id="input-firstName-user-info"
                 placeholder="First Name"
                 type="text"
-                {...register('firstName',{required:{value:true,
+                {...register('title',{required:{value:true,
               message:"This Filed is required"},maxLength:{value:40,message:"name is too long, maxium 40 letters"
               
               
@@ -71,30 +53,10 @@ import {
                 error={!!errors.message}
   
               />
-              <FormHelperText sx={{color:"red"}}>{errors.firstName?.message}</FormHelperText>
+              <FormHelperText sx={{color:"red"}}>{errors.title?.message}</FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
-              <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Last Name</FormLabel>
-              <OutlinedInput
-                id="input-lastName-user-info"
-                placeholder="Last Name"
-                type="text"
-                {...register('lastName',{required:{value:true,
-              message:"This Filed is required"},maxLength:{value:40,message:"name is too long, maxium 40 letters"
-              
-              
-          },minLength:{value:3,message:"name is too short, minum 3 letters"}})}
-  
-                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
-                error={!!errors.message}
-  
-              />
-              <FormHelperText sx={{color:"red"}}>{errors.lastName?.message}</FormHelperText>
-            </FormControl>
-          </Grid>
+          
           <Grid item xs={12} sm={12}>
             <FormControl fullWidth>
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
@@ -105,7 +67,7 @@ import {
                 type="text"
                 multiline
                 rows={4}
-                {...register('message',{required:{value:true,
+                {...register('body',{required:{value:true,
               message:"This Filed is required"},maxLength:{value:100,message:"message is too long, maxium 40 letters"
               
               
@@ -115,7 +77,7 @@ import {
                 error={!!errors.message}
   
               />
-              <FormHelperText sx={{color:"red"}}>{errors.message?.message}</FormHelperText>
+              <FormHelperText sx={{color:"red"}}>{errors.body?.message}</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item sm={6}>
@@ -124,7 +86,7 @@ import {
                 placeholder="Entre your message here please!"
                 type="file"
                 accepet=".pdf,.doc,.docx"
-                {...register('picture',{required:{value:true,
+                {...register('attachments',{required:{value:true,
               message:"This Filed is required"}})}
   
                 sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}

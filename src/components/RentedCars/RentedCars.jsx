@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box } from "@mui/material";
+import "./styles.css"
 // import { CardImage, CardTitle } from "@wellbiiDashboard/common";
 import { useNavigate } from "react-router-dom";
 
@@ -14,31 +15,8 @@ const accordionData = [
   {
     title: "Front - End Development",
     description: "Front - End Development Course for...",
-  },
-  {
-    title: "Front - End Development",
-    description: "Front - End Development Course for...",
-  },
-  {
-    title: "Front - End Development",
-    description: "Front - End Development Course for...",
-  },
-  {
-    title: "Front - End Development",
-    description: "Front - End Development Course for...",
-  },
-  {
-    title: "Front - End Development",
-    description: "Front - End Development Course for...",
-  },
-  {
-    title: "Front - End Development",
-    description: "Front - End Development Course for...",
-  },
-  {
-    title: "Front - End Development",
-    description: "Front - End Development Course for...",
-  },
+  }
+  
 ];
 
 export const RentedCars= () => {
@@ -48,6 +26,7 @@ export const RentedCars= () => {
   return (
    
     <div>
+       {accordionData.map((data, index) => (
       <Accordion
         disableGutters
         className="accordion-container"
@@ -61,17 +40,13 @@ export const RentedCars= () => {
           id="panel1-header"
         >
           <Box className="accordion-header">
-            {/* <CardImage
-              imgWidth={80}
-              imgHeight={80}
-              image="https://res.cloudinary.com/dnsare3ik/image/upload/v1706466079/WellBii/profile-placeholder_rif1m1.png"
-            />
-            <CardTitle text="Front - End Development" /> */}
+          <img style={{height:"80px",width:"80px"}} src="https://res.cloudinary.com/dnsare3ik/image/upload/v1706466079/WellBii/profile-placeholder_rif1m1.png" alt="img"/>
+            <Box>Front - End Development</Box>
           </Box>
         </AccordionSummary>
 
         <Box>
-          {accordionData.map((data, index) => (
+         
             <AccordionDetails key={index} className="accordion-details">
               <Box
                 sx={{
@@ -85,9 +60,10 @@ export const RentedCars= () => {
                 <Typography>{data.description}</Typography>
               </Box>
             </AccordionDetails>
-          ))}
+          
         </Box>
       </Accordion>
+      ))}
     </div>
   );
             }
