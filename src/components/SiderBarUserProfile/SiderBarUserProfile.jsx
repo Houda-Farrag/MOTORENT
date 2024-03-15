@@ -39,63 +39,63 @@ const SiderBarUser=(drawerWidth)=>{
         <Toolbar />
         <Divider />
         <List>
-        <ListItemButton sx={{color:"#3563E9"}} onClick={()=>{
-        navigate("./Home")
+        <ListItemButton  onClick={()=>{
+        navigate("./")
       }}>
         <ListItemIcon>
-          <HomeIcon/>
+          <HomeIcon sx={{color:"#3563E9"}}/>
         </ListItemIcon>
         <ListItemText primary="Home" />
       </ListItemButton>
-      <ListItemButton sx={{color:"#3563E9"}}>
+      <ListItemButton>
         <ListItemIcon>
-          <Person2Icon/>
+          <Person2Icon sx={{color:"#3563E9"}}/>
         </ListItemIcon>
         <ListItemText primary="Profile Details" />
       </ListItemButton>
 
-      <ListItemButton sx={{color:"#3563E9"}}>
+      <ListItemButton >
         <ListItemIcon>
-          <GarageIcon/>
+          <GarageIcon sx={{color:"#3563E9"}}/>
         </ListItemIcon>
         <ListItemText primary="Rented Cars" />
       </ListItemButton>
- <ListItemButton sx={{color:"#3563E9"}}>
+ <ListItemButton>
         <ListItemIcon>
-          <NoCrashIcon/>
+          <NoCrashIcon sx={{color:"#3563E9"}}/>
         </ListItemIcon>
         <ListItemText primary="Add Car To rent" />
       </ListItemButton>
-      <ListItemButton onClick={handleClick} sx={{color:"#3563E9"}}>
+      <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          <EmailIcon />
+          <EmailIcon sx={{color:"#3563E9"}}/>
         </ListItemIcon>
         <ListItemText primary="Messages" />
         {/* {open ? <ExpandLess /> : <ExpandMore />} */}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4, color:"#3563E9"}}>
+          <ListItemButton sx={{ pl: 4}}>
             <ListItemIcon>
-              <SendIcon />
+              <SendIcon sx={{color:"#3563E9"}} />
             </ListItemIcon>
             <ListItemText primary="Send Message" />
           </ListItemButton>
 
-          <ListItemButton sx={{ pl: 4,color:"#3563E9" }}>
+          <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <MarkEmailUnreadIcon />
+              <MarkEmailUnreadIcon sx={{color:"#3563E9"}} />
             </ListItemIcon>
             <ListItemText primary="Recivied Messages" />
           </ListItemButton>
         </List>
       </Collapse>
 
-      <ListItemButton sx={{color:"#3563E9"}} onClick={()=>{
-        navigate("./login")
+      <ListItemButton  onClick={()=>{
+        navigate("/login")
       }}>
         <ListItemIcon>
-          <LogoutIcon/>
+          <LogoutIcon sx={{color:"#3563E9"}}/>
         </ListItemIcon>
         <ListItemText primary=" Log out" />
       </ListItemButton>
