@@ -8,11 +8,23 @@ import styles from "./Home.module.css";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import NavBar from "../../components/NavBar/NavBar";
 import useUser from "../Auth/useUser";
-import useCars from "../../useCars"
-
+// import useCars from "../../useCars"
+import useFetchingCarHook from "../../service/carApiHook"
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
   // const {data : cars , isLoading : LoadingCars} = useCars();
+  const {data:car,isLoading:carLoadind,isError:carError} = useFetchingCarHook();
+  if(carLoadind){
+    return<>
+    <><div> isLoading Car</div></>
+    </>
+  }
+  if(car){
+  console.log(car)
+}
+if (carError){
+  console.log('error')
+}
 
   return (
       <Box className={styles.home}> 

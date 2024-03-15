@@ -1,24 +1,47 @@
 import React, { useState } from 'react';
-import { Grid, TextField, Button, Box } from '@mui/material';
+import { Grid, TextField, Button, Box, Select, MenuItem } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import LocationForm from '../LocationForm/LocationForm';
+import DocumentationForm from '../DocumentationForm/DocumentaionForm';
 
 function AddCarForm() {
+    const [category , setCategory] = useState("SUV")
+    const [transmission , setTransmision] = useState("manual")
     const [step ,setStep] = useState(0);
     const {register , formState , handleSubmit } = useForm({
         mode : "all"
     })
+
+    const [address, setAddress] = useState({
+        city: '',
+        area: '',
+        description: ''
+    });
+
+
     const {errors} = formState
 
+    function handleBack(){
+        if(step < 0) return
+        setStep(step => step  - 1)
+    }
+
     function submit(values){
-        console.log(values)
+        if(step !==1) return;
+        const formData = { ...values, address };
+        console.log(formData);
     }
 
     function onErrors(errors){
         console.log(errors)
     }
 
+    const handleLocationChange = (data) => {
+        setAddress(data);
+    };
+
   return (
-    <Box onSubmit={handleSubmit(submit , onErrors)} sx={{
+    <Box onSubmit={handleSubmit(submit , onErrors)} component="form" sx={{
         width : "75%",
         position : "absolute",
         top : "50%",
@@ -38,10 +61,7 @@ function AddCarForm() {
             size="small"
             id="model"
             label="Model"
-            {...register("model" , {
-                required : "Model is Required",
-                validate : (value) => typeof value === "string" || "Model Should be String"
-            })}
+            {...register("model" , {required : "Model is Required"})}
             error = {errors?.model?.message}
             helperText = {
                 !errors?.model?.message ? "" : errors?.model?.message
@@ -50,15 +70,13 @@ function AddCarForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
         <TextField 
-            fullWidth 
+            fullWidth
+            type='number' 
             required
             size="small"
             id="manufacturingYear"
             label="Year Model"
-            {...register("manufacturingYear" , {
-                required : "Manufacturing Year is Required",
-                validate : (value) => typeof value === "number" || "Manufacturing Year Should be Number"
-            })}
+            {...register("manufacturingYear" , {required : "Year Model is Required"})}
             error = {errors?.manufacturingYear?.message}
             helperText = {
                 !errors?.manufacturingYear?.message ? "" : errors?.manufacturingYear?.message
@@ -69,13 +87,11 @@ function AddCarForm() {
         <TextField 
             fullWidth 
             required
+            type='Brand'
             size="small"
             id="brand"
             label="Brand"
-            {...register("brand" , {
-                required : "Brand is Required",
-                validate : (value) => typeof value === "string" || "Brand Should be String"
-            })}
+            {...register("brand"  , {required : "Brand is Required"})}
             error = {errors?.brand?.message}
             helperText = {
                 !errors?.brand?.message ? "" : errors?.brand?.message
@@ -86,13 +102,11 @@ function AddCarForm() {
         <TextField 
             fullWidth 
             required
+            type='number'
             size="small"
             id="tankCapacity"
             label="Tank Capacity"
-            {...register("tankCapacity" , {
-                required : "Tank Capacity is Required",
-                validate : (value) => typeof value === "number" || "Tank Capacity Should be Number"
-            })}
+            {...register("tankCapacity" , {required : "Tank Capacity is Required"} )}
             error = {errors?.tankCapacity?.message}
             helperText = {
                 !errors?.tankCapacity?.message ? "" : errors?.tankCapacity?.message
@@ -103,13 +117,11 @@ function AddCarForm() {
         <TextField 
             fullWidth 
             required
+            type='number'
             size="small"
             id="average"
             label="Average KM"
-            {...register("average" , {
-                required : "Average is Required",
-                validate : (value) => typeof value === "number" || "Average Should be Number"
-            })}
+            {...register("average" , {required : "Average is Required"})}
             error = {errors?.average?.message}
             helperText = {
                 !errors?.average?.message ? "" : errors?.average?.message
@@ -120,13 +132,11 @@ function AddCarForm() {
         <TextField 
             fullWidth 
             required
+            type='number'
             size="small"
             id="capacity"
             label="Capacity"
-            {...register("capacity" , {
-                required : "Capacity is Required",
-                validate : (value) => typeof value === "number" || "Capacity Should be Number"
-            })}
+            {...register("capacity" , {required : "Capacity"})}
             error = {errors?.capacity?.message}
             helperText = {
                 !errors?.capacity?.message ? "" : errors?.capacity?.message
@@ -137,13 +147,11 @@ function AddCarForm() {
         <TextField 
             fullWidth 
             required
+            type='number'
             size="small"
             id="priceForDay"
             label="Rate Per Day"
-            {...register("priceForDay" , {
-                required : "Rate is Required",
-                validate : (value) => typeof value === "number" || "Rate Should be Number"
-            })}
+            {...register("priceForDay" , {required : "Rate Per Day is Required"})}
             error = {errors?.priceForDay?.message}
             helperText = {
                 !errors?.priceForDay?.message ? "" : errors?.priceForDay?.message
@@ -154,13 +162,11 @@ function AddCarForm() {
         <TextField 
             fullWidth 
             required
+            type='string'
             size="small"
             id="plateNumber"
             label="Plate Number"
-            {...register("plateNumber" , {
-                required : "Plate Number is Required",
-                validate : (value) => typeof value === "string" || "Plate Number Should be String"
-            })}
+            {...register("plateNumber")}
             error = {errors?.plateNumber?.message}
             helperText = {
                 !errors?.plateNumber?.message ? "" : errors?.plateNumber?.message
@@ -172,154 +178,58 @@ function AddCarForm() {
         {step === 1 && 
         <>
         <Grid item xs={12} sm={6}>
-          <TextField 
-            fullWidth 
+        <Select
+            fullWidth
+            size='small'
+            id="category"
+            value={category}
             required
-            size="small"
-            id="model"
-            label="Model"
-            {...register("model" , {
-                required : "Model is Required",
-                validate : (value) => typeof value === "string" || "Model Should be String"
-            })}
-            error = {errors?.model?.message}
-            helperText = {
-                !errors?.model?.message ? "" : errors?.model?.message
-            }
-            />
+            onChange={(e) =>setCategory(e.target.value)}
+            {...register("category")}
+        >
+            <MenuItem value="SUV">SUV</MenuItem>
+            <MenuItem value="Sedan">Sedan</MenuItem>
+            <MenuItem value="Hatchback">Hatchback</MenuItem>
+            <MenuItem value="Coupe">Coupe</MenuItem>
+            <MenuItem value="Convertible">Convertible</MenuItem>
+            <MenuItem value="Wagon">Wagon</MenuItem>
+        </Select>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <TextField 
-            fullWidth 
+        <Select
+            fullWidth
+            size='small'
+            id="transmition"
+            value={transmission}
             required
-            size="small"
-            id="manufacturingYear"
-            label="Year Model"
-            {...register("manufacturingYear" , {
-                required : "Manufacturing Year is Required",
-                validate : (value) => typeof value === "number" || "Manufacturing Year Should be Number"
-            })}
-            error = {errors?.manufacturingYear?.message}
-            helperText = {
-                !errors?.manufacturingYear?.message ? "" : errors?.manufacturingYear?.message
-            }
-            />
+            onChange={(e) =>setTransmision(e.target.value)}
+            {...register("transmition")}
+        >
+            <MenuItem value="manual">manual</MenuItem>
+            <MenuItem value="auto">auto</MenuItem>
+        </Select>
         </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField 
-            fullWidth 
-            required
-            size="small"
-            id="brand"
-            label="Brand"
-            {...register("brand" , {
-                required : "Brand is Required",
-                validate : (value) => typeof value === "string" || "Brand Should be String"
-            })}
-            error = {errors?.brand?.message}
-            helperText = {
-                !errors?.brand?.message ? "" : errors?.brand?.message
-            }
-            />
+        <Grid item xs={12}>
+            <LocationForm onChange={handleLocationChange}/>
         </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField 
-            fullWidth 
-            required
-            size="small"
-            id="tankCapacity"
-            label="Tank Capacity"
-            {...register("tankCapacity" , {
-                required : "Tank Capacity is Required",
-                validate : (value) => typeof value === "number" || "Tank Capacity Should be Number"
-            })}
-            error = {errors?.tankCapacity?.message}
-            helperText = {
-                !errors?.tankCapacity?.message ? "" : errors?.tankCapacity?.message
-            }
-            />
+        <Grid item xs={12}>
+            <DocumentationForm />
         </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField 
-            fullWidth 
-            required
-            size="small"
-            id="average"
-            label="Average KM"
-            {...register("average" , {
-                required : "Average is Required",
-                validate : (value) => typeof value === "number" || "Average Should be Number"
-            })}
-            error = {errors?.average?.message}
-            helperText = {
-                !errors?.average?.message ? "" : errors?.average?.message
-            }
-            />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField 
-            fullWidth 
-            required
-            size="small"
-            id="capacity"
-            label="Capacity"
-            {...register("capacity" , {
-                required : "Capacity is Required",
-                validate : (value) => typeof value === "number" || "Capacity Should be Number"
-            })}
-            error = {errors?.capacity?.message}
-            helperText = {
-                !errors?.capacity?.message ? "" : errors?.capacity?.message
-            }
-            />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField 
-            fullWidth 
-            required
-            size="small"
-            id="priceForDay"
-            label="Rate Per Day"
-            {...register("priceForDay" , {
-                required : "Rate is Required",
-                validate : (value) => typeof value === "number" || "Rate Should be Number"
-            })}
-            error = {errors?.priceForDay?.message}
-            helperText = {
-                !errors?.priceForDay?.message ? "" : errors?.priceForDay?.message
-            }
-            />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField 
-            fullWidth 
-            required
-            size="small"
-            id="plateNumber"
-            label="Plate Number"
-            {...register("plateNumber" , {
-                required : "Plate Number is Required",
-                validate : (value) => typeof value === "string" || "Plate Number Should be String"
-            })}
-            error = {errors?.plateNumber?.message}
-            helperText = {
-                !errors?.plateNumber?.message ? "" : errors?.plateNumber?.message
-            }
-            />
-        </Grid>
-        </>
-            }         
 
+        </>
+            }  
         <Box width="100%" display="flex" justifyContent="space-between" alignItems="center">
-        <Grid item>
-        <Button onClick={() => setStep(s => s - 1)} variant='contained'>Back</Button>
-        {/* <Button type='submit' variant='contained'>Add Car</Button> */}
-        </Grid>
-        <Grid item> 
-        <Button onClick={() => setStep(s => s + 1)} variant='contained'>Next</Button>
-        {/* <Button type='submit' variant='contained'>Add Car</Button> */}
-        </Grid>
-        </Box>    
+          <Grid item>
+          <Button onClick={handleBack}  variant='contained'>Back</Button>
+          </Grid>
+          <Grid item> 
+          {step === 1 ? <Button type='submit' variant='contained'>Add Car</Button> : 
+           <Button onClick={(e) => {
+            e.preventDefault()
+            return setStep(s => s + 1)
+           }} variant='contained'>Next</Button>}
+          </Grid>
+        </Box>           
       </Grid>
     </Box>
   );
