@@ -11,6 +11,7 @@ import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Cars from "./pages/Cars/Cars";
 import Profile from "./pages/Profile/Profile";
+import UserProfile from "./pages/UserProfile/UserProfile"
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const rental = {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
         <Profile />
       </ProtectedRoute>
     )
+  },
+   {
+     path : "user",
+     element : <UserProfile /> 
   }
 ]);
 

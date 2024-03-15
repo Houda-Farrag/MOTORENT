@@ -212,10 +212,19 @@ function AddCarForm() {
         <Grid item xs={12}>
             <LocationForm onChange={handleLocationChange}/>
         </Grid>
-        <Grid item xs={12}>
-            <DocumentationForm />
-        </Grid>
-
+        <Grid item xs={4}>
+            <input
+              accept="image/*"
+              style={{ display: 'none' }}
+              id={`doc-insurance`}
+              type="file"
+            />
+            <label htmlFor={`doc-insurance`}>
+              <Button variant="contained" size="small" component="span">
+                Upload
+              </Button>
+            </label>
+          </Grid>
         </>
             }  
         <Box width="100%" display="flex" justifyContent="space-between" alignItems="center">
@@ -229,7 +238,7 @@ function AddCarForm() {
             return setStep(s => s + 1)
            }} variant='contained'>Next</Button>}
           </Grid>
-        </Box>           
+        </Box>
       </Grid>
     </Box>
   );
