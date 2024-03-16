@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Box } from '@mui/material';
 
 const LocationForm = ({onChange}) => {
-  const [address, setAddress] = useState({
+  const [location, setLocation] = useState({
     city: '',
     area: '',
     description: ''
@@ -10,11 +10,11 @@ const LocationForm = ({onChange}) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAddress(prevState => ({
+    setLocation(prevState => ({
         ...prevState,
         [name]: value
     }));
-    onChange(address);
+    onChange(location);
 };
 
   const handleSubmit = (e) => {
@@ -29,7 +29,7 @@ const LocationForm = ({onChange}) => {
         size='small'
         label="City"
         name="city"
-        value={address.city}
+        value={location.city}
         onChange={handleChange}
         required
       />
@@ -39,7 +39,7 @@ const LocationForm = ({onChange}) => {
         size='small'
         label="Area"
         name="area"
-        value={address.area}
+        value={location.area}
         onChange={handleChange}
         required
       />
@@ -48,7 +48,7 @@ const LocationForm = ({onChange}) => {
         size='small'
         label="Description"
         name="description"
-        value={address.description}
+        value={location.description}
         onChange={handleChange}
         multiline
         rows={4}

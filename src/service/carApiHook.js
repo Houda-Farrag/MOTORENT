@@ -6,8 +6,9 @@ async function fetchCars() {
 }
 
 const useFetchingCarHook = () => {
-  return useQuery({queryKey:"fetchCars",
-queryFn:fetchCars},{
+  return useQuery({
+    queryKey:["fetchCars"],
+    queryFn:fetchCars},{
 
     retry: 3, 
     retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000)

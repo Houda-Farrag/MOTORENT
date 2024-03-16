@@ -88,10 +88,10 @@ function Login() {
             type="password"
             {...register("password", {
               required: "Password is Required",
-              pattern: {
-                value: passwordRegex,
-                message: "Please Enter a Valid Password",
-              },
+              // pattern: {
+              //   value: passwordRegex,
+              //   message: "Please Enter a Valid Password",
+              // },
             })}
             error={errors?.password?.message}
             helperText={
