@@ -90,8 +90,9 @@ const router = createBrowserRouter([
   },
    {
      path : "user",
-     element : <UserProfile /> 
+     element :<UserProfille></UserProfille>
   }
+  
 ]);
 
 const queryClient = new QueryClient({

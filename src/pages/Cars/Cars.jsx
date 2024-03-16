@@ -1,10 +1,10 @@
 import styles from "./Cars.module.css";
 import { Box, Grid, Hidden } from "@mui/material";
+import Navbar from "../../components/NavBar/NavBar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Location from "../../components/Location/Location";
 import CarCard from "../../components/CarCard/CarCard";
 import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/NavBar/NavBar";
 
 function Cars() {
   return (

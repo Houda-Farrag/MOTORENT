@@ -191,14 +191,14 @@ function Navbar({user}) {
 
   return (
     <Box sx={{ flexGrow: 1,width:"100%" }}>
-      <AppBar position="static" sx={{ backgroundColor: 'white' }}>
+      <AppBar position="static" sx={{ backgroundColor: 'white', }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
         
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } ,color:"var(--main-color)",
+            sx={{ display: { xs: 'none', sm: 'block' } ,color:"#3563E9",
             fontSize:"32px",
             fontWeight:700,
             font:"Plus Jakarta Sans",
