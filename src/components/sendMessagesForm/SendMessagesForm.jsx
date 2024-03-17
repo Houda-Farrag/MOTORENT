@@ -1,7 +1,6 @@
 import {
     Typography,
     FormHelperText,
-    FormControl,
     FormLabel,
     OutlinedInput,
     Grid,
@@ -9,14 +8,28 @@ import {
   import SendIcon from '@mui/icons-material/Send';
 
   import {useForm,} from 'react-hook-form'
+import { useSendMessage } from "./useSendMessage";
   
   const UserSendMessageForm = () => {
-  
       const form = useForm({
           mode:"all"
       })
       const {register,formState,handleSubmit}=form
       const {errors}=formState
+  const {sendMessage,isSending} =useSendMessage()
+async function submit (values){
+try {const res =await sendMessage(values)
+  console.log(values)
+console.log(res)
+
+
+}catch(error){
+  // console.log(error)
+}
+}
+function onError(errors){
+  console.log(errors)
+}
    return (
       <>
      
@@ -35,65 +48,58 @@ import {
             if you have a question or problem.We look forward to providing
              you with the best service and our friendly team is always here to chat
 </FormHelperText>
-        <form noValidate>
+        <form noValidate onSubmit={handleSubmit(submit,onError)}>
         <Grid container spacing={2}>
        
           <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
+          
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Name</FormLabel>
-              <OutlinedInput
-                id="input-firstName-user-info"
-                placeholder="First Name"
+      fontWeight:600, fontSize:"16px"}}>Titel</FormLabel>
+              <OutlinedInput fullWidth
+                id="title"
+                placeholder="Titel "
                 type="text"
-                {...register('title',{required:{value:true,
-              message:"This Filed is required"},maxLength:{value:40,message:"name is too long, maxium 40 letters"
-              
-              
-          },minLength:{value:3,message:"name is too short, minum 3 letters"}})}
+                {...register('title',{required:{value:true,message:"This Filed is required"},maxLength:{value:40,message:"Title is too long, maxium 40 letters"},minLength:{value:3,message:"name is too short, minum 3 letters"}})}
   
-                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
+                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none"}}
                 error={!!errors.message}
   
               />
               <FormHelperText sx={{color:"red"}}>{errors.title?.message}</FormHelperText>
-            </FormControl>
+            
           </Grid>
           
           <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
+           
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Message</FormLabel>
-              <OutlinedInput
-                id="input-lastName-user-info"
+              <OutlinedInput  fullWidth
+                id="body"
                 placeholder="Entre your message here please!"
                 type="text"
                 multiline
                 rows={4}
                 {...register('body',{required:{value:true,
-              message:"This Filed is required"},maxLength:{value:100,message:"message is too long, maxium 40 letters"
-              
-              
-          },minLength:{value:3,message:"Message is too short, minum 3 letters"}})}
+              message:"This Filed is required"},maxLength:{value:200,message:"message is too long, maxium 40 letters"
+            },minLength:{value:3,message:"Message is too short, minum 3 letters"}})}
   
                 sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
                 error={!!errors.message}
   
               />
               <FormHelperText sx={{color:"red"}}>{errors.body?.message}</FormHelperText>
-            </FormControl>
+          
           </Grid>
           <Grid item sm={6}>
 
           <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}> Attachment</FormLabel>
-            <OutlinedInput
-                id="input-lastName-user-info"
-                placeholder="Entre your message here please!"
+            <OutlinedInput fullWidth
+                id="attachments"
+            
                 type="file"
                 accepet=".pdf,.doc,.docx"
-                {...register('attachments',{required:{value:true,
-              message:"This Filed is required"}})}
+                {...register('attachments')}
   
                 sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
                 error={!!errors.message}
@@ -104,9 +110,9 @@ import {
       
             </Grid>
             <Grid item sm={6}>
-            <Button size="large" sx={{mt:3,font:"Plus Jakarta Sans",
-      fontWeight:600,}} type="submit" variant="contained" onSubmit={handleSubmit} endIcon={<SendIcon />}>Send
-</Button>
+            <Button disabled={isSending}  size="large" sx={{mt:6.5,ml:6,font:"Plus Jakarta Sans",
+      fontWeight:600, backgroundColor:'#3563E9'}} type="submit" variant="contained"  endIcon={<SendIcon />}>Send
+            </Button>
             </Grid>
           </Grid>
 

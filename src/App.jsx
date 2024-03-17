@@ -89,7 +89,7 @@ const router = createBrowserRouter([
   {
     path : "profile",
     element : (
-    
+   
         <Profile />
     
     )
@@ -97,9 +97,12 @@ const router = createBrowserRouter([
    {
      path : "user",
      element :<PersistentDrawerLeft/>,children:[
-      {path:"profiledetalis"
+      {path:""
       ,element:<UserProfileDetailsForm/>
     },
+    {path:"profiledetalis"
+    ,element:<UserProfileDetailsForm/>
+  },
     {path:"rentedcars"
       ,element:<RentedCars/>
     }, {path:"addcar"

@@ -5,9 +5,7 @@ import {
     FormLabel,
     OutlinedInput,
     Grid,
-    Stack,Button,} from "@mui/material";
-  import SendIcon from '@mui/icons-material/Send';
-
+    Stack,} from "@mui/material";
   import {useForm,} from 'react-hook-form'
   
   const RecviedMessagesUser = () => {
@@ -30,17 +28,17 @@ import {
               }} >
         Messages
         </Typography>
-     
+     <FormHelperText sx={{mb:4}}>You can find reply on your message here</FormHelperText>
         <form noValidate>
         <Grid container spacing={2}>
        
           <Grid item xs={12} sm={12}>
             <FormControl fullWidth>
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Name</FormLabel>
+      fontWeight:600, fontSize:"16px"}}>Titel</FormLabel>
               <OutlinedInput
-                id="input-firstName-user-info"
-                placeholder="First Name"
+                id="title"
+              
                 type="text"
                 {...register('title',)}
   
@@ -52,11 +50,11 @@ import {
           </Grid>
           
           <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
+            
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Your Message</FormLabel>
-              <OutlinedInput
-                id="input-lastName-user-info"
+              <OutlinedInput fullWidth
+                id="body"
                 placeholder=""
                 type="text"
                 multiline
@@ -66,18 +64,17 @@ import {
                 sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
   
               />
-            </FormControl>
+          
           </Grid>
           <Grid item sm={6}>
           <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Your Attachment</FormLabel>
-            <OutlinedInput
-                id="input-attachments-user-info"
+            <OutlinedInput fullWidth
+                id="attachments"
                 placeholder=" your message here please!"
                 type="file"
                 accepet=".pdf,.doc,.docx"
-                {...register('attachments',{required:{value:true,
-              message:"This Filed is required"}})}
+                {...register('attachments')}
   
                 sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
                 error={!!errors.message}
@@ -88,12 +85,12 @@ import {
       
             </Grid>
             <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
+          
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Reply</FormLabel>
-              <OutlinedInput
-                id="input-lastName-user-info"
-                placeholder="!"
+              <OutlinedInput fullWidth
+                id="reply"
+               
                 type="text"
                 multiline
                 rows={4}
@@ -102,7 +99,7 @@ import {
                 sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
   
               />
-            </FormControl>
+          
           </Grid>
           </Grid>
 

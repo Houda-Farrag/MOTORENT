@@ -15,8 +15,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { InputBase } from '@mui/material';
-import { AccountCircle, Badge, Search } from '@mui/icons-material';
+import { Badge, InputBase, Menu, MenuItem } from '@mui/material';
+import { AccountCircle,   Search } from '@mui/icons-material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -31,6 +31,7 @@ import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
 import { Outlet, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import { useState } from 'react';
 
 
 const drawerWidth = 240;
@@ -125,8 +126,18 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
   const PersistentDrawerLeft = () => {
+    const [anchorEl, setAnchorEl] = useState(null);
+const [notifications, setNotifications] = useState(5); // Number of notifications
+
+const handleMenuOpen = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+const handleMenuClose = () => {
+  setAnchorEl(null);
+};
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
   const handleClick = () => {
     setOpen(!open);
@@ -174,7 +185,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
               color="inherit"
               sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
             >
-              <FavoriteIcon />
+              <FavoriteIcon sx={{"&:hover":{color:"#8b0000"}}}  />
             </IconButton>
             <IconButton
               size="large"
@@ -190,11 +201,27 @@ const DrawerHeader = styled('div')(({ theme }) => ({
               size="large"
               aria-label="show 17 new notifications"
               sx={{ color: '#596780' ,bgcolor: 'white', borderRadius: '50%',border: '1px solid #C3D4E9' ,mr: 2}}
+              aria-controls="notifications-menu"
+              aria-haspopup="true"
+              onClick={handleMenuOpen}
             >
-              <Badge badgeContent={17} color="error">
-               <NotificationsActiveIcon></NotificationsActiveIcon>
-              </Badge>
+               <Badge badgeContent={notifications} color="error">
+          <NotificationsIcon sx={{"&:hover":{color:"#FBB917"},"&:click":{color:"#FBB917"}}} />
+        </Badge>
             </IconButton>
+            <Menu
+        id="notifications-menu"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        {/* Notification items */}
+        <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
+        {/* You can map over a list of notifications to generate menu items */}
+      </Menu>
+
             <IconButton
               size="large"
               edge="end"

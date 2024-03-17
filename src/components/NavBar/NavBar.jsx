@@ -99,9 +99,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Navbar({user}) {
-  const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [notifications, setNotifications] = useState(5); // Number of notifications
+  
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -113,36 +121,14 @@ function Navbar({user}) {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+
+  ;
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -245,11 +231,26 @@ function Navbar({user}) {
               size="large"
               aria-label="show 17 new notifications"
               sx={{ color: '#596780' ,bgcolor: 'white', borderRadius: '50%',border: '1px solid #C3D4E9' ,mr: 2}}
+              aria-controls="notifications-menu"
+              aria-haspopup="true"
+              onClick={handleMenuOpen}
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
+               <Badge badgeContent={notifications} color="error">
+          <NotificationsIcon sx={{"&:hover":{color:"#FBB917"},"&:click":{color:"#FBB917"}}} />
+        </Badge>
             </IconButton>
+            <Menu
+        id="notifications-menu"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        {/* Notification items */}
+        <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
+        {/* You can map over a list of notifications to generate menu items */}
+      </Menu>
             <IconButton
               size="large"
               edge="end"
@@ -280,8 +281,7 @@ function Navbar({user}) {
         </Toolbar>
         {/* <Link to={"/cars"}>Cars</Link> */}
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+    
     </Box>
   );
 }
