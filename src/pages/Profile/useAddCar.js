@@ -9,10 +9,10 @@ function useAddCar() {
     mutationFn : addCarApi,
     onSuccess : () => {
         toast.success("Car is Added Successfully");
-        // queryClient.invalidateQueries(["ownedCars"]);
+        queryClient.invalidateQueries(["ownedCars"]);
     },
     onError : (error) => {
-        toast.error(error.message)
+        toast.error(error.response.data.message )
     }
    })
 

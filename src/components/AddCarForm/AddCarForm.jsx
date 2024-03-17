@@ -3,17 +3,30 @@ import { Grid, TextField, Button, Box, Select, MenuItem } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import LocationForm from '../LocationForm/LocationForm';
 import useAddCar from '../../pages/Profile/useAddCar';
+import LoadingIndicator from '../../ui/LoadingIndicator';
+import useCategories from '../../pages/Cars/useCategories';
+import useBrands from "../../pages/Cars/useBrands"
 
 function AddCarForm() {
   const token = localStorage.getItem("token");
-  const { addCar, isCreating, error } = useAddCar();
-  const [category, setCategory] = useState("SUV");
+
+  const {carBrands , isGettingCarBrands} = useBrands()
+  const {carCategories , isGettingCategories} = useCategories()
+  const { addCar, isCreating } = useAddCar();
+
+  const [category, setCategory] = useState("CONVERTIBLE");
   const [transmission, setTransmision] = useState("manual");
+  const [brand , setBrand] = useState("MERCEDES BENZ")
   const [step, setStep] = useState(0);
+
   const { register, formState, handleSubmit } = useForm({
     mode: "all"
   });
 
+  console.log(carCategories)
+  console.log(category)
+  console.log(transmission)
+  
   const [location, setLocation] = useState({
     city: '',
     area: '',
@@ -27,15 +40,18 @@ function AddCarForm() {
     setStep(step => step - 1);
   }
 
+  
   async function submit(values) {
+    console.log(values)
     if (step !== 1) return;
-    
+
     const formData = new FormData();
+    formData.append('brand', brand);
+    formData.append('transmission', transmission);
+    formData.append('category', category);
 
     formData.append('average', values.average);
-    formData.append('brand', '65ec1cc8586fc0a0e0af257e');
     formData.append('capacity', values.capacity);
-    formData.append('category', values.category);
     formData.append('doc-carLicense', values.carLicense[0]);
     formData.append('doc-carInspection', values.carInspection[0]);
     formData.append('doc-insurance', values.insurance[0]);
@@ -50,8 +66,8 @@ function AddCarForm() {
     formData.append('plateNumber', values.plateNumber);
     formData.append('priceForDay', values.priceForDay);
     formData.append('tankCapacity', values.tankCapacity);
-    formData.append('transmission', values.transmission);
 
+    
     for (let pair of formData.entries()) {
       if (pair[1] instanceof File) {
         console.log(pair[0] + ', ' + pair[1].name + ', ' + pair[1].size + ', ' + pair[1].type);
@@ -59,10 +75,9 @@ function AddCarForm() {
         console.log(pair[0] + ', ' + pair[1]);
       }
     }
-
+    
     try {
-      const response = await addCar(formData, token);
-      console.log(response);
+      await addCar(formData, token);
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +92,8 @@ function AddCarForm() {
   };
 
   return (
+    <>
+    {(isCreating || isGettingCategories || isGettingCarBrands) && <LoadingIndicator />}
     <Box onSubmit={handleSubmit(submit, onErrors)} component="form" sx={{
       width: "75%",
       position: "absolute",
@@ -120,19 +137,16 @@ function AddCarForm() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+            <Select
                 fullWidth
-                required
-                type='Brand'
-                size="small"
+                size='small'
                 id="brand"
-                label="Brand"
-                {...register("brand", { required: "Brand is Required" })}
-                error={errors?.brand?.message}
-                helperText={
-                  !errors?.brand?.message ? "" : errors?.brand?.message
-                }
-              />
+                value={brand}
+                required
+                onChange={(e) => setBrand(e.target.value)}
+              >
+                {carBrands?.data.map(b => <MenuItem value={b._id}>{b.brand}</MenuItem>)}
+              </Select>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -221,14 +235,14 @@ function AddCarForm() {
                 value={category}
                 required
                 onChange={(e) => setCategory(e.target.value)}
-                {...register("category")}
               >
+                {/* <MenuItem value="CONVERTIBLE">CONVERTIBLE</MenuItem>
+                <MenuItem value="COUPE">COUPE</MenuItem>
+                <MenuItem value="HATCHBACK">HATCHBACK</MenuItem>
                 <MenuItem value="SUV">SUV</MenuItem>
-                <MenuItem value="Sedan">Sedan</MenuItem>
-                <MenuItem value="Hatchback">Hatchback</MenuItem>
-                <MenuItem value="Coupe">Coupe</MenuItem>
-                <MenuItem value="Convertible">Convertible</MenuItem>
-                <MenuItem value="Wagon">Wagon</MenuItem>
+                <MenuItem value="WAGON">WAGON</MenuItem>
+                <MenuItem value="SEDAN">SEDAN</MenuItem> */}
+                {carCategories?.data.map(category => <MenuItem value={category}>{category}</MenuItem>)}
               </Select>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -239,10 +253,9 @@ function AddCarForm() {
                 value={transmission}
                 required
                 onChange={(e) => setTransmision(e.target.value)}
-                {...register("transmission")}
               >
-                <MenuItem value="manual" onClick={() => setTransmision("manual")}>manual</MenuItem>
-                <MenuItem value="auto" onClick={() => setTransmision("manual")}>auto</MenuItem>
+                <MenuItem value="manual">manual</MenuItem>
+                <MenuItem value="auto">auto</MenuItem>
               </Select>
             </Grid>
             <Grid item xs={12}>
@@ -254,7 +267,7 @@ function AddCarForm() {
                 style={{ display: 'none' }}
                 id={`insurance`}
                 type="file"
-                multiple="false"
+                multiple={false}
                 {...register("insurance", { required: "Upload The Insurance Photo" })}
               />
               <label htmlFor={`insurance`}>
@@ -267,7 +280,7 @@ function AddCarForm() {
                 style={{ display: 'none' }}
                 id="carLicense"
                 type="file"
-                multiple="false"
+                multiple={false}
                 {...register("carLicense", { required: "Upload The CarLicense Photo" })}
               />
               <label htmlFor={`carLicense`}>
@@ -280,7 +293,7 @@ function AddCarForm() {
                 style={{ display: 'none' }}
                 id="carInspection"
                 type="file"
-                multiple="false"
+                multiple={false}
                 {...register("carInspection", { required: "Upload The carInspection Photo" })}
               />
               <label htmlFor={`carInspection`}>
@@ -320,6 +333,7 @@ function AddCarForm() {
         </Box>
       </Grid>
     </Box>
+    </>
   );
 }
 
