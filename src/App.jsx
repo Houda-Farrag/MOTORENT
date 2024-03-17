@@ -11,8 +11,14 @@ import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Cars from "./pages/Cars/Cars";
 import Profile from "./pages/Profile/Profile";
-import UserProfile from "./pages/UserProfile/UserProfile";
-
+// import UserProfille from "./pages/userProfile/userProfile";
+import UserProfileDetailsForm from "./components/userProfileDetailsForm/UserProfileDetailsForm"
+import { RentedCars } from "./components/RentedCars/RentedCars";
+import AddCarForm from "./components/AddCarForm/AddCarForm";
+import UserSendMessageForm from "./components/sendMessagesForm/SendMessagesForm";
+import RecviedMessagesUser from "./components/RecviedMessagesUser/RecviedMessagesUser";
+import SportsCar from "./components/CarDetails/CarDetailsImages";
+import PersistentDrawerLeft from "./components/Test/Test";
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const rental = {
@@ -83,16 +89,39 @@ const router = createBrowserRouter([
   {
     path : "profile",
     element : (
-      <ProtectedRoute>
+    
         <Profile />
-      </ProtectedRoute>
+    
     )
   },
    {
      path : "user",
-     element :<UserProfile></UserProfile>
+     element :<PersistentDrawerLeft/>,children:[
+      {path:"profiledetalis"
+      ,element:<UserProfileDetailsForm/>
+    },
+    {path:"rentedcars"
+      ,element:<RentedCars/>
+    }, {path:"addcar"
+    ,element:<AddCarForm/>
+  },
+  {path:"sendmessage"
+    ,element:<UserSendMessageForm/>
+  },
+  {
+    path:"recviedmessage",
+    element:<RecviedMessagesUser/>
   }
-  
+
+     ] },
+     {
+      path:"Detalis",
+      element:<SportsCar></SportsCar>
+     }
+  ,{
+    path:"test",
+    element:<PersistentDrawerLeft/>
+  }
 ]);
 
 const queryClient = new QueryClient({

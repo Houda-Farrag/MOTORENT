@@ -19,7 +19,10 @@ import {
       const {errors}=formState
    return (
       <>
-      <Stack sx={{m:2,p:2,borderRadius:"10px"}}>
+     
+      <Stack  sx={{m:2,p:2,borderRadius:"10px",backgroundColor: '#ffffff',
+       
+        border:"1px solid #3563E9" , }}>
         <Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
               fontSize:"20px",
               fontWeight:700,
@@ -28,7 +31,7 @@ import {
               }} >
         Have a question?
         </Typography>
-        <FormHelperText>Please fill out this form 
+        <FormHelperText sx={{  mb:5}}>Please fill out this form 
             if you have a question or problem.We look forward to providing
              you with the best service and our friendly team is always here to chat
 </FormHelperText>
@@ -81,6 +84,9 @@ import {
             </FormControl>
           </Grid>
           <Grid item sm={6}>
+
+          <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
+      fontWeight:600, fontSize:"16px"}}> Attachment</FormLabel>
             <OutlinedInput
                 id="input-lastName-user-info"
                 placeholder="Entre your message here please!"
@@ -106,6 +112,7 @@ import {
 
           </form>
          </Stack> 
+   
          </>)
           }
           export default UserSendMessageForm;

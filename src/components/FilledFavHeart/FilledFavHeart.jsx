@@ -5,8 +5,8 @@ import IconButton from '@mui/material/IconButton';
 
 const FilledFavHeart=()=>{
     return<>
-    <IconButton aria-label="fingerprint" color="red">
-      <FavoriteIcon/>
+    <IconButton aria-label="fingerprint" >
+      <FavoriteIcon color="error"/>
       </IconButton>
     </>
 }

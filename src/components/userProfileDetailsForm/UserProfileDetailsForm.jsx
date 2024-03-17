@@ -19,16 +19,18 @@ import {
       const {errors}=formState
    return (
       <>
-      <Stack sx={{m:2,p:2,borderRadius:"10px"}}>
+      <Stack sx={{m:2,p:2,borderRadius:"10px",backgroundColor: '#ffffff',
+       border:"1px solid #3563E9"}}>
         <Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
               fontSize:"20px",
               fontWeight:700,
               font:"Plus Jakarta Sans",
               fontStyle:"bold",
+            
               }} >
         Profile Details
         </Typography>
-        <FormHelperText>You can update your info</FormHelperText>
+        <FormHelperText sx={{  mb:5}}>You can update your info</FormHelperText>
         <form noValidate>
         <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
