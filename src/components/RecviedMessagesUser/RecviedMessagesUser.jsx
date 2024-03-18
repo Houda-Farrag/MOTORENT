@@ -7,9 +7,13 @@ import {
     Grid,
     Stack,} from "@mui/material";
   import {useForm,} from 'react-hook-form'
+import { useGetReplyAdmin } from "./useGetReplyAdmin";
+import { useGetUserMessage } from "./useGetUserMessage";
   
   const RecviedMessagesUser = () => {
-  
+  const {data:userMessageData,isLoading:isLoadingMessage,error:errorUserMessage} = useGetUserMessage()
+
+    // const {data:adminReply,isLoading:LoadingAdminReply,error:errorAdminReply} =  useGetReplyAdmin()
       const form = useForm({
          
       })
@@ -89,12 +93,12 @@ import {
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Reply</FormLabel>
               <OutlinedInput fullWidth
-                id="reply"
+                id="replay"
                
                 type="text"
                 multiline
                 rows={4}
-                {...register('reply')}
+                {...register('replay')}
   
                 sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
   
