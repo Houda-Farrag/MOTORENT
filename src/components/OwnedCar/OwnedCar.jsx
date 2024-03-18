@@ -10,7 +10,7 @@ import useUser from '../../pages/Auth/useUser';
 import LoadingIndicator from '../../ui/LoadingIndicator';
 import styles from "./OwnedCar.module.css"
 import useDeleteCar from './useDeleteCar';
-import AddCarForm from "../AddCarForm/AddCarForm"
+import EditCarForm from '../EditCarForm/EditCarForm';
 
 const Accordion = styled(MuiAccordion)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
@@ -42,9 +42,9 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function OwnedCar() {
-    const [showForm , setShowForm] = useState(true);
     const {data , isLoading } = useUser()
     const {deleteCar , isDeleting , token} = useDeleteCar()
+    const [selectedCarId, setSelectedCarId] = useState(null);
     
   const [expanded, setExpanded] = useState('panel1');
   const handleChange = (panel) => () => {
@@ -52,21 +52,32 @@ export default function OwnedCar() {
   };
 
   return (
-    <> {(isLoading || isDeleting )&& <LoadingIndicator />}
+    <> {(isLoading || isDeleting ) && <LoadingIndicator />}
     <Box sx={{width : "75%"}}> 
     {data?.data.ownedCars.map(car => 
         <Accordion expanded={expanded === car.id} onChange={handleChange(car.id)} key={car.id}>
         <AccordionSummary aria-controls={`${car.id}-content`} id={`${car.id}-header`} expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}>
           <Typography sx={{color : "#fff" , fontFamily: "Nunito" , fontSize : "1.2rem"}}>{car.model}</Typography>
         </AccordionSummary>
+        {selectedCarId === car.id ? 
+
         <AccordionDetails>
+                <Box className="cardetails">
+                  <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row">
+                    <Box>
+                    <EditCarForm car={car} hidden />
+                    </Box>
+                  </Stack>
+                </Box>
+        </AccordionDetails> : 
+                <AccordionDetails>
                 <Box className="cardetails">
                     <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row" >
                         <Box sx={{
                             width : "200px",
                             height : "150px",
                         }}>
-                            <img className={styles.image}src={car.images[0].url} alt={car.images[0]._id} />
+                            <img className={styles.image} src={car.images[0].url} alt={car.images[0]._id} />
                         </Box>
                         <Box>    
                             <div>
@@ -115,12 +126,13 @@ export default function OwnedCar() {
                             <Button  variant='contained' size='small' color='error' onClick={()=>deleteCar(car.id , token)}>Delete</Button>
                         </Box>
                         <Box>
-                            <Button variant='contained' size='small'>Update</Button>
+                            <Button variant='contained' size='small' onClick={() => setSelectedCarId(car.id)}>Update</Button>
                         </Box>
                     </Stack>
-                    {showForm && <AddCarForm />}
                 </Box>
         </AccordionDetails>
+        }
+        
       </Accordion>)}
     </Box>
     </>
