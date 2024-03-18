@@ -16,11 +16,11 @@ import { useSendMessage } from "./useSendMessage";
       })
       const {register,formState,handleSubmit}=form
       const {errors}=formState
-  const {sendMessage,isSending} =useSendMessage()
+    const {sendMessage,isSending} =useSendMessage()
 async function submit (values){
 try {const res =await sendMessage(values)
   console.log(values)
-console.log(res)
+  // console.log(res)
 
 
 }catch(error){
