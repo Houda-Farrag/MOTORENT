@@ -8,10 +8,58 @@ import {
     Stack
   } from "@mui/material";
   import {useForm} from 'react-hook-form'
+import useUser from "../../pages/Auth/useUser";
+import LoadingIndicator from "../../ui/LoadingIndicator";
+import { useState } from "react";
   
   
   const UserProfileDetailsForm = () => {
-  
+      const {data , isLoading} =useUser();
+      console.log(data)
+      const user =  data?.data
+      
+      const [ profileForm , setProfileForm] = useState(
+      {
+        firstName : data?.data.firstName,
+        lastName   : data?.data.lastName,
+        address   : data?.data.address,
+        driverLicense  : data?.data.driverLicense ,
+        phone  : data?.data.phone
+      })
+
+      console.log(profileForm)
+
+      const changeHandler = (event) => {
+        const {name , value} = event.target
+        switch (name) {
+          case 'firstName' : {
+            setProfileForm((prevFormData) => ({ ...prevFormData, firstName: value }))
+            break
+          }
+          case 'lastName' : {
+            setProfileForm((prevFormData) => ({ ...prevFormData, lastName: value }))
+            break
+          }
+          case 'phone' : {
+            setProfileForm((prevFormData) => ({ ...prevFormData, phone: value }))
+            break
+          }
+          case 'address' : {
+            setProfileForm((prevFormData) => ({ ...prevFormData, address: value }))
+            break
+          }
+          case 'driverLicense' : {
+            setProfileForm((prevFormData) => ({ ...prevFormData, driverLicense: value }))
+            break
+          }
+          default: {
+            setProfileForm((prevFormData) => ({ ...prevFormData, [name]: value }))
+            break
+          }
+        }
+      }
+
+      console.log(profileForm)
       const form = useForm({
           mode:"all"
       })
@@ -19,6 +67,7 @@ import {
       const {errors}=formState
    return (
       <>
+      {isLoading && <LoadingIndicator />}
       <Stack sx={{m:2,p:2,borderRadius:"10px",backgroundColor: '#ffffff',
        border:"1px solid #3563E9"}}>
         <Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
@@ -38,6 +87,8 @@ import {
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Email</FormLabel>
               <OutlinedInput
+                disabled
+                value={user?.email}
                 id="input-email-user-info"
                 placeholder="Email"
                 type="email"
@@ -57,6 +108,9 @@ import {
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>First Name</FormLabel>
               <OutlinedInput
+                name="firstName"
+                value={profileForm.firstName}
+                onChange={changeHandler}
                 id="input-firstName-user-info"
                 placeholder="First Name"
                 type="text"
@@ -78,6 +132,9 @@ import {
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Last Name</FormLabel>
               <OutlinedInput
+               name="lastName"
+               value={profileForm.lastName}
+               onChange={changeHandler}
                 id="input-lastName-user-info"
                 placeholder="Last Name"
                 type="text"
@@ -99,6 +156,9 @@ import {
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Address</FormLabel>
               <OutlinedInput
+                name="address"
+                value={profileForm.address}
+                onChange={changeHandler}
                 id="input-address-user-info"
                 placeholder="Your Address"
                 type="text"
@@ -119,6 +179,9 @@ import {
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Drive Lisencese</FormLabel>
               <OutlinedInput
+                name="driverLicense"
+                value={profileForm.driverLicense}
+                onChange={changeHandler}
                 id="input-drivel-user-info"
                 placeholder="Your Driver License"
                 type="text"
@@ -131,11 +194,13 @@ import {
   
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          
+          {/* <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Town/City</FormLabel>
               <OutlinedInput
+                value={}
                 id="input-city-user-info"
                 placeholder="Your City"
                 type="text"
@@ -148,12 +213,15 @@ import {
               />
                <FormHelperText sx={{color:"red"}}>{errors.city?.message}</FormHelperText>
             </FormControl>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <FormLabel component="legend"sx={{color:'#1A202C',font:"Plus Jakarta Sans",
       fontWeight:600, fontSize:"16px"}}>Phone</FormLabel>
               <OutlinedInput
+                name="phone"
+                value={profileForm.phone}
+                onChange={changeHandler}
                 id="input-Phone-user-info"
                 placeholder="Your Phone"
                 type="text"
