@@ -187,16 +187,7 @@ const handleMenuClose = () => {
             >
               <FavoriteIcon sx={{"&:hover":{color:"#8b0000"}}}  />
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="open settings"
-              color="inherit"
-              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
-            >
-
-              <SettingsIcon />
-            </IconButton>
-
+            
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -270,7 +261,7 @@ const handleMenuClose = () => {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
-          <ListItemButton
+          <ListItemButton 
             onClick={() => {
               navigate("./profiledetalis");
             }}
@@ -283,23 +274,25 @@ const handleMenuClose = () => {
 
           <ListItemButton
             onClick={() => {
-              navigate("./rentedcars");
+              navigate("./addcar");
             }}
           >
             <ListItemIcon>
               <GarageIcon sx={{ color: "#3563E9" }} />
             </ListItemIcon>
-            <ListItemText primary="Rented Cars" />
+            <ListItemText primary="Add Car To Rent" />
           </ListItemButton>
+
+
           <ListItemButton
             onClick={() => {
-              navigate("./rentedcars");
+              navigate("./collection");
             }}
           >
             <ListItemIcon>
               <NoCrashIcon sx={{ color: "#3563E9" }} />
             </ListItemIcon>
-            <ListItemText primary="Add Car To rent" />
+            <ListItemText primary="My Collection" />
           </ListItemButton>
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>

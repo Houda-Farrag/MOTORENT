@@ -71,10 +71,9 @@ console.log(editValues)
     formData.append('tankCapacity', values.tankCapacity);
   
 
-
     console.log(formData)
     try {
-      await addCar({formData});
+      await addCar(formData);
     } catch (error) {
       console.log(error);
     }
@@ -91,15 +90,7 @@ console.log(editValues)
   return (
     <>
     {(isCreating || isGettingCategories || isGettingCarBrands) && <LoadingIndicator />}
-    <Box onSubmit={handleSubmit(submit, onErrors)} component="form" sx={{
-      width: "75%",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "Translate(-50% , -50%)",
-      border: "1px solid #eee",
-      padding: "40px"
-    }}>
+    <Box onSubmit={handleSubmit(submit, onErrors)} component="form">
       <Grid container spacing={1} rowGap={2}
       >
         {step === 0 &&

@@ -51,7 +51,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -102,6 +102,7 @@ function Navbar({user}) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [notifications, setNotifications] = useState(5); // Number of notifications
+  const navigate = useNavigate()
   
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -127,8 +128,6 @@ function Navbar({user}) {
   };
 
   const menuId = 'primary-search-account-menu';
-
-  ;
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -217,16 +216,7 @@ function Navbar({user}) {
             >
               <FavoriteIcon />
             </IconButton>
-          <IconButton
-              size="large"
-              aria-label="open settings"
-              color="inherit"
-              sx={{ color: '#596780' ,bgcolor: 'white', borderRadius: '50%',border: '1px solid #C3D4E9' ,mr: 2}}
-            >
-             
-              <SettingsIcon />
-            </IconButton>
-    
+                
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -257,7 +247,7 @@ function Navbar({user}) {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={()=> navigate("/user") }
               sx={{ color: '#596780' ,bgcolor: 'white', borderRadius: '50%',border: '1px solid #C3D4E9' ,mr: 2}}
             >
               <AccountCircle />

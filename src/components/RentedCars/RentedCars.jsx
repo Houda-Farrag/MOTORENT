@@ -1,106 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "./styles.css"
-// import { CardImage, CardTitle } from "@wellbiiDashboard/common";
-import { useNavigate } from "react-router-dom";
-
-
-const accordionData = [
-  {
-    title: "Front - End Development",
-    description: "Front - End Development Course for...",
-  }
-  
-];
+import OwnedCar from "../OwnedCar/OwnedCar"
+import AddCarForm from "../AddCarForm/AddCarForm";
+import imageCar from "../../assets/logo.jpg"
 
 export const RentedCars= () => {
-    const rentedCar=1;
-   const navigate= useNavigate()
-    if(rentedCar) {
+  const [showForm , setShowForm] = useState(false)
+
+  function handleShowForm(){
+    setShowForm(!showForm)
+  }
+
   return (
-   
+   <>
     <div>
-       {accordionData.map((data, index) => (
-      <Accordion
-        disableGutters
-        className="accordion-container"
-        defaultExpanded
-        sx={{ border: "none !important" }}
-      >
-        <AccordionSummary
-          className="accordion-summary"
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <Box className="accordion-header">
-          <img style={{height:"80px",width:"80px"}} src="https://res.cloudinary.com/dnsare3ik/image/upload/v1706466079/WellBii/profile-placeholder_rif1m1.png" alt="img"/>
-            <Box>Front - End Development</Box>
-          </Box>
-        </AccordionSummary>
-
-        <Box>
-         
-            <AccordionDetails key={index} className="accordion-details">
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  gap: "200px",
-                  alignItems: "center",
-                }}
-              >
-                <Typography>{data.title}</Typography>
-                <Typography>{data.description}</Typography>
+        <Box fullWidth>
+          <Accordion
+            disableGutters
+            className="accordion-container"
+            defaultExpanded
+            sx={{ border: "none !important" }}
+          >
+            <AccordionSummary
+              className="accordion-summary"
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              <Box className="accordion-header">
+                <img src={imageCar} alt="logo" width="80px" height="80px"/>
+                <Typography variant="h6" fontSize="20px" color="primary">Your Cars</Typography>
               </Box>
-            </AccordionDetails>
-          
-        </Box>
-      </Accordion>
-      ))}
+            </AccordionSummary>
+              <OwnedCar />
+          </Accordion>
+      </Box>
     </div>
+
+        <Box sx={{mt:2}} >
+            <Button variant="contained" size="large" onClick={handleShowForm}>{showForm ? "Hide Form" : "ADD CAR"}</Button>
+        </Box>
+        { showForm &&  <Box sx={{mt:2}}><AddCarForm /></Box>}
+    </>
   );
-            }
-            else {
-return<>
-<Box height={"100%"}
-  width={`calc(100% - 5%)` }
-  sx={{
-    position: "absolute",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  }}
->
-  <h3 >
-    You do not rent
-  </h3>
-  <Button
-    size="large"
-    sx={{
-      mt: 5,
-      font: "Plus Jakarta Sans",
-      fontWeight: 600,
-      justifyContent: "center",
-    }}
-    onClick={() => {
-      navigate("./cars");
-    }}
-    type="submit"
-    variant="contained"
-  >
-    Rent Now
-  </Button>
-</Box>
-</>
 
-
-            }
-};
+}
