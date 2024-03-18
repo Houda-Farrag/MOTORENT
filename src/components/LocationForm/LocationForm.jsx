@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { TextField, Box } from '@mui/material';
 
-const LocationForm = ({onChange}) => {
+const LocationForm = ({onChange , car}) => {
   const [location, setLocation] = useState({
     city: '',
     area: '',
     description: ''
   });
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLocation(prevState => ({
@@ -29,6 +29,7 @@ const LocationForm = ({onChange}) => {
         size='small'
         label="City"
         name="city"
+        // defaultValue={car.location.city}
         value={location.city}
         onChange={handleChange}
         required
@@ -39,6 +40,7 @@ const LocationForm = ({onChange}) => {
         size='small'
         label="Area"
         name="area"
+        // defaultValue={car.location.area}
         value={location.area}
         onChange={handleChange}
         required
@@ -48,6 +50,7 @@ const LocationForm = ({onChange}) => {
         size='small'
         label="Description"
         name="description"
+        // defaultValue={car.location.description}
         value={location.description}
         onChange={handleChange}
         multiline

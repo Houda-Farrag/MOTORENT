@@ -7,9 +7,7 @@ import LoadingIndicator from '../../ui/LoadingIndicator';
 import useCategories from '../../pages/Cars/useCategories';
 import useBrands from "../../pages/Cars/useBrands"
 
-function AddCarForm() {
-  const token = localStorage.getItem("token");
-
+function AddCarForm({car = {}}) {
   const {carBrands , isGettingCarBrands} = useBrands()
   const {carCategories , isGettingCategories} = useCategories()
   const { addCar, isCreating } = useAddCar();
@@ -19,14 +17,19 @@ function AddCarForm() {
   const [brand , setBrand] = useState("MERCEDES BENZ")
   const [step, setStep] = useState(0);
 
+  const {id : EditId , ...editValues} = car;
+  const EditSession = Boolean(EditId);
   const { register, formState, handleSubmit } = useForm({
-    mode: "all"
+    mode: "all",
   });
+  
+console.log(editValues)
 
+/*
   console.log(carCategories)
   console.log(category)
   console.log(transmission)
-  
+*/  
   const [location, setLocation] = useState({
     city: '',
     area: '',
@@ -36,7 +39,7 @@ function AddCarForm() {
   const { errors } = formState;
 
   function handleBack() {
-    if (step < 0) return;
+    if (step < 1) return;
     setStep(step => step - 1);
   }
 
@@ -66,18 +69,12 @@ function AddCarForm() {
     formData.append('plateNumber', values.plateNumber);
     formData.append('priceForDay', values.priceForDay);
     formData.append('tankCapacity', values.tankCapacity);
+  
 
-    
-    for (let pair of formData.entries()) {
-      if (pair[1] instanceof File) {
-        console.log(pair[0] + ', ' + pair[1].name + ', ' + pair[1].size + ', ' + pair[1].type);
-      } else {
-        console.log(pair[0] + ', ' + pair[1]);
-      }
-    }
-    
+
+    console.log(formData)
     try {
-      await addCar(formData, token);
+      await addCar({formData});
     } catch (error) {
       console.log(error);
     }
@@ -114,6 +111,7 @@ function AddCarForm() {
                 size="small"
                 id="model"
                 label="Model"
+                defaultValue={editValues?.model}
                 {...register("model", { required: "Model is Required" })}
                 error={errors?.model?.message}
                 helperText={
@@ -129,6 +127,7 @@ function AddCarForm() {
                 size="small"
                 id="manufacturingYear"
                 label="Year Model"
+                defaultValue={editValues?.manufacturingYear}
                 {...register("manufacturingYear", { required: "Year Model is Required" })}
                 error={errors?.manufacturingYear?.message}
                 helperText={
@@ -143,6 +142,7 @@ function AddCarForm() {
                 id="brand"
                 value={brand}
                 required
+                defaultValue={editValues?.brand}
                 onChange={(e) => setBrand(e.target.value)}
               >
                 {carBrands?.data.map(b => <MenuItem value={b._id}>{b.brand}</MenuItem>)}
@@ -155,6 +155,7 @@ function AddCarForm() {
                 type='number'
                 size="small"
                 id="tankCapacity"
+                defaultValue={editValues?.tankCapacity}
                 label="Tank Capacity"
                 {...register("tankCapacity", { required: "Tank Capacity is Required" })}
                 error={errors?.tankCapacity?.message}
@@ -170,6 +171,7 @@ function AddCarForm() {
                 type='number'
                 size="small"
                 id="average"
+                defaultValue={editValues?.average}
                 label="Average KM"
                 {...register("average", { required: "Average is Required" })}
                 error={errors?.average?.message}
@@ -186,6 +188,7 @@ function AddCarForm() {
                 size="small"
                 id="capacity"
                 label="Capacity"
+                defaultValue={editValues?.capacity}
                 {...register("capacity", { required: "Capacity" })}
                 error={errors?.capacity?.message}
                 helperText={
@@ -200,6 +203,7 @@ function AddCarForm() {
                 type='number'
                 size="small"
                 id="priceForDay"
+                defaultValue={editValues?.priceForDay}
                 label="Rate Per Day"
                 {...register("priceForDay", { required: "Rate Per Day is Required" })}
                 error={errors?.priceForDay?.message}
@@ -215,6 +219,7 @@ function AddCarForm() {
                 type='string'
                 size="small"
                 id="plateNumber"
+                defaultValue={editValues?.plateNumber}
                 label="Plate Number"
                 {...register("plateNumber")}
                 error={errors?.plateNumber?.message}
@@ -235,6 +240,7 @@ function AddCarForm() {
                 value={category}
                 required
                 onChange={(e) => setCategory(e.target.value)}
+                defaultValue={editValues?.category}
               >
                 {/* <MenuItem value="CONVERTIBLE">CONVERTIBLE</MenuItem>
                 <MenuItem value="COUPE">COUPE</MenuItem>
@@ -242,7 +248,7 @@ function AddCarForm() {
                 <MenuItem value="SUV">SUV</MenuItem>
                 <MenuItem value="WAGON">WAGON</MenuItem>
                 <MenuItem value="SEDAN">SEDAN</MenuItem> */}
-                {carCategories?.data.map(category => <MenuItem value={category}>{category}</MenuItem>)}
+                {carCategories?.data.map(category => <MenuItem value={category} key={category}>{category}</MenuItem>)}
               </Select>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -252,6 +258,7 @@ function AddCarForm() {
                 id="transmission"
                 value={transmission}
                 required
+                defaultValue={editValues?.transmission}
                 onChange={(e) => setTransmision(e.target.value)}
               >
                 <MenuItem value="manual">manual</MenuItem>
@@ -259,7 +266,7 @@ function AddCarForm() {
               </Select>
             </Grid>
             <Grid item xs={12}>
-              <LocationForm onChange={handleLocationChange} />
+              <LocationForm onChange={handleLocationChange} car={car}/>
             </Grid>
             <Grid container gap="30px">
               <input
@@ -269,6 +276,7 @@ function AddCarForm() {
                 type="file"
                 multiple={false}
                 {...register("insurance", { required: "Upload The Insurance Photo" })}
+                // defaultValue={editValues.documents.insurance.url}
               />
               <label htmlFor={`insurance`}>
                 <Button variant="contained" size="small" component="span">
@@ -282,6 +290,7 @@ function AddCarForm() {
                 type="file"
                 multiple={false}
                 {...register("carLicense", { required: "Upload The CarLicense Photo" })}
+                // defaultValue={editValues.documents.carLicense.url}
               />
               <label htmlFor={`carLicense`}>
                 <Button variant="contained" size="small" component="span">
@@ -295,6 +304,7 @@ function AddCarForm() {
                 type="file"
                 multiple={false}
                 {...register("carInspection", { required: "Upload The carInspection Photo" })}
+                // defaultValue={editValues.documents.carInspection.url}
               />
               <label htmlFor={`carInspection`}>
                 <Button variant="contained" size="small" component="span">
@@ -310,6 +320,7 @@ function AddCarForm() {
                 type="file"
                 multiple
                 {...register("images", { required: "Images are Required" })}
+                // defaultValue={editValues.images}
               />
               <label htmlFor={`images`}>
                 <Button variant="contained" size="small" component="span">
