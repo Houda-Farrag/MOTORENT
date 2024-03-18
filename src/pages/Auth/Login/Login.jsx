@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import LoadingIndicator from "../../../ui/LoadingIndicator";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
-const passwordRegex = /^[A-Z][a-z0-9]{8,}$/gi;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]+$/
   
 function Login() {
   const navigate = useNavigate();
@@ -93,10 +93,10 @@ function Login() {
               //   message: "Please Enter a Valid Password",
               // },
             })}
-            error={errors?.password?.message}
-            helperText={
-              !errors?.password?.message ? "" : errors?.password?.message
-            }
+            // error={errors?.password?.message}
+            // helperText={
+            //   !errors?.password?.message ? "" : errors?.password?.message
+            // }
           />
         </Stack>
 

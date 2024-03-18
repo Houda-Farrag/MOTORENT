@@ -12,6 +12,7 @@ import styles from "./OwnedCar.module.css"
 import useDeleteCar from './useDeleteCar';
 import EditCarForm from '../EditCarForm/EditCarForm';
 
+
 const Accordion = styled(MuiAccordion)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   '&:not(:last-child)': {
@@ -25,8 +26,8 @@ const Accordion = styled(MuiAccordion)(({ theme }) => ({
 const AccordionSummary = styled(MuiAccordionSummary)(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === 'dark'
-      ? "#54a6ff"
-      : '#54a6ff',
+      ? "#fff"
+      : '#fff',
   flexDirection: 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
@@ -53,15 +54,15 @@ export default function OwnedCar() {
 
   return (
     <> {(isLoading || isDeleting ) && <LoadingIndicator />}
-    <Box sx={{width : "75%"}}> 
+    <Box sx={{width : "100%" , border : "1px solid #3563E9" , borderRadius :"6px"}}> 
     {data?.data.ownedCars.map(car => 
-        <Accordion expanded={expanded === car.id} onChange={handleChange(car.id)} key={car.id}>
+        <Accordion expanded={expanded === car.id} onChange={handleChange(car.id)} key={car.id} >
         <AccordionSummary aria-controls={`${car.id}-content`} id={`${car.id}-header`} expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}>
-          <Typography sx={{color : "#fff" , fontFamily: "Nunito" , fontSize : "1.2rem"}}>{car.model}</Typography>
+          <Typography sx={{color : "#000" , fontFamily: "Nunito" , fontSize : "1.2rem"}}>{car.model}</Typography>
         </AccordionSummary>
         {selectedCarId === car.id ? 
 
-        <AccordionDetails>
+        <AccordionDetails >
                 <Box className="cardetails">
                   <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row">
                     <Box>

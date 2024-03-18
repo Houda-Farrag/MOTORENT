@@ -5,8 +5,10 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Location from "../../components/Location/Location";
 import CarCard from "../../components/CarCard/CarCard";
 import Footer from "../../components/Footer/Footer";
+import useCars from "../../useCars";
 
 function Cars() {
+  const {data , isLoading : LoadingCars} = useCars();
   return (
     <Box>
       <Grid container justifyContent="space-between" spacing={2}>
@@ -26,12 +28,12 @@ function Cars() {
             <Grid item xs={12} sm={6}>
               <Location />
             </Grid>
-            <Grid container rowGap={2} >
-              {Array.from({ length: 10 }, (_, i) => (
-                <Grid item xs={12} sm={6} md={4} key={i} sx={{ display: 'flex', justifyContent: 'center'}}>
-                  <CarCard />
+            <Grid container rowGap={1} >
+                {data?.data.map(car => 
+                <Grid item xs={12} ms={6} md={4}>
+                    <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
                 </Grid>
-              ))}
+                )}
             </Grid>
           </Grid>
         </Grid>

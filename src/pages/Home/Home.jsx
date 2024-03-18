@@ -8,27 +8,14 @@ import styles from "./Home.module.css";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import NavBar from "../../components/NavBar/NavBar";
 import useUser from "../Auth/useUser";
-// import useCars from "../../useCars"
-import useFetchingCarHook from "../../service/carApiHook"
+import useCars from "../../useCars"
+// import useFetchingCarHook from "../../service/carApiHook"
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
-  // const {data : cars , isLoading : LoadingCars} = useCars();
-  const {data:car,isLoading:carLoadind,isError:carError} = useFetchingCarHook();
-  if(carLoadind){
-    return<>
-    <><div> isLoading Car</div></>
-    </>
-  }
-  if(car){
-  console.log(car)
-}
-if (carError){
-  console.log('error')
-}
-
+  const {data , isLoading : LoadingCars} = useCars();
   return (
       <Box className={styles.home}> 
-      {LoadingUser  && (
+      {(LoadingUser || LoadingCars)  && (
         <LoadingIndicator />
       )}
         <NavBar user={user} />
@@ -43,7 +30,13 @@ if (carError){
           <SwapHorizOutlinedIcon item sm={2} className={styles.swap} />
           <Location item sm={5} />
         </Grid>
-        <CarCard />
+        <Grid container>
+          {data?.data.map(car => 
+            <Grid item xs={12} ms={6} md={4} lg={3}>
+                 <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
+            </Grid>
+            )}
+        </Grid>
         <Footer />
       </Box>
   );

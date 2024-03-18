@@ -60,12 +60,14 @@ const SiderBarUser=(drawerWidth)=>{
         </ListItemIcon>
         <ListItemText primary="Rented Cars" />
       </ListItemButton>
- <ListItemButton>
+
+      <ListItemButton onClick={()=>navigate("./")}>
         <ListItemIcon>
           <NoCrashIcon sx={{color:"#3563E9"}}/>
         </ListItemIcon>
-        <ListItemText primary="Add Car To rent" />
+        <ListItemText primary="Add Car" />
       </ListItemButton>
+
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
           <EmailIcon sx={{color:"#3563E9"}}/>

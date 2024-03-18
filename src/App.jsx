@@ -102,11 +102,13 @@ const router = createBrowserRouter([
     },
     {path:"profiledetalis"
     ,element:<UserProfileDetailsForm/>
-  },
-    {path:"rentedcars"
-      ,element:<RentedCars/>
-    }, {path:"addcar"
-    ,element:<AddCarForm/>
+    },
+    {path:"addcar",
+    element:<AddCarForm/>
+    },
+    {path:"collection",
+    element:<RentedCars/>
+    
   },
   {path:"sendmessage"
     ,element:<UserSendMessageForm/>

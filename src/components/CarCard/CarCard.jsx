@@ -19,95 +19,13 @@ import EvStationIcon from "@mui/icons-material/EvStation";
 import AdjustIcon from "@mui/icons-material/Adjust";
 import PersonIcon from "@mui/icons-material/Person";
 import FavouriteICon from "../../ui/FavouriteICon";
+import LoadingIndicator from "../../ui/LoadingIndicator";
 
-// function CarCard(){
-//   // const {category , images , tankCapacity , transmission , capacity} = cars.data[0]
-//   return (
-//     <Card
-//     sx={{
-//       maxWidth: "304px",
-//       maxHeight: "478px",
-//       padding: "10px !important",
-//     }}
-//     className={styles.slider}
-//   >
-//     <CardHeader action={<FavouriteICon />} title="sedan" />
-//     <Box
-//       sx={{
-//         margin: "30px 0px",
-//       }}
-//     >
-//       <CardMedia
-//         component="img"
-//         // image={images[0].url}
-//         image = './public/car.png'
-//         alt="Paella dish"
-//         width="100%"
-//         height="100%"
-//         sx={{
-//           marginTop: "15px",
-//           marginBottom: "15px",
-//         }}
-//       />
-//        <Box className={styles.shadow}></Box> 
-//     </Box>
-    // <CardContent>
-
-//       <Box display="flex" justifyContent="space-between" width="100%" color="#90A3BF">
-//         <Box display="flex">
-//           <EvStationIcon fontSize="small" />
-//           <Typography>80 L</Typography>
-//         </Box>
-//         <Box display="flex">
-//           <AdjustIcon fontSize="small" />
-//           <Typography>auto</Typography>
-//         </Box>
-//         <Box display="flex">
-//           <PersonIcon fontSize="small" />
-//           <Typography>2 persons</Typography>
-//         </Box>
-//       </Box>
-//     </CardContent>
-//     <CardContent>
-//       <Box
-//         display="flex"
-//         justifyContent="space-between"
-//         alignItems="center"
-//       >
-//         <Box>
-//           $<strong>99.00</strong>/day
-//         </Box>
-//         <Box>
-//           <Button variant="contained">Rent NOW</Button>
-//         </Box>
-//       </Box>
-//     </CardContent>
-//     <CardActions disableSpacing></CardActions>
-//   </Card>
-//   )
-// }
-
-// export default CarCard;
-
-function CarCard() {
-  const { data: car, isLoading: carLoading, isError: carError,error } = useFetchingCarHook();
-
-  if (carLoading) {
-    return (
-      <div>
-        <div>isLoading Car</div>
-      </div>
-    );
-  }
-
-  if (carError) {
-    console.log('error',error);
-  }
-
+function CarCard({car , LoadingCars}) {
   return (
-    <>
-      {car?.data.data.map((Car) => (
-        <div className={styles.slider} key={Car.id}>
+      <>
+      {LoadingCars && <LoadingIndicator />}
+        <div className={styles.slider} key="1">
           <Grid container gap="20px">
             <Grid item>
               <Card
@@ -117,18 +35,14 @@ function CarCard() {
                   padding: "10px !important",
                 }}
               >
-                <CardHeader action={<FavouriteICon />} title={Car.category} />
-                <Box
-                  sx={{
-                    margin: "30px 0px",
-                  }}
-                >
+                <CardHeader action={<FavouriteICon />} title={car.category} />
+                <Box>
                   <CardMedia
                     component="img"
-                    image={Car.images[0].url}
+                    image={car.images[0]?.url}
                     alt="Car image"
-                    width="232px"
-                    height="72"
+                    width="192px"
+                    height="100px"
                     sx={{
                       marginTop: "15px",
                       marginBottom: "15px",
@@ -141,30 +55,30 @@ function CarCard() {
                    <Box display="flex">
 
                      <EvStationIcon fontSize="small" />
-                     <Typography>90L</Typography>
+                     <Typography>{car.tankCapacity} L</Typography>
                    </Box>
                    <Box display="flex">
                      <AdjustIcon fontSize="small" />
-                   <Typography>Manual</Typography>
+                   <Typography>{car.transmission}</Typography>
                                       </Box>
                 <Box display="flex">
                      <PersonIcon fontSize="small" />
-                     <Typography>2 persons</Typography>
+                     <Typography>{car.capacity} persons</Typography>
                    </Box>
                  </Stack>
                </CardContent>
                <CardContent>
                  <Stack
                    direction="row"
-                   spacing={5}
+                   spacing={12}
                    display="flex"
                    alignItems="center"
                  >
                    <Box>
-                     $<strong>99.00</strong>/day
+                   L.E<strong>{car.priceForDay}</strong>/day
                    </Box>
                    <Box>
-                     <Button variant="contained">Rent Now</Button>
+                     <Button variant="contained">Rent</Button>
                    </Box>
                  </Stack>
                </CardContent> 
@@ -173,84 +87,9 @@ function CarCard() {
             </Grid>
           </Grid>
         </div>
-      ))}
-    </>
+      </>
   );
 }
-
-
-
-
-//   return (
-//     <div className={styles.slider}>
-//       <Grid container gap="20px">
-//         {Array.from({ length: 4 }, (_, i) => (
-//           <Grid item>
-//             <Card
-//               sx={{
-//                 maxWidth: "304px",
-//                 maxHeight: "388px",
-//                 padding: "10px !important",
-//               }}
-//             >
-//               <CardHeader action={<FavouriteICon />} title="Car title" />
-//               <Box
-//                 sx={{
-//                   margin: "30px 0px",
-//                 }}
-//               >
-//                 <CardMedia
-//                   component="img"
-//                   image="../public/car.png"
-//                   alt="Paella dish"
-//                   width="232px"
-//                   height="72"
-//                   sx={{
-//                     marginTop: "15px",
-//                     marginBottom: "15px",
-//                   }}
-//                 />
-//                  <Box className={styles.shadow}></Box> 
-//               </Box>
-//               <CardContent>
-//                 <Stack direction="row" spacing={2} color="#90A3BF">
-//                   <Box display="flex">
-//                     <EvStationIcon fontSize="small" />
-//                     <Typography>90L</Typography>
-//                   </Box>
-//                   <Box display="flex">
-//                     <AdjustIcon fontSize="small" />
-//                     <Typography>Manual</Typography>
-//                   </Box>
-//                   <Box display="flex">
-//                     <PersonIcon fontSize="small" />
-//                     <Typography>2 persons</Typography>
-//                   </Box>
-//                 </Stack>
-//               </CardContent>
-//               <CardContent>
-//                 <Stack
-//                   direction="row"
-//                   spacing={5}
-//                   display="flex"
-//                   alignItems="center"
-//                 >
-//                   <Box>
-//                     $<strong>99.00</strong>/day
-//                   </Box>
-//                   <Box>
-//                     <Button variant="contained">Rent Now</Button>
-//                   </Box>
-//                 </Stack>
-//               </CardContent>
-//               <CardActions disableSpacing></CardActions>
-//             </Card>
-//           </Grid>
-//         ))}
-//       </Grid>
-//     </div>
-//   );
-// }
 
 export default CarCard;
 
