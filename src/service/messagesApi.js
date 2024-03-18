@@ -42,7 +42,7 @@ export async function addMessagee(values) {
   }
 
  export async function getUserMessage(){
-  const{data,error} =   await axios.get("localhost:3000/api/v1/messages/",{
+  const{data,error} =   await axios.get("http://localhost:3000/api/v1/messages",{
         headers:{
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -51,13 +51,15 @@ export async function addMessagee(values) {
         console.log("message user returened sucessefully",data)
         return data
       }
+      const messageIdes=data._id
+      console.log("idesss",messageIdes)
 if(error){
     console.log("error message user ",error)
         return error 
 }
   }
-  export  async function getAdminReplyForUserMessage(){
-const { data, error}=await axios.get("localhost:3000/api/v1/messages/65f608546139b47080ad792c",{
+  export  async function getAdminReplyForUserMessage(id){
+const { data, error}=await axios.get(`http://localhost:3000/api/v1/messages/${id}`,{
     headers:{
         Authorization: `Bearer ${localStorage.getItem("token")}`
     }
@@ -68,7 +70,7 @@ const { data, error}=await axios.get("localhost:3000/api/v1/messages/65f60854613
   }
   if(error){
     console.log("error with admin reply ",error)
-        return error 
+    throw error 
 } 
 
 
