@@ -1,115 +1,99 @@
-import {
-    Typography,
-    FormHelperText,
-    FormControl,
-    FormLabel,
-    OutlinedInput,
-    Grid,
-    Stack,} from "@mui/material";
-  import {useForm,} from 'react-hook-form'
+import React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import DraftsIcon from '@mui/icons-material/Drafts';
+import MessageIcon from '@mui/icons-material/Message';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ReplyIcon from '@mui/icons-material/Reply';
+
+import TelegramIcon from '@mui/icons-material/Telegram';
+import { Avatar, Box } from "@mui/material";
+import "./styles.css";
 import { useGetReplyAdmin } from "./useGetReplyAdmin";
 import { useGetUserMessage } from "./useGetUserMessage";
   
   const RecviedMessagesUser = () => {
+
   const {data:userMessageData,isLoading:isLoadingMessage,error:errorUserMessage} = useGetUserMessage()
 
-    // const {data:adminReply,isLoading:LoadingAdminReply,error:errorAdminReply} =  useGetReplyAdmin()
-      const form = useForm({
-         
-      })
-      const {register,formState}=form
-      const {errors}=formState
+    const {data:adminReply,isLoading:LoadingAdminReply,error:errorAdminReply} =  useGetReplyAdmin()
+    console.log(adminReply)
+    
+    
+  
    return (
       <>
-      <Stack sx={{m:2,p:2,borderRadius:"10px",backgroundColor: '#ffffff',
-       
-        border:"1px solid #3563E9" , }}>
-        <Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
-              fontSize:"20px",
-              fontWeight:700,
-              font:"Plus Jakarta Sans",
-              fontStyle:"bold",
-              }} >
-        Messages
-        </Typography>
-     <FormHelperText sx={{mb:4}}>You can find reply on your message here</FormHelperText>
-        <form noValidate>
-        <Grid container spacing={2}>
-       
-          <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
-              <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Titel</FormLabel>
-              <OutlinedInput
-                id="title"
+        <Box  sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection:"column",
+                  
+                  alignItems: "center",
+                }}>
+      <Accordion transition="0.2s ease"
+        disableGutters
+        className="accordion-container"
+        defaultExpanded
+        sx={{ border: "none !important" }}
+      >
+        <AccordionSummary
+          className="accordion-summary"
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Box className="accordion-header">
+          
               
-                type="text"
-                {...register('title',)}
-  
-                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
-               
-  
-              />
-            </FormControl>
-          </Grid>
-          
-          <Grid item xs={12} sm={12}>
+          <Avatar sx={{backgroundColor:"#3563E9"}} >
+            < TelegramIcon sx={{color:"#fff"}} />
+          </Avatar>          
+            <Box >Your Messages</Box>
+          </Box>
+        </AccordionSummary>
+
+        <Box>
+           {userMessageData && userMessageData.data && userMessageData.data.map((message, index) => (
+            <AccordionDetails key={index} className="accordion-details">
+              <Box
+                sx={{
+                  // display: "flex",
+                  // justifyContent: "flex-start",
+                  // flexDirection:"column"
+                  // gap: "200px",
+                  // alignItems: "center",
+                }}
+              >
+               <Box m={2}>
+              <DraftsIcon  fontSize="xl2" sx={{ mx: 1,color:"red" }} />
+              <Typography component="span" fontWeight={600}> Subject:</Typography>   
+                       <Typography component="span">{message.title}</Typography>
+            </Box>
+            <Box m={2}>
+              <MessageIcon   fontSize="xl2" sx={{ mx: 1,color:"#3563E9" }} />
+              <Typography component="span" fontWeight={600}> Body:</Typography>
+              <Typography  component="span">&nbsp;&nbsp;{message.body}</Typography>
+              </Box>
+              <Box m={2}>
+              <ReplyIcon   fontSize="xl2" sx={{ mx: 1,color:"green" }} />
+              <Typography component="span" fontWeight={600}>Reply:</Typography>
+           
+             <Typography component="span">&nbsp;&nbsp;Still pending...</Typography>
             
-              <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Your Message</FormLabel>
-              <OutlinedInput fullWidth
-                id="body"
-                placeholder=""
-                type="text"
-                multiline
-                rows={4}
-                {...register('body',)}
-  
-                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
-  
-              />
-          
-          </Grid>
-          <Grid item sm={6}>
-          <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Your Attachment</FormLabel>
-            <OutlinedInput fullWidth
-                id="attachments"
-                placeholder=" your message here please!"
-                type="file"
-                accepet=".pdf,.doc,.docx"
-                {...register('attachments')}
-  
-                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
-                error={!!errors.message}
-  
-              />
-          
-
-      
-            </Grid>
-            <Grid item xs={12} sm={12}>
-          
-              <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-      fontWeight:600, fontSize:"16px"}}>Reply</FormLabel>
-              <OutlinedInput fullWidth
-                id="replay"
-               
-                type="text"
-                multiline
-                rows={4}
-                {...register('replay')}
-  
-                sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
-  
-              />
-          
-          </Grid>
-          </Grid>
-
-          </form>
-         </Stack> 
+              </Box>
+              
+                {/* <Typography>{message.title}</Typography>
+                <Typography>{message.body}</Typography> */}
+              </Box>
+            </AccordionDetails>
+          ))}
+        </Box>
+      </Accordion>
+      </Box>/
+  );
          </>)
           }
           export default RecviedMessagesUser;
-          // please nora do not forget to remove validtion//
+       
