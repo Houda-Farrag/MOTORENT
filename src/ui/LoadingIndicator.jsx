@@ -1,17 +1,17 @@
-import { Box, CircularProgress } from "@mui/material";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-function LoadingIndicator() {
+
+export default function LoadingIndicator({load}) {
+
   return (
-    <Box 
-      position="absolute"
-      top="50%"
-      left="48.5%"
-      transform="translate(-50%, -50%)"
-      zIndex={5}
-    >
-      <CircularProgress color="primary" />
-    </Box>
+    <div>
+      <Backdrop
+        sx={{ color: '#eee', width: "100%" , height:"100vh" ,zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={load}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
   );
 }
-
-export default LoadingIndicator;

@@ -59,6 +59,10 @@ export async function getAllBrands(){
   return data;
 }
 
+export async function getCarsByCategorgy(){
+  
+}
+
 export async function deleteCar(id){
 
   const {data ,error} = await axios.delete(`http://localhost:3000/api/v1/cars/${id}`, 
@@ -72,4 +76,11 @@ export async function deleteCar(id){
   if (error) return error;
 
   return data;
+}
+//{{url}}api/v1/cars/getTop5ExpensiveCars
+export async function getTopFiveExpensiveCars(){
+  const {data , error} = await axios.get("http://localhost:3000/api/v1/cars/getTop5ExpensiveCars")
+    if(error) return error;
+
+    return data
 }

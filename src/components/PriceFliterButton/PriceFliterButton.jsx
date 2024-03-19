@@ -1,55 +1,38 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import Slider from '@mui/material/Slider';
-import Typography from '@mui/material/Typography';
+import { Box, Typography } from '@mui/material';
 
-
-const MAX = 100;
-const MIN = 0;
-const marks = [
-  {
-    value: MIN,
-    label: '',
+const StyledSlider = styled(Slider)({
+  width: '100%',
+  '& .MuiSlider-thumb': {
+    color: '#54a6ff',
   },
-  {
-    value: MAX,
-    label: '',
+  '& .MuiSlider-rail': {
+    color: 'rgba(0, 0, 0, 0.26)',
   },
-];
+  '& .MuiSlider-track': {
+    color: '#54a6ff',
+  },
+});
 
-export default function PriceFliterButton () {
-  const [val, setVal] = React.useState(MIN);
-  const handleChange = (_, newValue) => {
-    setVal(newValue);
-  };
-
+const PriceFliterButton = ({ selectedPrice, handleChangePrice }) => {
   return (
-    <Box sx={{ width: "90%" }}>
-        <Typography sx={{color:'#90A3BF',font:"Plus Jakarta Sans",lineHeight:'30px',
-    fontWeight:600, fontSize:"12px"}}>
-P R I C E
-        </Typography>
-     
-      <Slider
-        marks={marks}
-        step={10}
-        value={val}
-        valueLabelDisplay="auto"
-        min={MIN}
-        max={MAX}
-        onChange={handleChange}
-        sx={{height:10,color:"#3563E9"}}
-       
+    <Box sx={{padding : "20px"}}>
+    <StyledSlider
+      value={selectedPrice}
+      onChange={handleChangePrice}
+      valueLabelDisplay='on'
+      aria-label='range-slider'
+      min={500}
+      max={2500}
       />
- 
-      
-        <Typography
-          variant="h5"
-          sx={{ m: 1 ,color:'#596780',font:"Plus Jakarta Sans",
-    fontWeight:400, fontSize:"20px",lineHeight:"30px"
-    }}>Max.$100.00
+       <Typography sx={{color:'#90A3BF',font:"Plus Jakarta Sans",lineHeight:'30px',
+          fontWeight:600, fontSize:"12px"}}>
+          P R I C E
         </Typography>
-      
     </Box>
+    
   );
-}
+};
+
+export default PriceFliterButton;

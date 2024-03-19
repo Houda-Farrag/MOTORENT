@@ -8,15 +8,19 @@ import styles from "./Home.module.css";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import NavBar from "../../components/NavBar/NavBar";
 import useUser from "../Auth/useUser";
-import useCars from "../../useCars"
-// import useFetchingCarHook from "../../service/carApiHook"
+import useCars from "../Cars/useCars"
+import useGetTopFiveExpensive from "../Cars/useGetTopFiveExpensive";
+
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
   const {data , isLoading : LoadingCars} = useCars();
+  const {data : topFiveExpensiveCars , isLoading : GettingTopFiveExpensive} = useGetTopFiveExpensive();
+  console.log(topFiveExpensiveCars)
+
   return (
       <Box className={styles.home}> 
       {(LoadingUser || LoadingCars)  && (
-        <LoadingIndicator />
+        <LoadingIndicator load={LoadingCars}/>
       )}
         <NavBar user={user} />
         <Box>

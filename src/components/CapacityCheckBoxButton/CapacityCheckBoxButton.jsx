@@ -6,25 +6,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function CapacityCheckBoxButton() {
-  const [state, setState] = React.useState({
-    twoPerson: true,
-    fourPerson: false,
-    sixPerson: false,
-    eightOrMore:false,
-    
-   
-  });
-
-  const handleChange = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  const { twoPerson, fourPerson, sixPerson,eightOrMore } = state;
-  const error = [twoPerson, fourPerson,sixPerson,eightOrMore].filter((v) => v).length !== 2;
+export default function CapacityCheckBoxButton({ capacities , handleChangeCheckedCapacities}) {
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -32,34 +14,15 @@ export default function CapacityCheckBoxButton() {
     fontWeight:600, fontSize:"20px "
     }}component="fieldset" variant="standard">
         <FormLabel component="legend" sx={{color:'#90A3BF',font:"Plus Jakarta Sans",lineHeight:'30px',
-    fontWeight:600, fontSize:"12px"}}>C A P A C I T Y</FormLabel>
+        fontWeight:600, fontSize:"12px"}}>C A P A C I T Y</FormLabel>
         <FormGroup>
-          <FormControlLabel
+          {capacities.map(capacity =>
+           <FormControlLabel
             control={
-              <Checkbox checked={twoPerson} onChange={handleChange} name="twoPerson" value={twoPerson} />
+              <Checkbox checked={capacity.checked} onChange={()=>handleChangeCheckedCapacities(capacity.id)} name={capacity.label} value={capacity.label} />
             }
-            label="2 Person"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={fourPerson} onChange={handleChange} name="fourPerson" value={fourPerson} />
-            }
-            label="4 Person"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={sixPerson} onChange={handleChange} name="sixPerson" value={sixPerson}/>
-            }
-            label="6 Person "
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={eightOrMore} onChange={handleChange} name="eightOrMore" value={eightOrMore}/>
-            }
-            label="8 Or More "
-          />
-        
-         
+            label={capacity.label === "1" ? `${capacity.label} Person` : `${capacity.label} Persons`}
+          />)}
         </FormGroup>
       
       </FormControl>
