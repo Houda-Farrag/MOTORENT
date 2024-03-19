@@ -1,13 +1,32 @@
 import React from 'react';
-import { Rating, Typography, Button ,Box, Grid, Card} from '@mui/material';
-import FilledFavHeart from '../FilledFavHeart/FilledFavHeart'
-const CarDetailsForm = ({ car }) => {
-  
+import {
+  Typography,
+  Grid,
+  Rating,
+  Button,
+  Stack,
+IconButton,
+Card,
+Divider
+} from "@mui/material";
+import img1 from '../../assets/2 (2).png'
+import DeleteIcon from '@mui/icons-material/Delete';
 
-  return<>
-<Card sx={{p:3,backgroundColor:"#ffffff"}} >
-<Grid container spacing={2} height={"100%"}>
-<Grid item xs={6} sm={8}>
+const CarWishList=(car)=>{
+
+return<>
+<Card sx={{p:1 ,borderRadius:8}}>
+<Grid container >
+<Grid item xs={6} sm={4}>
+         <Stack p={1} borderRadius={8} backgroundColor="#3563E9"><img src={img1} alt={car.name} style={{
+            width: 'auto',
+            height: 'auto',
+          }} />
+          </Stack> 
+        </Grid>
+
+        <Grid item xs={6}ml={1} sm={4}>
+
 <Typography variant="h5" component="h2" gutterBottom sx={{color:"#1A202C",
             fontSize:"32px",
             fontWeight:700,
@@ -15,30 +34,32 @@ const CarDetailsForm = ({ car }) => {
             fontStyle:"bold",
             lineHeight:"48px"
             }}>
-            {car.name}
+            Nissan GT - R
           </Typography>
           <Rating name="read-only" value={car.reviewer} readOnly />
           <Typography variant="body1" color="textSecondary">
-            {`${car.reviewer}+ reviewer(s)`}
+            {`440+ reviewer(s)`}
           </Typography>
+          <Typography sx={{color:"#596780",font:"Plus Jakarta Sans",fontSize:"20px",lineHeight:"40px"}}>
+NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".</Typography>
 </Grid>
-<Grid item xs={6} sm={4} sx={{display:"flex",justifyContent:"flex-end"}}>
-<FilledFavHeart/>
-</Grid>
-<Grid item sm={12}>
-<Typography sx={{color:"#596780",font:"Plus Jakarta Sans",fontSize:"20px",lineHeight:"40px"}}>
-  {car.discripstion}
-</Typography>
+
+<Grid item  xs={6} sm={3} display={"flex"} justifyContent={"center"} alignItems={'flex-start'}>
+<IconButton size="large"  onClick={''} aria-label="delete">
+  <DeleteIcon sx={{fontSize:"32px"}} />
+</IconButton>
 </Grid>
 <Grid container sx={{m:2}} spacing={2}>
+<Grid item sm={12}><Divider></Divider></Grid>
 <Grid item sm={3}>
+   
 <Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
               Type Car
               </Typography>
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.TypeCar}
+             Manual
               </Typography>
 </Grid>
 <Grid item sm={3}>
@@ -48,7 +69,7 @@ const CarDetailsForm = ({ car }) => {
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.capacity}
+            2 Person
               </Typography>
 </Grid>
 <Grid item sm={3}>
@@ -58,21 +79,25 @@ Gasoline
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.Gasoline}
+            70L
               </Typography>
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
 Streening
               </Typography>
+             
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.Streening}
+             55
               </Typography>
+            
 </Grid>
+
 </Grid>
-<Grid item sm={8}>
+<Grid item sm={12}><Divider></Divider></Grid>
+<Grid item mt={2} sm={7} display={'flex'} justifyContent={'end'}>
 <Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
             fontSize:"28px",
             fontWeight:700,
@@ -80,26 +105,26 @@ Streening
             fontStyle:"bold",
           lineHeight:"35.5px"
             }} >
-{car.priceAferDiscount.subtotal}<span style={{color:"#90A3BF",font:"Plus Jakarta Sans",fontSize:"16px"}}>/days</span>`
-     <h5 style={{fontWeight:600,font:"Plus Jakarta Sans",color:"#90A3BF",fontSize:"20px", textDecoration: 'line-through' }}>{car.priceBerforeDiscount.subtotal}</h5>
+Price Now! 55<span style={{color:"#90A3BF",font:"Plus Jakarta Sans",fontSize:"16px"}}>/days</span>`
+     <h5 style={{fontWeight:600,font:"Plus Jakarta Sans",color:"#90A3BF",fontSize:"20px", textDecoration: 'line-through' }}> Price before:88</h5>
       </Typography>
 </Grid>
-<Grid item sm={4}>
-  <Button size='large' variant="contained" sx={{p:2,
+<Grid item sm={5} mt={2} display={'flex'} justifyContent={'center'}>
+  <Button size='medium' variant="contained" sx={{
     bgcolor:"#3563E9",
     fontSize:"16px",
+    lineHeight:"24px",
     fontWeight:700,
+    width:'120px',
+    height:"56px",
     font:"Plus Jakarta Sans",
     textTransform:"unset"
     }} >Rent Now</Button>
 </Grid>
-
 </Grid>
-
 </Card>
 
-  </>
+</>
 
-};
-
-export default CarDetailsForm;
+}
+export default CarWishList;

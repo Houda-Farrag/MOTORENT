@@ -1,33 +1,52 @@
 import React from 'react';
-import { Container, Typography, Grid, Card, CardMedia, CardContent, CardActions } from '@mui/material';
+import { Container, Typography, Grid, Card, CardMedia, CardContent, CardActions, Stack, Box } from '@mui/material';
 import img1 from '../../assets/2 (1).png'
 import img2 from '../../assets/2 (2).png'
 
-const SportsCar = () => {
+const ImageCars = () => {
   return (
   <>
-  <Grid container>
+ <Card >
+  <Grid container >
  
-    <Grid bgcolor={"#54a6ff"} sm={12} item sx={{border:"1px white",borderRadius:"10px", p:2}}>
-<img src={img1} alt=''></img>
+    <Grid  item sm={12} >
+    <Stack p={1} borderRadius={8} backgroundColor="#3563E9"><img src={img2} alt="" style={{
+            width: '75%',
+            height: '75%',
+            borderRadius:8
+          }} />
+          </Stack> 
 </Grid>
     
-    <Grid container spacing={2}>
-    <Grid bgcolor={"#54a6ff"} sm={4} item sx={{border:"1px white",borderRadius:"10px", p:2}}>
-<img src={img1} alt=''></img>
+  
+    <Grid mt={4}    sm={4} height={"15%"}  item >
+    <Stack  p={1} borderRadius={8} ><img src={img1} alt="" style={{
+            width: '100%',
+            
+            borderRadius:20
+          }} />
+          </Stack> </Grid>
+<Grid  mt={4} sm={4} height={"15%"}   item>
+<Stack p={1} borderRadius={8} ><img src={img1} alt="" style={{
+            width: '100%',
+          
+            borderRadius:15
+          }} />
+          </Stack> 
 </Grid>
-<Grid sm={4} sx={{border:"1px white",borderRadius:"10px"}}item>
-<img src={img2} alt=''></img>
-</Grid>
-<Grid sm={4} sx={{border:"1px white",borderRadius:"10px"}} item>
-<img src={img2} alt=''></img>
-
+<Grid sm={4}  mt={4} height={"15%"}    item>
+<Stack p={1} borderRadius={8}><img src={img2} alt="" style={{
+            width: '100%',
+            backgroundColor:"#3563E9",
+            borderRadius:15,
+         
+          }} />
+          </Stack> 
 </Grid>
     </Grid>
-  </Grid>
-  
+    </Card>
   </>
   );
 };
 
-export default SportsCar;
+export default ImageCars;
