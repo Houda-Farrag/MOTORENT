@@ -2,9 +2,6 @@ import React from 'react';
 import {
   Typography,
   FormHelperText,
-  FormControl,
-  FormLabel,
-  OutlinedInput,
   Grid,
   Rating,
   Button,

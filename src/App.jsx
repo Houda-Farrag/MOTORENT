@@ -19,6 +19,9 @@ import UserSendMessageForm from "./components/sendMessagesForm/SendMessagesForm"
 import RecviedMessagesUser from "./components/RecviedMessagesUser/RecviedMessagesUser";
 import SportsCar from "./components/CarDetails/CarDetailsImages";
 import PersistentDrawerLeft from "./components/Test/Test";
+import CarDetails from "./pages/CarDetails/CarDetails";
+import RentalSummary from "./components/FormSummaryRental/FormSummaryRental";
+import Wishlist from "./pages/Wishlist/Wishlist";
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const rental = {
@@ -31,24 +34,16 @@ const rental = {
   },
 };
 
-const car = {
-  name: 'Nissan GT-R',
-  reviewer: 440,
-  image: "car1",
-  priceAferDiscount: {
-    subtotal: 80,
-    tax: 0,
 
-  },
-  priceBerforeDiscount:{
-    subtotal: 100,
-  },
-  TypeCar:"Sport",
-  capacity:'2 Person',
-  Streening:"Manual",
-  Gasoline:"70L",
-  discripstion:"NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving"
-}
+const reviews = 
+  {
+    name: 'Alex Stanton',
+    position: 'CEO at Bukalapak',
+    date: '21 July 2022',
+    review: 'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition,the service provided by the officers is also very friendly and very polite.',
+    rating: 4.5
+  }
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -125,7 +120,18 @@ const router = createBrowserRouter([
   ,{
     path:"test",
     element:<PersistentDrawerLeft/>
+  },
+  {
+    path:'carDetals',
+    element:<CarDetails></CarDetails>
+  },{
+    path:"rental",
+    element:<RentalSummary rental={rental}></RentalSummary>
+  },{
+    path:"wishlist",
+    element:<Wishlist></Wishlist>
   }
+
 ]);
 
 const queryClient = new QueryClient({
