@@ -42,7 +42,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function OwnedCar() {
+export default function OwnedCar({setShowForm}) {
     const {data , isLoading } = useUser()
     const {deleteCar , isDeleting , token} = useDeleteCar()
     const [selectedCarId, setSelectedCarId] = useState(null);
@@ -66,7 +66,7 @@ export default function OwnedCar() {
                 <Box className="cardetails">
                   <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row">
                     <Box>
-                    <EditCarForm car={car} hidden />
+                    <EditCarForm car={car} hidden setShowForm={setShowForm} selectedCarId={selectedCarId}/>
                     </Box>
                   </Stack>
                 </Box>

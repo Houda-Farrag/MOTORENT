@@ -43,7 +43,6 @@ console.log(editValues)
     setStep(step => step - 1);
   }
 
-  
   async function submit(values) {
     console.log(values)
     if (step !== 1) return;
@@ -89,7 +88,7 @@ console.log(editValues)
 
   return (
     <>
-    {(isCreating || isGettingCategories || isGettingCarBrands) && <LoadingIndicator />}
+    {(isCreating || isGettingCategories || isGettingCarBrands) && <LoadingIndicator load={isCreating}/>}
     <Box onSubmit={handleSubmit(submit, onErrors)} component="form">
       <Grid container spacing={1} rowGap={2}
       >

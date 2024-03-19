@@ -5,12 +5,19 @@ import TypeSelectedCheckBoxButton from "../TypeSelectedCheckBoxButton/TypeSelect
 import Box from '@mui/material/Box';
 import styles from "./Sidebar.module.css"
 
-export default function Sidebar(){
+export default function Sidebar({categories , handleChangeChecked, selectedPrice, handleChangePrice , capacities , handleChangeCheckedCapacities}){
     return (
     <Box sx={{ml:2}} className={styles.sidebar}>
-    <TypeSelectedCheckBoxButton></TypeSelectedCheckBoxButton>
-    <CapacityCheckBoxButton></CapacityCheckBoxButton>
-    <PriceFliterButton></PriceFliterButton> 
+    <TypeSelectedCheckBoxButton categories={categories} handleChangeChecked={handleChangeChecked}></TypeSelectedCheckBoxButton>
+    <CapacityCheckBoxButton 
+            capacities={capacities}
+            handleChangeCheckedCapacities={handleChangeCheckedCapacities}>
+    </CapacityCheckBoxButton>
+    <PriceFliterButton
+     selectedPrice={selectedPrice}
+     handleChangePrice={handleChangePrice}
+    >
+    </PriceFliterButton> 
     </Box>
         )
 }

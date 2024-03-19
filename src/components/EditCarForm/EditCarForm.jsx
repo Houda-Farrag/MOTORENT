@@ -7,7 +7,7 @@ import useCategories from '../../pages/Cars/useCategories';
 import useBrands from "../../pages/Cars/useBrands"
 import useEditCar from '../../pages/Profile/useEditCar';
 
-export default function EditCarForm({car = {}}) {
+export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) {
     const {carBrands , isGettingCarBrands} = useBrands()
     const {carCategories , isGettingCategories} = useCategories()
     const {editCar , editingCar} = useEditCar()
@@ -30,7 +30,7 @@ export default function EditCarForm({car = {}}) {
     const { errors } = formState;
   
     function handleBack() {
-      if (step < 1) return;
+      if (step < 1) setSelectedCarId(null)
       setStep(step => step - 1);
     }
     async function submit(values) {
@@ -79,13 +79,7 @@ export default function EditCarForm({car = {}}) {
       <>
       {(editingCar || isGettingCategories || isGettingCarBrands) && <LoadingIndicator />}
       <Box onSubmit={handleSubmit(submit, onErrors)} component="form" sx={{
-        width: "75%",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "Translate(-50% , -50%)",
-        border: "1px solid #eee",
-        padding: "40px"
+        width: "100%",
       }}>
         <Grid container spacing={1} rowGap={2}
         >
