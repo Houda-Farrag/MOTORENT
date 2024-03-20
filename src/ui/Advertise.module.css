@@ -7,6 +7,15 @@
   border-radius: 10px;
   font-family: "Nunito";
 }
+.adv2 {
+  position: relative;
+  width: 640px;
+  height: 360px;
+  background-color: #3563E9;
+  padding: 30px;
+  border-radius: 10px;
+  font-family: "Nunito";
+}
 
 .text {
   color: #fff;
@@ -26,6 +35,14 @@
   width: 406px;
   height: 116px;
 }
+.image2 {
+  position: absolute;
+  top: 180px;
+  right: 137px;
+  width: 406px;
+  height: 180px;
+  
+}
 
 .header {
   font-size: 32px;
@@ -37,14 +54,26 @@
     width: 450px;
     height: 300px;
   }
+  .adv2 {
+    position: relative;
+    width: 450px;
+    height: 300px;
+  }
   .image {
     position: absolute;
     width: 250px;
-    height: 80pxpx;
+    height: 80px;
     top: 172px;
     left: 190px;
   }
-
+  .image2 {
+    position: absolute;
+    top: 190px;
+    right: 137px;
+    width: 250px;
+    height: 80px;
+    
+  }
   .header {
     font-size: 28px;
   }
@@ -56,6 +85,11 @@
     width: 327px;
     height: 232px;
   }
+  .adv2 {
+    position: relative;
+    width: 327px;
+    height: 232px;
+  }
   .image {
     position: absolute;
     width: 120px;
@@ -63,7 +97,14 @@
     top: 172px;
     left: 190px;
   }
-
+  .image2 {
+    position: absolute;
+    top: 168px;
+    right: 65px;
+    width: 120px;
+    height: 65px;
+    
+  }
   .header {
     font-size: 24px;
   }

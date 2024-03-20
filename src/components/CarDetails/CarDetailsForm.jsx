@@ -14,11 +14,11 @@ const CarDetailsForm = ({ car }) => {
             fontStyle:"bold",
             lineHeight:"48px"
             }}>
-            {car.name}
+            {car?.brand.brand}
           </Typography>
-          <Rating name="read-only" value={car.reviewer} readOnly />
+          <Rating name="read-only" value={car?.rating} readOnly />
           <Typography variant="body1" color="textSecondary">
-            {`${car.reviewer}+ reviewer(s)`}
+            {`${car?.rating}+ reviewer(s)`}
           </Typography>
           </Grid>
           <Grid item xs={6} sm={4} sx={{display:"flex",justifyContent:"flex-end"}}>

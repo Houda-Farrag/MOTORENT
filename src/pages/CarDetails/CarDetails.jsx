@@ -30,10 +30,10 @@ const CarDetails = () => {
   return <>
     <Stack mt={2} justifyContent={"center"} alignItems={"center"} display={"grid"}   >
       <Grid container spacing={2} >
-        <Grid item sm={6}><Box display={"flex"} justifyContent={"center"} >
-          <ImageCars></ImageCars></Box></Grid>
+        <Grid item sm={6}><Box height={'100%'} display={"flex"} justifyContent={"center"} >
+          <ImageCars car={carDetails}></ImageCars  ></Box></Grid>
         <Grid item sm={6}><Box display={"flex"} justifyContent={"center"} height={"100%"}>
-          <CarDetailsForm car={car} ></CarDetailsForm></Box></Grid>
+          <CarDetailsForm car={carDetails} ></CarDetailsForm></Box></Grid>
 
         <Grid item sm={12} boxShadow={3} borderRadius={8} mt={4} >
           <Review></Review>

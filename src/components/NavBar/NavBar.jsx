@@ -1,3 +1,4 @@
+import Fade from '@mui/material/Fade';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,10 +16,14 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, CardMedia, Divider } from '@mui/material';
-
-
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, CardMedia, Divider, SvgIcon } from '@mui/material';
+import PagesIcon from '@mui/icons-material/Pages';
+import HomeIcon from '@mui/icons-material/Home';
+import CommuteIcon from '@mui/icons-material/Commute';
+import LoginIcon from '@mui/icons-material/Login';
+import Person3Icon from '@mui/icons-material/Person3';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -66,6 +71,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Navbar({ user = {}, cars = [] }) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [pageIconAnchor, setPageIconAnchor] = useState(null);
+  const [pageIconUserAnchor, setPageIconUserAnchor] = useState(null);
+
+
   const [notifications, setNotifications] = useState(5); // Number of notifications
   const navigate = useNavigate()
   //?-----------------------
@@ -99,71 +108,87 @@ function Navbar({ user = {}, cars = [] }) {
     setAnchorEl(null);
   };
   const isMenuOpen = Boolean(anchorEl);
+//?------------------------------------
+// const handleMenuPageOpen = (event) => {
+// setPageIconAnchor(event.currentTarget);
+// };
+const handleClickPage = (event) => {
+  setPageIconAnchor(event.currentTarget);
+};
+const handleClickPageUser = (event) => {
+  setPageIconUserAnchor(event.currentTarget);
+};
+const handleMenuItemClick = (page) => {
+  handleMenuPageClose();
+  if (page === 'cars') {
+   navigate('/cars');
+  } else if (page === 'home') {
+    navigate('/');
+  }
+  else if (page === 'user') {
+    navigate('/user');
+  }
+  else if (page === 'login') {
+    navigate('/login');
+    localStorage.removeItem(token)
+  }
+  
+  
+};
+const PositionedMenu = (props) => (
+  <div {...props}>
+    <Menu
+      id="pages-menu"
+      anchorEl={pageIconAnchor}
+      open={Boolean(pageIconAnchor)}
+      onClose={handleMenuPageClose}
+      TransitionComponent={Fade}
+      sx={{ zIndex: 1200, mt: 1.5, boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)' }}
+    >
+      <MenuItem onClick={() => handleMenuItemClick('cars')}><CommuteIcon></CommuteIcon>Cars</MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick('home')}><HomeIcon></HomeIcon>Home</MenuItem>
+    </Menu>
+  </div>
+);
+//-------////
+const PositionedMenuProfile = (props) => (
+  <div {...props}>
+    <Menu
+      id="pages-menu-user"
+      anchorEl={pageIconUserAnchor}
+      open={Boolean(pageIconUserAnchor)}
+      onClose={handleMenuPageUserClose}
+      TransitionComponent={Fade}
+      sx={{ zIndex: 1200, mt: 1.5, boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)' }}
+    >
+      <MenuItem onClick={() => handleMenuItemClick('user')}><Person3Icon/>Profile</MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick('login')}><LoginIcon/>Log Out</MenuItem>
+    </Menu>
+  </div>
+);
+///---///
+const handleMenuPageClose = () => {
+  setPageIconAnchor (null);
+};
+const handleMenuPageUserClose = () => {
+  setPageIconUserAnchor (null);
+};
+const isMenuPageOpen = Boolean(mobileMoreAnchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
+  
   const menuId = 'primary-search-account-menu';
+////////////// token for user ///////////////
+const token= localStorage.getItem("token")
+ ///////////////////////////////////////////
+ 
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+ 
+ 
 
   return (
-    <Box sx={{ flexGrow: 1, width: "100%" }}>
-      <AppBar position="static" sx={{ backgroundColor: 'white', }}>
+    <Box  sx={{ flexGrow: 1, width: "100%" }}>
+      <AppBar position="sticky" top={0} sx={{ backgroundColor: 'white',  }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
 
           <Typography
@@ -255,75 +280,127 @@ function Navbar({ user = {}, cars = [] }) {
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }} >
-            <IconButton
-              size="large"
-              aria-label="wishlist"
-              color="inherit"
-              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
-            >
-              <FavoriteIcon />
-            </IconButton>
-          <IconButton
-              size="large"
-              aria-label="wishlist"
-              color="inherit"
-              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9',mr: 2 }}
-              onClick={()=> navigate("/cars") }
-            >
-              <FilterAltIcon />
-            </IconButton> 
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
-              aria-controls="notifications-menu"
-              aria-haspopup="true"
-              onClick={handleMenuOpen}
-            >
-              <Badge badgeContent={notifications} color="error">
-                <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
-              </Badge>
-            </IconButton>
-            <Menu
-              id="notifications-menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleMenuClose}
-            >
-              {/* Notification items */}
-              <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
-              {/* You can map over a list of notifications to generate menu items */}
-            </Menu>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={() => navigate("/user")}
-              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-            >
-              <Avatar
-                alt="Remy Sharp"
-                src="../../public/1.webp"
-                sx={{ width: 24, height: 24 }}
-              />
-            </IconButton>
-          </Box>
+          {token ? (
+  <>
+    <Box sx={{ flexGrow: 1 }} />
+    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+      <IconButton
+        size="large"
+        aria-label="wishlist"
+        color="inherit"
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+      >
+        <FavoriteIcon />
+      </IconButton>
+      <IconButton
+        size="large"
+        aria-label="pages"
+        color="inherit"
+        aria-controls="pages-menu"
+        aria-haspopup="true"
+        onClick={handleClickPage}
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+      >
+        <PagesIcon />
+      </IconButton>
+     <PositionedMenu/>
+      
+      <IconButton
+        size="large"
+        aria-label="show 17 new notifications"
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+        aria-controls="notifications-menu"
+        aria-haspopup="true"
+        onClick={handleMenuOpen}
+      >
+        <Badge badgeContent={notifications} color="error">
+          <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
+        </Badge>
+      </IconButton>
+      <Menu
+        id="notifications-menu"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        {/* Notification items */}
+        <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
+        {/* You can map over a list of notifications to generate menu items */}
+      </Menu>
+      <IconButton
+        size="large"
+        aria-label="pages"
+        color="inherit"
+        aria-controls="pages-menu-user"
+        aria-haspopup="true"
+        onClick={handleClickPageUser}
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+      >
+        <AccountCircle />
+      </IconButton>
+      <PositionedMenuProfile/>
+    </Box>
+    
+  </>
+) : (
+  <>
+    <Box sx={{ flexGrow: 1 }} />
+    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+      <IconButton
+        size="large"
+        aria-label="wishlist"
+        color="inherit"
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+     onClick={()=>{
+      navigate('/login')
+     }}
+     >
+        <LoginIcon />
+      </IconButton>
+      <IconButton
+        size="large"
+        aria-label="pages"
+        color="inherit"
+        aria-controls="pages-menu"
+        aria-haspopup="true"
+        onClick={handleClickPage}
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+      >
+        <PagesIcon />
+      </IconButton>
+     <PositionedMenu/>
+      <IconButton
+        size="large"
+        aria-label="show 17 new notifications"
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+        aria-controls="notifications-menu"
+        aria-haspopup="true"
+        onClick={handleMenuOpen}
+      >
+        <Badge badgeContent={notifications} color="error">
+          <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
+        </Badge>
+      </IconButton>
+      <Menu
+        id="notifications-menu"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        {/* Notification items */}
+        <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
+      
+      </Menu>
+    
+    </Box>
+   
+  </>
+)}
+
         </Toolbar>
         {/* <Link to={"/cars"}>Cars</Link> */}
       </AppBar>
