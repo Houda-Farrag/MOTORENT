@@ -215,14 +215,7 @@ console.log(car)
                     >EGP{car.priceForDay}/</Typography>day
                    </Box>
                    <Box>
-                   <Button size='medium' variant="contained" sx={{
-    
-    bgcolor:"#3563E9",
-    fontSize:"14px",
-    fontWeight:700,
-    font:"Plus Jakarta Sans",
-    textTransform:"unset"
-    }} >RENT</Button>
+                     <Button variant="contained" onClick={()=> navigate("/rentalInfo" , {state : {car}})}>Rent</Button>
                    </Box>
                  </Stack>
                </CardContent> 

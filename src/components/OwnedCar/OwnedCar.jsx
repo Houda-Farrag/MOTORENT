@@ -53,7 +53,7 @@ export default function OwnedCar({setShowForm}) {
   };
 
   return (
-    <> {(isLoading || isDeleting ) && <LoadingIndicator />}
+    <> {(isLoading || isDeleting ) && <LoadingIndicator load={isDeleting}/>}
     <Box sx={{width : "100%" , border : "1px solid #3563E9" , borderRadius :"6px"}}> 
     {data?.data.ownedCars.map(car => 
         <Accordion expanded={expanded === car.id} onChange={handleChange(car.id)} key={car.id} >

@@ -8,7 +8,7 @@ export function useDeleteCar() {
         mutationFn : deleteCarApi,
         onSuccess: () => {
             toast.success("Car is deleted Successfully")
-            queryClient.invalidateQueries(["cars"])
+            queryClient.invalidateQueries(["user"])
         },
 
         onError : (error) => {

@@ -77,7 +77,7 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
   
     return (
       <>
-      {(editingCar || isGettingCategories || isGettingCarBrands) && <LoadingIndicator />}
+      {(editingCar || isGettingCategories || isGettingCarBrands) && <LoadingIndicator load={editingCar} />}
       <Box onSubmit={handleSubmit(submit, onErrors)} component="form" sx={{
         width: "100%",
       }}>

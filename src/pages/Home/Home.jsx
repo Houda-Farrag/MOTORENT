@@ -21,7 +21,7 @@ function Home() {
  
   return (
       <Box className={styles.home}> 
-      {(LoadingUser)  && (
+      {(LoadingUser || isLoading)  && (
         <LoadingIndicator load={LoadingUser}/>
       )}
         <NavBar user={user} cars={cars}/>
