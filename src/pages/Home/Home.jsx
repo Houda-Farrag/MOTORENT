@@ -13,6 +13,7 @@ import TopFiveExpensiveCars from "../../components/TopFiveExpensiveCars/TopFiveE
 import TopFiveCheapestCars from "../../components/TopFiveCheapestCars/TopFiveCheapestCars";
 import TopFiveCars from "../../components/TopFiveCars/TopFiveCars";
 import AllCars from "../../components/AllCars/AllCars";
+import AdvertiseTwo from "../../ui/AdvertiseTwo";
 
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
@@ -27,7 +28,7 @@ function Home() {
         <Box>
           <Grid container gap="15px" className={styles.loc}>
             <Advertise item sm={6} />
-            <Advertise item sm={6} />
+            <AdvertiseTwo item sm={6} />
           </Grid>
         </Box>
         <Grid container className={styles.loc}>

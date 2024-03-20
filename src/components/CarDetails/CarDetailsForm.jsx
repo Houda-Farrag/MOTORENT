@@ -15,19 +15,20 @@ const CarDetailsForm = ({ car }) => {
             fontStyle:"bold",
             lineHeight:"48px"
             }}>
-            {car.name}
+            {car?.brand.brand}
           </Typography>
-          <Rating name="read-only" value={car.reviewer} readOnly />
+          <Rating name="read-only" value={car?.rating} readOnly />
           <Typography variant="body1" color="textSecondary">
-            {`${car.reviewer}+ reviewer(s)`}
+            {`${car?.rating}+ reviewer(s)`}
           </Typography>
 </Grid>
 <Grid item xs={6} sm={4} sx={{display:"flex",justifyContent:"flex-end"}}>
 <FilledFavHeart/>
 </Grid>
 <Grid item sm={12}>
-<Typography sx={{color:"#596780",font:"Plus Jakarta Sans",fontSize:"20px",lineHeight:"40px"}}>
-  {car.discripstion}
+<Typography sx={{color:"#596780",font:"Plus Jakarta Sans",fontSize:"20px",lineHeight:"40px"}}>{car?.brand?.brand} has become the embodiment of  outstanding performance, inspired by the most unforgiving,
+Manufacturing year is {car?.manufacturingYear}and car model is {car?.model}
+
 </Typography>
 </Grid>
 <Grid container sx={{m:2}} spacing={2}>
@@ -38,7 +39,7 @@ const CarDetailsForm = ({ car }) => {
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.TypeCar}
+             {car?.category}
               </Typography>
 </Grid>
 <Grid item sm={3}>
@@ -48,7 +49,7 @@ const CarDetailsForm = ({ car }) => {
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.capacity}
+            {car?.capacity} Person
               </Typography>
 </Grid>
 <Grid item sm={3}>
@@ -58,7 +59,7 @@ Gasoline
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.Gasoline}
+             {car?.tankCapacity}L
               </Typography>
 </Grid>
 <Grid item sm={3}>
@@ -68,7 +69,7 @@ Streening
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car.Streening}
+             {car?.Streening}
               </Typography>
 </Grid>
 </Grid>
@@ -80,8 +81,8 @@ Streening
             fontStyle:"bold",
           lineHeight:"35.5px"
             }} >
-{car.priceAferDiscount.subtotal}<span style={{color:"#90A3BF",font:"Plus Jakarta Sans",fontSize:"16px"}}>/days</span>`
-     <h5 style={{fontWeight:600,font:"Plus Jakarta Sans",color:"#90A3BF",fontSize:"20px", textDecoration: 'line-through' }}>{car.priceBerforeDiscount.subtotal}</h5>
+{car?.priceForDay} EGP<span style={{color:"#90A3BF",font:"Plus Jakarta Sans",fontSize:"16px"}}>/days</span>`
+     {/* <h5 style={{fontWeight:600,font:"Plus Jakarta Sans",color:"#90A3BF",fontSize:"20px", textDecoration: 'line-through' }}>{car.priceBerforeDiscount.subtotal}</h5> */}
       </Typography>
 </Grid>
 <Grid item sm={4}>

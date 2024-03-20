@@ -15,7 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Badge, InputBase, Menu, MenuItem } from '@mui/material';
+import { Badge, Fade, InputBase, Menu, MenuItem } from '@mui/material';
 import { AccountCircle,   Search } from '@mui/icons-material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -32,6 +32,12 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { useState } from 'react';
+import PagesIcon from '@mui/icons-material/Pages';
+import Person3Icon from '@mui/icons-material/Person3';
+import CommuteIcon from '@mui/icons-material/Commute';
+import LoginIcon from '@mui/icons-material/Login';
+import Footer from '../Footer/Footer';
+
 
 
 const drawerWidth = 240;
@@ -128,7 +134,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   const PersistentDrawerLeft = () => {
     const [anchorEl, setAnchorEl] = useState(null);
 const [notifications, setNotifications] = useState(5); // Number of notifications
-
+const handleDrawerOpen = () => {
+  setOpen(true);
+};
 const handleMenuOpen = (event) => {
   setAnchorEl(event.currentTarget);
 };
@@ -143,11 +151,70 @@ const handleMenuClose = () => {
     setOpen(!open);
   };
 
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const menuId = 'primary-search-account-menu';
+  const [pageIconAnchor, setPageIconAnchor] = useState(null);
+  const [pageIconUserAnchor, setPageIconUserAnchor] = useState(null);
+  const token=localStorage.getItem('token')
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleClickPage = (event) => {
+    setPageIconAnchor(event.currentTarget);
+  };
+  const handleClickPageUser = (event) => {
+    setPageIconUserAnchor(event.currentTarget);
+  };
+  const handleMenuItemClick = (page) => {
+    handleMenuPageClose();
+    if (page === 'cars') {
+     navigate('/cars');
+    } else if (page === 'home') {
+      navigate('/');
+    }
+    else if (page === 'user') {
+      navigate('/user');
+    }
+    else if (page === 'login') {
+      navigate('/login');
+      localStorage.removeItem(token)
+    }
+    
+    
+  };
+  const PositionedMenu = (props) => (
+    <div {...props}>
+      <Menu
+        id="pages-menu"
+        anchorEl={pageIconAnchor}
+        open={Boolean(pageIconAnchor)}
+        onClose={handleMenuPageClose}
+        TransitionComponent={Fade}
+        sx={{ zIndex: 1200, mt: 1.5, boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)' }}
+      >
+        <MenuItem onClick={() => handleMenuItemClick('cars')}><CommuteIcon/>Cars</MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick('home')}><HomeIcon/>Home</MenuItem>
+      </Menu>
+    </div>
+  );
+  //-------////
+  const PositionedMenuProfile = (props) => (
+    <div {...props}>
+      <Menu
+        id="pages-menu-user"
+        anchorEl={pageIconUserAnchor}
+        open={Boolean(pageIconUserAnchor)}
+        onClose={handleMenuPageUserClose}
+        TransitionComponent={Fade}
+        sx={{ zIndex: 1200, mt: 1.5, boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)' }}
+      >
+        <MenuItem onClick={() => handleMenuItemClick('user')}><Person3Icon/>Profile</MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick('login')}><LogoutIcon/>Log Out</MenuItem>
+      </Menu>
+    </div>
+  );
+  ///---///
+  const handleMenuPageClose = () => {
+    setPageIconAnchor (null);
+  };
+  const handleMenuPageUserClose = () => {
+    setPageIconUserAnchor (null);
   };
 
   const handleDrawerClose = () => {
@@ -189,28 +256,31 @@ const handleMenuClose = () => {
             </IconButton>
 
             <IconButton
-              size="large"
-              aria-label="wishlist"
-              color="inherit"
-              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9',mr: 2 }}
-              onClick={()=> navigate("/cars") }
-            >
-              <FilterAltIcon />
-            </IconButton> 
-            
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              sx={{ color: '#596780' ,bgcolor: 'white', borderRadius: '50%',border: '1px solid #C3D4E9' ,mr: 2}}
-              aria-controls="notifications-menu"
-              aria-haspopup="true"
-              onClick={handleMenuOpen}
-            >
-               <Badge badgeContent={notifications} color="error">
-          <NotificationsIcon sx={{"&:hover":{color:"#FBB917"},"&:click":{color:"#FBB917"}}} />
+        size="large"
+        aria-label="pages"
+        color="inherit"
+        aria-controls="pages-menu"
+        aria-haspopup="true"
+        onClick={handleClickPage}
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+      >
+        <PagesIcon />
+      </IconButton>
+     <PositionedMenu/>
+      
+      <IconButton
+        size="large"
+        aria-label="show 17 new notifications"
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+        aria-controls="notifications-menu"
+        aria-haspopup="true"
+        onClick={handleMenuOpen}
+      >
+        <Badge badgeContent={notifications} color="error">
+          <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
         </Badge>
-            </IconButton>
-            <Menu
+      </IconButton>
+      <Menu
         id="notifications-menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -222,17 +292,18 @@ const handleMenuClose = () => {
         <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
         {/* You can map over a list of notifications to generate menu items */}
       </Menu>
-
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              // aria-controls={menuId}
-              aria-haspopup="true"
-              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
-            >
-              <AccountCircle />
-            </IconButton>
+      <IconButton
+        size="large"
+        aria-label="pages"
+        color="inherit"
+        aria-controls="pages-menu-user"
+        aria-haspopup="true"
+        onClick={handleClickPageUser}
+        sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+      >
+        <AccountCircle />
+      </IconButton>
+      <PositionedMenuProfile/>
           </Box>
          
         </Toolbar>
@@ -356,12 +427,14 @@ const handleMenuClose = () => {
         <DrawerHeader />
         <Box sx={{boxShadow:5 ,
       bgcolor:"background.paper",
-      p:2 ,borderRadius:"10px" }}>
+      p:10, mb:20 ,borderRadius:"10px" }}>
 
 
       
        <Outlet></Outlet>
+       
        </Box>
+       <Footer/>
       </Main>
     </Box>
   );
