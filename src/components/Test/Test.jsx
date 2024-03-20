@@ -30,7 +30,7 @@ import Collapse from "@mui/material/Collapse";
 import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
 import { Outlet, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { useState } from 'react';
 
 
@@ -187,6 +187,16 @@ const handleMenuClose = () => {
             >
               <FavoriteIcon sx={{"&:hover":{color:"#8b0000"}}}  />
             </IconButton>
+
+            <IconButton
+              size="large"
+              aria-label="wishlist"
+              color="inherit"
+              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9',mr: 2 }}
+              onClick={()=> navigate("/cars") }
+            >
+              <FilterAltIcon />
+            </IconButton> 
             
             <IconButton
               size="large"

@@ -47,7 +47,7 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import SettingsIcon from '@mui/icons-material/Settings';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
@@ -180,16 +180,17 @@ function Navbar({user}) {
         <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
         
           <Typography
+            onClick={()=>navigate("/")}
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } ,color:"#3563E9",
             fontSize:"32px",
             fontWeight:700,
+            cursor : "pointer",
             font:"Plus Jakarta Sans",
             mr:10,
             ml:2
-
         }}
           >
             MOTORENT
@@ -216,7 +217,15 @@ function Navbar({user}) {
             >
               <FavoriteIcon />
             </IconButton>
-                
+          <IconButton
+              size="large"
+              aria-label="wishlist"
+              color="inherit"
+              sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9',mr: 2 }}
+              onClick={()=> navigate("/cars") }
+            >
+              <FilterAltIcon />
+            </IconButton> 
             <IconButton
               size="large"
               aria-label="show 17 new notifications"

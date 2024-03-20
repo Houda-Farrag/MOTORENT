@@ -51,7 +51,6 @@ console.log(editValues)
     formData.append('brand', brand);
     formData.append('transmission', transmission);
     formData.append('category', category);
-
     formData.append('average', values.average);
     formData.append('capacity', values.capacity);
     formData.append('doc-carLicense', values.carLicense[0]);
