@@ -9,20 +9,21 @@ import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import NavBar from "../../components/NavBar/NavBar";
 import useUser from "../Auth/useUser";
 import useCars from "../Cars/useCars"
-import useGetTopFiveExpensive from "../Cars/useGetTopFiveExpensive";
+import TopFiveExpensiveCars from "../../components/TopFiveExpensiveCars/TopFiveExpensiveCars";
+import TopFiveCheapestCars from "../../components/TopFiveCheapestCars/TopFiveCheapestCars";
+import TopFiveCars from "../../components/TopFiveCars/TopFiveCars";
+import AllCars from "../../components/AllCars/AllCars";
 
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
-  const {data:cars , isLoading : LoadingCars} = useCars();
-  const {data : topFiveExpensiveCars , isLoading : GettingTopFiveExpensive} = useGetTopFiveExpensive();
-  console.log(topFiveExpensiveCars)
-
+  const {data : cars , isLoading } = useCars()
+ 
   return (
       <Box className={styles.home}> 
-      {(LoadingUser || LoadingCars)  && (
-        <LoadingIndicator load={LoadingCars}/>
+      {(LoadingUser)  && (
+        <LoadingIndicator load={LoadingUser}/>
       )}
-        <NavBar cars={cars} user={user} />
+        <NavBar user={user} cars={cars}/>
         <Box>
           <Grid container gap="15px" className={styles.loc}>
             <Advertise item sm={6} />
@@ -34,13 +35,18 @@ function Home() {
           <SwapHorizOutlinedIcon item sm={2} className={styles.swap} />
           <Location item sm={5} />
         </Grid>
-        <Grid container>
-          {cars?.data.map(car => 
-            <Grid item xs={12} ms={6} md={4} lg={3}>
-                 <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
-            </Grid>
-            )}
-        </Grid>
+          <Box sx={{padding : "25px"}}>
+            <TopFiveExpensiveCars />
+          </Box>
+          <Box sx={{padding : "25px"}}>
+            <TopFiveCheapestCars />
+          </Box>
+          <Box sx={{padding : "25px"}}>
+            <TopFiveCars />
+          </Box>
+          <Box sx={{padding : "25px"}}>
+            <AllCars />
+          </Box>
         <Footer />
       </Box>
   );

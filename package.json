@@ -20,6 +20,7 @@
     "axios": "^1.6.7",
     "eslint-config-react-app": "^7.0.1",
     "react": "^18.2.0",
+    "react-datetime-picker": "^4.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.0",
     "react-hot-toast": "^2.4.1",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
+    "@types/react-datetime-picker": "^5.0.0",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",

@@ -77,9 +77,23 @@ export async function deleteCar(id){
 
   return data;
 }
-//{{url}}api/v1/cars/getTop5ExpensiveCars
+
 export async function getTopFiveExpensiveCars(){
   const {data , error} = await axios.get("http://localhost:3000/api/v1/cars/getTop5ExpensiveCars")
+    if(error) return error;
+
+    return data
+}
+
+export async function getTopFiveCheapestCars(){
+  const {data , error} = await axios.get("http://localhost:3000/api/v1/cars/getTop5CheapestCars")
+    if(error) return error;
+
+    return data
+}
+
+export async function getTopFiveCars(){
+  const {data , error} = await axios.get("http://localhost:3000/api/v1/cars/getTop5Cars")
     if(error) return error;
 
     return data

@@ -22,6 +22,7 @@ import PersistentDrawerLeft from "./components/Test/Test";
 import CarDetails from "./pages/CarDetails/CarDetails";
 import RentalSummary from "./components/FormSummaryRental/FormSummaryRental";
 import Wishlist from "./pages/Wishlist/Wishlist";
+import RentalInfo from "./pages/RentalInfo/RentalInfo";
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const rental = {
@@ -84,7 +85,6 @@ const router = createBrowserRouter([
   {
     path : "profile",
     element : (
-   
         <Profile />
     )
   },
@@ -127,6 +127,10 @@ const router = createBrowserRouter([
   },{
     path:"wishlist",
     element:<Wishlist></Wishlist>
+  },
+  {
+    path : "rentalInfo",
+    element : <RentalInfo />
   }
 
 ]);

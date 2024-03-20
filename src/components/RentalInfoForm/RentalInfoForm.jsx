@@ -9,7 +9,9 @@ import {
     Select,
     Box
   } from "@mui/material";
+
 import {useForm} from 'react-hook-form'
+
 const RentalInfoForm =()=>{
 const form = useForm({
         mode:"all"
@@ -77,7 +79,7 @@ const form = useForm({
             message:"This Filed is required"}})}
             error={!!errors.message}
         >
-          <MenuItem value={"12"}>12:pm</MenuItem>
+          <MenuItem value={"1-12-2024"}>1-12-2024</MenuItem>
           <MenuItem value={"2"}>2:pm</MenuItem>
           <MenuItem value={"3"}>3:pm</MenuItem>
         </Select>
@@ -88,7 +90,7 @@ const form = useForm({
         <Grid item xs={12} sm={6}>
         <FormControl fullWidth>
         <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
-    fontWeight:600, fontSize:"16px"}}>Time</FormLabel>
+          fontWeight:600, fontSize:"16px"}}>Time</FormLabel>
         <Select
           labelId="select-location-rentalForm"
           id="time-select-rentalForm"
@@ -107,7 +109,7 @@ const form = useForm({
       </FormControl>
         </Grid>
        </Grid>
-       <Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
+       <Typography variant="h5" noWrap component="div" sx={{color:"#1A202C",
             fontSize:"20px",
             fontWeight:700,
             font:"Plus Jakarta Sans",
@@ -116,7 +118,7 @@ const form = useForm({
             mt:4
 
             }} >
-      Drop-Off
+          Drop-Off
       </Typography>
 
       <Grid container spacing={2}>
@@ -157,7 +159,7 @@ const form = useForm({
             message:"This Filed is required"}})}
             error={!!errors.message}
         >
-          <MenuItem value={"Beni Seuf"}>Beni Seuf</MenuItem>
+          <MenuItem value={"1-22-2024"}>1-22-2024</MenuItem>
           <MenuItem value={"Cairo"}>Cairo</MenuItem>
           <MenuItem value={"Alex"}>Alex</MenuItem>
         </Select>

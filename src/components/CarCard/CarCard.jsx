@@ -20,8 +20,10 @@ import AdjustIcon from "@mui/icons-material/Adjust";
 import PersonIcon from "@mui/icons-material/Person";
 import FavouriteICon from "../../ui/FavouriteICon";
 import LoadingIndicator from "../../ui/LoadingIndicator";
+import { useNavigate } from "react-router-dom";
 
 function CarCard({car , LoadingCars}) {
+  const navigate = useNavigate()
   return (
       <>
       {LoadingCars && <LoadingIndicator />}
@@ -78,7 +80,7 @@ function CarCard({car , LoadingCars}) {
                    L.E<strong>{car.priceForDay}</strong>/day
                    </Box>
                    <Box>
-                     <Button variant="contained">Rent</Button>
+                     <Button variant="contained" onClick={()=> navigate("/rentalInfo")}>Rent</Button>
                    </Box>
                  </Stack>
                </CardContent> 
