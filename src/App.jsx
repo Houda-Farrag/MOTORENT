@@ -17,12 +17,14 @@ import { RentedCars } from "./components/RentedCars/RentedCars";
 import AddCarForm from "./components/AddCarForm/AddCarForm";
 import UserSendMessageForm from "./components/sendMessagesForm/SendMessagesForm";
 import RecviedMessagesUser from "./components/RecviedMessagesUser/RecviedMessagesUser";
-import SportsCar from "./components/CarDetails/CarDetailsImages";
 import PersistentDrawerLeft from "./components/Test/Test";
 import CarDetails from "./pages/CarDetails/CarDetails";
 import RentalSummary from "./components/FormSummaryRental/FormSummaryRental";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import RentalInfo from "./pages/RentalInfo/RentalInfo";
+import PaymentRes from "./pages/PaymentRes/PaymentRes";
+import LayOut from "./pages/LayOut/LayOut";
+import PaymentFail from "./pages/PaymentRes/PaymentFail";
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const rental = {
@@ -130,7 +132,20 @@ const router = createBrowserRouter([
   },
   {
     path : "rentalInfo",
-    element : <RentalInfo />
+    element : <LayOut /> , children : [
+      {
+        index : true,
+        element : <RentalInfo />
+      },
+      {
+        path : "payRes/:rentId",
+        element : <PaymentRes />
+      },
+      {
+        path : "payFail/:rentId",
+        element : <PaymentFail />
+      }
+    ]
   }
 
 ]);

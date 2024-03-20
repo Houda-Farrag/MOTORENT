@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getAllCars() {
-  const { data, error } = await axios.get("http://localhost:3000/api/v1/cars");
+  const { data, error } = await axios.get("http://localhost:3000/api/v1/cars/getAllAvailableCars");
 
   if (error) return error;
 
@@ -97,4 +97,18 @@ export async function getTopFiveCars(){
     if(error) return error;
 
     return data
+}
+
+export async function rentCar(values){
+  console.log(values)
+  const {data , error} = await axios.post("http://localhost:3000/api/v1/rentals/createRental" , values ,
+  {
+    headers: {   
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }
+  }
+  )
+  if (error) return error;
+  console.log("Response:", data); // Log the response data
+  return data;
 }

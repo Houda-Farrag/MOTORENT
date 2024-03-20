@@ -1,39 +1,3 @@
-/*
-import { Box, Button } from "@mui/material";
-import { logout } from "../../service/userApi";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-
-function NavBar({ user }) {
-  const { firstName, email, phone } = user.data;
-  const navigate = useNavigate();
-
-  async function handleLogout() {
-    const token = localStorage.getItem("token");
-    try {
-      const response = await logout(token);
-      toast.success(response.message);
-      localStorage.removeItem("token");
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-      toast.success(error.respnse.data.message);
-    }
-  }
-
-  return (
-    <Box>
-      Hello <strong>{firstName}</strong> your emal address is{" "}
-      <strong>{email}</strong> and mobile number is <strong>{phone}</strong>
-      <Button onClick={handleLogout}>Logout</Button>
-    </Box>
-  );
-}
-
-export default NavBar;
-*/
-
-
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -51,7 +15,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, CardMedia, Divider } from '@mui/material';
 
 

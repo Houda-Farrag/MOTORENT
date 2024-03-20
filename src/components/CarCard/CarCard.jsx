@@ -80,7 +80,7 @@ function CarCard({car , LoadingCars}) {
                    L.E<strong>{car.priceForDay}</strong>/day
                    </Box>
                    <Box>
-                     <Button variant="contained" onClick={()=> navigate("/rentalInfo")}>Rent</Button>
+                     <Button variant="contained" onClick={()=> navigate("/rentalInfo" , {state : {car}})}>Rent</Button>
                    </Box>
                  </Stack>
                </CardContent> 
