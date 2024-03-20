@@ -13,7 +13,7 @@ import useGetTopFiveExpensive from "../Cars/useGetTopFiveExpensive";
 
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
-  const {data , isLoading : LoadingCars} = useCars();
+  const {data:cars , isLoading : LoadingCars} = useCars();
   const {data : topFiveExpensiveCars , isLoading : GettingTopFiveExpensive} = useGetTopFiveExpensive();
   console.log(topFiveExpensiveCars)
 
@@ -22,7 +22,7 @@ function Home() {
       {(LoadingUser || LoadingCars)  && (
         <LoadingIndicator load={LoadingCars}/>
       )}
-        <NavBar user={user} />
+        <NavBar cars={cars} user={user} />
         <Box>
           <Grid container gap="15px" className={styles.loc}>
             <Advertise item sm={6} />
@@ -35,7 +35,7 @@ function Home() {
           <Location item sm={5} />
         </Grid>
         <Grid container>
-          {data?.data.map(car => 
+          {cars?.data.map(car => 
             <Grid item xs={12} ms={6} md={4} lg={3}>
                  <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
             </Grid>
