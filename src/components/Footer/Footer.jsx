@@ -1,6 +1,6 @@
 // Footer.jsx
 
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import styles from "./Footer.module.css";
 
 function Footer() {
@@ -8,9 +8,21 @@ function Footer() {
     <footer className={styles.footer}>
       <Grid container spacing={2} className={styles.upper}>
         <Grid item xs={12} sm={5} className={styles.text}>
-          <h1>MOTORENT</h1>
+        <Typography
+           
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' } ,color:"#3563E9",
+            fontSize:"32px",
+            fontWeight:700,
+            cursor : "pointer",
+            font:"Plus Jakarta Sans",
+            mr:10,
+            ml:2
+        }}>MOTORENT</Typography>
           <p>
-            Our Vision is to provide convenience and help increase your sales
+            Our Vision is to provide convenience<br></br> and help increase your sales
             business
           </p>
         </Grid>
