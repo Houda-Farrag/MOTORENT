@@ -113,16 +113,13 @@ const router = createBrowserRouter([
   }
 
      ] },
-     {
-      path:"Detalis",
-      element:<SportsCar></SportsCar>
-     }
-  ,{
+    
+  {
     path:"test",
     element:<PersistentDrawerLeft/>
   },
   {
-    path:'carDetals',
+    path:'carDetails',
     element:<CarDetails></CarDetails>
   },{
     path:"rental",
