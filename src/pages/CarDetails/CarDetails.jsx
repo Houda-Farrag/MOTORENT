@@ -7,7 +7,7 @@ import Review from "../../components/Reviews/Reviews";
 import { useLocation } from "react-router-dom";
 const CarDetails = () => {
   const location = useLocation();
-  const { car: carDetails } = location.state;
+  const { car: carDetails } = location?.state || {};
   console.log(carDetails)
   // const { } = carDetails;
   const car = {
@@ -30,8 +30,10 @@ const CarDetails = () => {
   return <>
     <Stack mt={2} justifyContent={"center"} alignItems={"center"} display={"grid"}   >
       <Grid container spacing={2} >
-        <Grid item sm={6}><Box display={"flex"} justifyContent={"center"} ><ImageCars></ImageCars></Box></Grid>
-        <Grid item sm={6}><Box display={"flex"} justifyContent={"center"} height={"100%"}><CarDetailsForm car={car} ></CarDetailsForm></Box></Grid>
+        <Grid item sm={6}><Box display={"flex"} justifyContent={"center"} >
+          <ImageCars></ImageCars></Box></Grid>
+        <Grid item sm={6}><Box display={"flex"} justifyContent={"center"} height={"100%"}>
+          <CarDetailsForm car={car} ></CarDetailsForm></Box></Grid>
 
         <Grid item sm={12} boxShadow={3} borderRadius={8} mt={4} >
           <Review></Review>
