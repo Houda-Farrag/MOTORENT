@@ -13,8 +13,9 @@ import {
 
 function  Location() {
   return (
+  
     <form className={styles.form}>
-      <FormControl>
+      <FormControl >
         <RadioGroup name="location" aria-labelledby="pickup">
           <FormControlLabel
             control={<Radio />}
@@ -62,6 +63,7 @@ function  Location() {
         </Box>
       </FormControl>
     </form>
+  
   );
 }
 

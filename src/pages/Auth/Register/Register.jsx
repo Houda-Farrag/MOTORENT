@@ -59,7 +59,7 @@ function Register() {
       >
         <Grid container spacing={2} justifyContent='center' alignItems='center'>
           <Grid item xs={12} md={6}>
-            <Typography variant="h4" textAlign="center" marginBottom={1}>
+            <Typography  fontWeight={550} fontFamily={'Nunito'} variant="h4" textAlign="center" marginBottom={1}>
               Register
             </Typography>
             <Stack spacing={1}>
@@ -211,7 +211,9 @@ function Register() {
                 disabled={isLoading}
                 type="submit"
                 variant="contained"
-                sx={{ width: '60%' }}
+                sx={{ width: '60%',textTransform:'unset' }}
+                fontWeight={550} fontFamily={'Nunito'}
+              
               >
                 Register
               </Button>
