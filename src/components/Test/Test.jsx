@@ -353,6 +353,17 @@ const handleMenuClose = () => {
             <ListItemText primary="Profile Details" />
           </ListItemButton>
 
+          <ListItemButton 
+            onClick={() => {
+              navigate("/wishlist");
+            }}
+          >
+            <ListItemIcon>
+              <FavoriteIcon sx={{ color: "#3563E9" }} />
+            </ListItemIcon>
+            <ListItemText primary="Wish List" />
+          </ListItemButton>
+
           <ListItemButton
             onClick={() => {
               navigate("./addcar");

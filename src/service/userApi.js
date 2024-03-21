@@ -76,3 +76,27 @@ export async function logout(token) {
 
   return data;
 }
+
+export async function addToWishList(id){
+  const {data , error} = await axios.patch(`http://localhost:3000/api/v1/users/wishlist/${id}` , null , {
+    headers : {
+      Authorization : `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+
+  if(error) return error
+
+  return data
+}
+
+export async function removeFromWishList(id){
+  const {data , error} = await axios.delete(`http://localhost:3000/api/v1/users/wishlist/${id}` , {
+    headers : {
+      Authorization : `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+
+  if(error) return error
+
+  return data
+}
