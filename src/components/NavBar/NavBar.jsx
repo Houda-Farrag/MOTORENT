@@ -130,7 +130,7 @@ const handleMenuItemClick = (page) => {
   }
   else if (page === 'login') {
     navigate('/login');
-    localStorage.removeItem(token)
+    localStorage.removeItem("token")
   }
   
   
