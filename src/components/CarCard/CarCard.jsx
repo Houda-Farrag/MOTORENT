@@ -32,7 +32,7 @@ function CarCard({car , LoadingCars}) {
   const navigate = useNavigate()
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const {addToWishList , addingToWishList} = useAddToWishList()
+  const {addToWishList , addingToWishList , res} = useAddToWishList()
   const {removeFromWishList , removingFromWishList} = useRemoveFromWishList()
   const {data : user , isLoading} = useUser()
 
@@ -48,8 +48,7 @@ function CarCard({car , LoadingCars}) {
 
   async function handleAddToWishList(id){
     try {
-      const res = await addToWishList(id)
-      console.log(res)
+      await addToWishList(id)
     } catch(error) {
       console.log(error)
     } 
@@ -88,7 +87,7 @@ function CarCard({car , LoadingCars}) {
     
                 }} action={
                   <>
-                  {user?.data?.wishlist.includes(car.id) ? <IconButton onClick={()=>handleRemoveFromWishList(car.id)}>
+                  {user?.data?.wishlist.filter(c => c._id === car._id ).length > 0 ? <IconButton onClick={()=>handleRemoveFromWishList(car._id)}>
                   <FavouriteICon  />
                   </IconButton> :
                    <IconButton onClick={()=>handleAddToWishList(car.id)}>

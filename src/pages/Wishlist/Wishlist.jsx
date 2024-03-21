@@ -1,41 +1,27 @@
-import React, { useEffect, useState } from "react";
 import CarWishList from "../../components/CarWishlist/CarWishlist";
-import car1 from "../../assets/2 (2).png"
-import { Box, Divider, FormHelperText, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, FormHelperText, Stack, Typography } from "@mui/material";
 import useUser from "../Auth/useUser";
-import { getCarById } from "../../service/carApi";
-
-
-
+import LoadingIndicator from "../../ui/LoadingIndicator";
+import useClearWishList from "./useClearWishList";
 
 const Wishlist=()=>{
     const {data : user, isLoading} = useUser()
-    const carsIds = user?.data.wishlist
-    const [cars, setCars] = useState([]);
-    useEffect(() => {
-      async function getCarsInWishList() {
-          if (!carsIds) return;
-          try {
-              const carPromises = carsIds.map(async (id) => {
-                  const res = await getCarById(id);
-                  return res;
-              });
-              const carsData = await Promise.all(carPromises);
-              setCars(carsData);
-          } catch (error) {
-              console.log(error);
-          }
+    const {clearWishList , clearingWishList} = useClearWishList();
+    async function handleClearWishlist(){
+      try {
+        await clearWishList()
+      } catch(error) {
+        console.log(error)
       }
-      getCarsInWishList();
-      console.log(cars) 
-  }, [carsIds]);
-
-
-    return<><Box>
+    }
+    return (
+      <>
+        {clearingWishList && <LoadingIndicator load={clearingWishList} />}
+      <Box>
         <Stack m={1}>
       
-
-    <Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
+      {isLoading && <LoadingIndicator load={isLoading}/>}
+    <Typography variant="h5" noWrap component="div" sx={{color:"#1A202C",
     fontSize:"32px",
     fontWeight:700,
     font:"Plus Jakarta Sans",
@@ -45,13 +31,20 @@ const Wishlist=()=>{
       </Typography>
     <FormHelperText>Prices may change depending on the length of the rental and the price of your rental car.</FormHelperText>
         </Stack>
-     {/* {cars.map(car => 
+     {user?.data?.wishlist.map(car => 
           <>
           <Stack mt={2}> <CarWishList  car={car}></CarWishList></Stack>
           <Divider></Divider>
           </>
-      )}    */}
+      )}
+      {
+        user?.data?.wishlist.length > 0 &&
+        <Box sx={{width : "fitContent" , m : "10px auto"}}>
+      <Button variant='contained' onClick={handleClearWishlist} >Clear WishList</Button>
+      </Box>   
+      }
     </Box>
     </>
+)
 }
 export default Wishlist
