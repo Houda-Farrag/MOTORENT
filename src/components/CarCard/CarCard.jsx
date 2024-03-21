@@ -21,6 +21,10 @@ import FavouriteICon from "../../ui/FavouriteICon";
 import LoadingIndicator from "../../ui/LoadingIndicator";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useAddToWishList from "./useAddToWishList";
+import useRemoveFromWishList from "./useRemoveFromWishList";
+import NotFavouriteICon from "../../ui/NotFavouriteICon";
+import useUser from "../../pages/Auth/useUser";
 
 
 
@@ -28,6 +32,9 @@ function CarCard({car , LoadingCars}) {
   const navigate = useNavigate()
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const {addToWishList , addingToWishList} = useAddToWishList()
+  const {removeFromWishList , removingFromWishList} = useRemoveFromWishList()
+  const {data : user , isLoading} = useUser()
 
 
   const handleHoverEnter = () => {
@@ -39,9 +46,26 @@ function CarCard({car , LoadingCars}) {
     setIsClicked(false);
   };
 
+  async function handleAddToWishList(id){
+    try {
+      const res = await addToWishList(id)
+      console.log(res)
+    } catch(error) {
+      console.log(error)
+    } 
+  }
+  async function handleRemoveFromWishList(id){
+    try {
+      await removeFromWishList(id)
+    } catch(error) {
+      console.log(error)
+    } 
+  }
+
+
   return (
       <>
-      {LoadingCars && <LoadingIndicator />}
+      {(LoadingCars || addingToWishList || removingFromWishList || isLoading) && <LoadingIndicator />}
         <div className={styles.slider} key="1">
           <Grid container gap="20px">
             <Grid item  >
@@ -63,10 +87,15 @@ function CarCard({car , LoadingCars}) {
                 textTransform: "capitalize",
     
                 }} action={
-                  
-                  <IconButton >
-                <FavouriteICon  />
+                  <>
+                  {user?.data?.wishlist.includes(car.id) ? <IconButton onClick={()=>handleRemoveFromWishList(car.id)}>
+                  <FavouriteICon  />
+                  </IconButton> :
+                   <IconButton onClick={()=>handleAddToWishList(car.id)}>
+                  <NotFavouriteICon  />
                   </IconButton>
+                  }
+                  </>
                 } title={car?.brand.brand} />
                 <Typography  component={'span'} style={{color:"#90A3BF",
               fontSize:"14px",

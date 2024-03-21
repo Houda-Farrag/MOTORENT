@@ -99,7 +99,6 @@ export async function getTopFiveCars(){
 }
 
 export async function rentCar(values){
-  console.log(values)
   const {data , error} = await axios.post("http://localhost:3000/api/v1/rentals/createRental" , values ,
   {
     headers: {   
@@ -108,6 +107,18 @@ export async function rentCar(values){
   }
   )
   if (error) return error;
+
+  return data;
+}
+
+export async function getCarById(id){
+  const {data , error} = await axios.get(`http://localhost:3000/api/v1/cars/${id}` , {
+    headers : {
+      Authorization : `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+
+  if (error) return error
 
   return data;
 }
