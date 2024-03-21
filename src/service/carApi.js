@@ -10,7 +10,6 @@ export async function getAllCars() {
 
 
 export async function addCar(values) {
-  console.log(values)
   const { data, error } = await axios.post("http://localhost:3000/api/v1/cars/addCar", values, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -109,6 +108,6 @@ export async function rentCar(values){
   }
   )
   if (error) return error;
-  console.log("Response:", data); // Log the response data
+
   return data;
 }
