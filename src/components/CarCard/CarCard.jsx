@@ -74,7 +74,7 @@ function CarCard({car , LoadingCars}) {
               font:"Plus Jakarta Sans",
               ml:2
                 }}>{car.category}</Typography>
-                <Box sx={{role:'button', cursor:"pointer"}}   >
+                <Box sx={{role:'button', cursor:"pointer"}} onClick={()=>navigate("/carDetails" , {state : {car}})}>
                   <CardMedia
                     component="img"
                     image={car.images[0]?.url}
