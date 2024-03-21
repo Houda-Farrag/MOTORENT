@@ -2,7 +2,7 @@ import Footer from "../../components/Footer/Footer";
 import Location from "../../components/Location/Location";
 import Advertise from "../../ui/Advertise";
 import CarCard from "../../components/CarCard/CarCard";
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import LoadingIndicator from "../../ui/LoadingIndicator"
 import styles from "./Home.module.css";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
@@ -14,11 +14,13 @@ import TopFiveCheapestCars from "../../components/TopFiveCheapestCars/TopFiveChe
 import TopFiveCars from "../../components/TopFiveCars/TopFiveCars";
 import AllCars from "../../components/AllCars/AllCars";
 import AdvertiseTwo from "../../ui/AdvertiseTwo";
+import { useState } from "react";
 
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
   const {data : cars , isLoading } = useCars()
- 
+
+
   return (
       <Box className={styles.home}> 
       {(LoadingUser || isLoading)  && (
@@ -31,11 +33,11 @@ function Home() {
             <AdvertiseTwo item sm={6} />
           </Grid>
         </Box>
-        <Grid container className={styles.loc}>
-          <Location item sm={5} />
-          <SwapHorizOutlinedIcon item sm={2} className={styles.swap} />
-          <Location item sm={5} />
-        </Grid>
+        {/* <Grid container className={styles.loc}>
+          <Location  item sm={5} />
+          <SwapHorizOutlinedIcon   item sm={2} className={styles.swap} />
+         <Location item sm={5} />
+        </Grid> */}
           <Box sx={{padding : "25px"}}>
             <TopFiveExpensiveCars />
           </Box>
@@ -43,10 +45,11 @@ function Home() {
             <TopFiveCheapestCars />
           </Box>
           <Box sx={{padding : "25px"}}>
-            <TopFiveCars />
+            <TopFiveCars  />
           </Box>
           <Box sx={{padding : "25px"}}>
             <AllCars />
+    
           </Box>
         <Footer />
       </Box>
