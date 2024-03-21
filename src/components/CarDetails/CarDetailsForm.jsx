@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rating, Typography, Button ,Box, Grid, Card} from '@mui/material';
+import { Rating, Typography, Button , Grid, Card} from '@mui/material';
 import FilledFavHeart from '../FilledFavHeart/FilledFavHeart'
 const CarDetailsForm = ({ car }) => {
   

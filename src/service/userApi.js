@@ -100,3 +100,15 @@ export async function removeFromWishList(id){
 
   return data
 }
+
+export async function clearWishList(){
+  const {data , error} = await axios.delete("http://localhost:3000/api/v1/users/clearWishlist" ,{
+    headers : {
+      Authorization : `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+
+  if (error) return error
+
+  return data;
+}

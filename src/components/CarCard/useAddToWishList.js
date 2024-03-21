@@ -4,19 +4,19 @@ import toast from "react-hot-toast";
 
 function useAddToWishList(){
     const queryClient = useQueryClient()
+    let res;
     const {mutate : addToWishList , isLoading : addingToWishList} = useMutation({
         mutationFn : addToWishListApi,
-        onSuccess : ()=> {
+        onSuccess : (data)=> {
             queryClient.invalidateQueries(["user"])
-
+            res = data
         },
-
         onError : ()=> {
             toast.error("Something Wrong")
         }
     })
 
-    return {addToWishList , addingToWishList}
+    return {addToWishList , addingToWishList , res}
 }
 
 export default useAddToWishList;
