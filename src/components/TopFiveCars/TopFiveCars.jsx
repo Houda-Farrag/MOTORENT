@@ -5,7 +5,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { Box, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import LoadingIndicator from '../../ui/LoadingIndicator';
 import CarCard from '../CarCard/CarCard';
 import useGetTopFive from '../../pages/Cars/useGetTopFive';
@@ -55,36 +55,62 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function TopFiveCars() {
   const [expanded, setExpanded] = useState('panel1');
   const {data : TopFive , isLoading : GettingTopFive} = useGetTopFive();
+  const [showAllCars, setShowAllCars] = useState(false);//naglaa added
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  // return (
+  //   <div >
+  //       {GettingTopFive && <LoadingIndicator />}
+  //     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+  //       <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" >
+  //       <Box sx={{
+  //           display : "flex",
+  //           justifyContent : "space-between",
+  //           alignItems : "center",
+  //           width : "100%"
+  //       }}>
+  //       <Typography>Top Five Cars</Typography>
+  //       <Typography>View All</Typography>
+  //       </Box>
+  //       </AccordionSummary>
+  //       <AccordionDetails>
+  //       <Grid container padding={1}>
+  //         {TopFive?.data.map(car => 
+  //           <Grid item xs={12} ms={6} md={4} lg={3} key={car.id}>
+  //                <CarCard  car={car} LoadingCars={GettingTopFive} key={car.id}/>
+  //           </Grid>
+  //           )}
+  //       </Grid>
+  //       </AccordionDetails>
+  //     </Accordion>
+  //   </div>
+  // );
   return (
-    <div >
-        {GettingTopFive && <LoadingIndicator />}
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" >
-        <Box sx={{
-            display : "flex",
-            justifyContent : "space-between",
-            alignItems : "center",
-            width : "100%"
-        }}>
-        <Typography>Top Five Cars</Typography>
-        <Typography>View All</Typography>
-        </Box>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Grid container padding={1}>
-          {TopFive?.data.map(car => 
-            <Grid item xs={12} ms={6} md={4} lg={3} key={car.id}>
-                 <CarCard  car={car} LoadingCars={GettingTopFive} key={car.id}/>
-            </Grid>
-            )}
-        </Grid>
-        </AccordionDetails>
-      </Accordion>
+    <div>
+      {GettingTopFive && <LoadingIndicator />}
+
+      <Box sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%"
+      }}>
+        <Typography sx={{ color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }}>Top Five Cars</Typography>
+        <Button onClick={() => setShowAllCars(!showAllCars)} sx={{textTransform:'unset',color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito"}}>{showAllCars ? "Hide All" : "View All"}</Button>
+</Box>
+
+      <Grid container padding={1}>
+        {TopFive?.data.slice(0, showAllCars ? TopFive.data.length : 4).map(car => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={car.id}>
+            <CarCard car={car} LoadingCars={GettingTopFive} key={car.id} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
+
+
 }

@@ -174,7 +174,7 @@ const handleMenuPageUserClose = () => {
   setPageIconUserAnchor (null);
 };
 const isMenuPageOpen = Boolean(mobileMoreAnchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   
   const menuId = 'primary-search-account-menu';
@@ -208,7 +208,10 @@ const token= localStorage.getItem("token")
             MOTORENT
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', width: '50%', position: 'relative' }}>
-            <Search sx={{ flex: 1, maxWidth: '100%', display: 'flex', alignItems: 'center', mr: 2, ml: 2 }}>
+            <Search sx={{ flex: 1, maxWidth: '100%', display: 'flex', alignItems: 'center', mr: 2, ml: 2,'& input:focus': {
+       
+          color: '#000',
+        }, }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>

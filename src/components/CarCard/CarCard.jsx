@@ -133,26 +133,30 @@ console.log(car)
     setIsClicked(false);
   };
 
-  const handleClick = () => {
+  /*const handleClick = () => {
     setIsClicked(true);
     navigate("/rentalInfo");
-  };
+  };*/
 
+  
   return (
       <>
       {LoadingCars && <LoadingIndicator />}
         <div className={styles.slider} key="1">
           <Grid container gap="20px">
             <Grid item  >
-              <Card style={{border:"1px solid #ffffff",borderRadius:"20px"}}
+              <Card style={{border:"1px solid #ffffff",borderRadius:"20px" ,width:"100%",height:"100%"}}
                 className={`${styles.card} ${isHovered && styles.cardHover} ${isClicked && styles.cardClick}`}
                 onMouseEnter={handleHoverEnter}
                 onMouseLeave={handleHoverLeave}
-                onClick={handleClick}
+                //onClick={handleClick}
                 sx={{
                   maxWidth: "304px",
                   maxHeight: "388px",
                   padding: "10px !important",
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.2)'
+
+                
                 }}
               >
                 <CardHeader sx={{fontWeight:700,font:
@@ -166,13 +170,14 @@ console.log(car)
               font:"Plus Jakarta Sans",
               ml:2
                 }}>{car.category}</Typography>
-                <Box>
+                <Box sx={{role:'button', cursor:"pointer"}}   >
                   <CardMedia
                     component="img"
                     image={car.images[0]?.url}
                     alt="Car image"
                     width="192px"
                     height="100px"
+
                     sx={{
                       marginTop: "15px",
                       marginBottom: "15px",
@@ -229,4 +234,3 @@ console.log(car)
 }
 
 export default CarCard;
-

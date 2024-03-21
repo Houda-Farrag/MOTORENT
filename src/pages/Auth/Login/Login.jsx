@@ -54,7 +54,7 @@ function Login() {
         <Grid container spacing={2} justifyContent='center' alignItems='center'>
           <Grid item xs={12} md={6} >
             <Box component="form" onSubmit={handleSubmit(submit)}>
-              <Typography variant="h4" textAlign="center" marginBottom={3}>
+              <Typography fontWeight={550} fontFamily={'Nunito'} variant="h4" textAlign="center" marginBottom={3}>
                 Login
               </Typography>
               <Stack spacing={2} display='flex' gap={1}>
@@ -89,7 +89,10 @@ function Login() {
 
                 />
                 <Box display='flex' justifyContent='center'>
-                <Button type="submit" variant="contained" disabled={isLoading} sx={{ width: '60%'}} >
+                <Button type="submit" variant="contained" disabled={isLoading} 
+                 sx={{ width: '60%',textTransform:'unset' }}
+                 fontWeight={550} fontFamily={'Nunito'}
+>
                   Login
                 </Button>
                 </Box>

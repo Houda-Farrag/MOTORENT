@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Typography, Stack, Box, Button, Grid, Avatar, Rating, TextField } from '@mui/material';
-import { deepOrange, deepPurple } from '@mui/material/colors';
+import { Card, Typography,  Box, Button, Grid, Avatar, Rating, TextField } from '@mui/material';
+import {  deepPurple } from '@mui/material/colors';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 

@@ -5,7 +5,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { Box, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import LoadingIndicator from '../../ui/LoadingIndicator';
 import CarCard from '../CarCard/CarCard';
 import useCars from '../../pages/Cars/useCars';
@@ -54,36 +54,62 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function AllCars() {
   const [expanded, setExpanded] = useState('panel1');
   const {data : allCars , isLoading : LoadingCars} = useCars();
+  const [showAll, setShowAll] = useState(false);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  // return (
+  //   <div >
+  //       {LoadingCars && <LoadingIndicator load={LoadingCars}/>}
+  //     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+  //       <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" >
+  //       <Box sx={{
+  //           display : "flex",
+  //           justifyContent : "space-between",
+  //           alignItems : "center",
+  //           width : "100%"
+  //       }}>
+  //       <Typography>All Cars</Typography>
+  //       <Typography>View All</Typography>
+  //       </Box>
+  //       </AccordionSummary>
+  //       <AccordionDetails>
+  //       <Grid container padding={1}>
+  //         {allCars?.data.map(car => 
+  //           <Grid item xs={12} ms={6} md={4} lg={3} key={car.id}>
+  //                <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
+  //           </Grid>
+  //           )}
+  //       </Grid>
+  //       </AccordionDetails>
+  //     </Accordion>
+  //   </div>
+  // );
   return (
     <div >
-        {LoadingCars && <LoadingIndicator load={LoadingCars}/>}
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" >
-        <Box sx={{
-            display : "flex",
-            justifyContent : "space-between",
-            alignItems : "center",
-            width : "100%"
-        }}>
-        <Typography>All Cars</Typography>
-        <Typography>View All</Typography>
-        </Box>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Grid container padding={1}>
-          {allCars?.data.map(car => 
-            <Grid item xs={12} ms={6} md={4} lg={3} key={car.id}>
-                 <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
-            </Grid>
-            )}
-        </Grid>
-        </AccordionDetails>
-      </Accordion>
+      {LoadingCars && <LoadingIndicator load={LoadingCars}/>}
+
+      <Box sx={{
+          display : "flex",
+          justifyContent : "space-between",
+          alignItems : "center",
+          width : "100%"
+      }}>
+        <Typography  sx={{ color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }}>All Cars</Typography>
+        <Button sx={{ textTransform:'unset', color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }} onClick={() => setShowAll(!showAll)}>
+          {showAll ? "Hide All" : "View All"}
+        </Button>
+      </Box>
+
+      <Grid container padding={1}>
+        {allCars?.data.map(car => 
+          <Grid item xs={12} ms={6} md={4} lg={3} key={car.id}>
+            <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
+          </Grid>
+        ).slice(0, showAll ? allCars.data.length : 4)}
+      </Grid>
     </div>
   );
 }
