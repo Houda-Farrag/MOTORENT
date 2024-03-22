@@ -62,7 +62,7 @@ export default function TopFiveExpensiveCars() {
     setExpanded(newExpanded ? panel : false);
   };
 
-  console.log(topFiveExpensiveCars)
+
   return (
     <div >
       {GettingTopFiveExpensive && <LoadingIndicator />}
