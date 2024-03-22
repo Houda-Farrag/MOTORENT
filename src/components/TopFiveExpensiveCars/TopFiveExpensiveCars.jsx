@@ -62,34 +62,7 @@ export default function TopFiveExpensiveCars() {
     setExpanded(newExpanded ? panel : false);
   };
 
-  // return (
-  //   <div >
-  //       {GettingTopFiveExpensive && <LoadingIndicator />}
-  //     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-  //       <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" >
-  //       <Box sx={{
-  //           display : "flex",
-  //           justifyContent : "space-between",
-  //           alignItems : "center",
-  //           width : "100%"
-  //       }}>
-  //       <Typography>Top Five Expensive Cars</Typography>
-  //       <Typography>View All</Typography>
-  //       </Box>
-  //       </AccordionSummary>
-  //       <AccordionDetails>
-  //       <Grid container padding={1}>
-  //         {topFiveExpensiveCars?.data.map(car => 
-  //           <Grid item xs={12} ms={6} md={4} lg={3} key={car.id}>
-  //                <CarCard  car={car} LoadingCars={GettingTopFiveExpensive} key={car.id}/>
-  //           </Grid>
-  //           )}
-  //       </Grid>
-  //       </AccordionDetails>
-  //     </Accordion>
-  //   </div>
-  // );
-  
+  console.log(topFiveExpensiveCars)
   return (
     <div >
       {GettingTopFiveExpensive && <LoadingIndicator />}
