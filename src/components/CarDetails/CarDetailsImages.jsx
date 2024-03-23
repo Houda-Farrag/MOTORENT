@@ -4,7 +4,6 @@ import { Grid, Card, CardMedia, CardContent, CardActions, Stack, Box } from '@mu
 // import img2 from '../../assets/2 (2).png'
 
 const ImageCars = ({car}) => {
-  console.log(car)
   return (
   <>
  <Card >

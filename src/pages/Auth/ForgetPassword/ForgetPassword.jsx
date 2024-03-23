@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
-import { Box, Stack, TextField, Button, Typography } from "@mui/material";
+import { Box, Stack, TextField, Button, Typography, Grid } from "@mui/material";
 import useForgetPassword from "./useForgetPassword";
 import LoadingIndicator from "../../../ui/LoadingIndicator";
+import image from '../../../assets/forgotPass.jpg'
+import Navbar from "../../../components/NavBar/NavBar";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
 
@@ -20,32 +22,25 @@ function ForgetPassword() {
     console.log(errors);
   }
   return (
-    <Box>
-      <Box
-        onSubmit={handleSubmit(submit, onError)}
-        component="form"
-        sx={{
-          width: "500px",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50% , -50%)",
-          border: " 1px solid #eee",
-          padding: "30px",
-          borderRadius: "5px",
-        }}
-        autoComplete="off"
-      >
-        {isLoading && <LoadingIndicator />}
-        <Typography variant="h4" textAlign="center" gutterBottom>
-          Find Your Account
-        </Typography>
-        <Stack
-          sx={{
-            marginBottom: "20px",
-          }}
-        >
-          <TextField
+    <>
+    <Navbar />
+    {isLoading && <LoadingIndicator />}
+    <Box container display='flex' justifyContent='center' alignItems='center' marginTop='4%'>
+      <Box  width='75%'
+      sx={{ 
+        border: " 2px solid #eee",
+        padding: "20px",
+        borderRadius: "10px",
+        boxShadow:'0 0 3px #ADD8E6',
+    }}>
+      <Grid container spacing={2} justifyContent='center' alignItems='center'>
+        <Grid item xs={12} md={6} >
+          <Box component="form" onSubmit={handleSubmit(submit)}>
+            <Typography fontWeight={550} fontFamily={'Nunito'} variant="h4" textAlign="center" marginBottom={3}>
+              Forget Password
+            </Typography>
+            <Stack spacing={2} display='flex' gap={1}>
+            <TextField
             gutterBottom
             required
             size="small"
@@ -60,16 +55,33 @@ function ForgetPassword() {
             })}
             error={errors?.email?.message}
             helperText={!errors?.email?.message ? "" : errors?.email?.message}
+                style={{ boxShadow: '0 0 3px #ADD8E6' }}
           />
-        </Stack>
-        <Stack>
-          <Button type="submit" variant="contained" disabled={isLoading}>
-            Send Email
-          </Button>
-        </Stack>
+              <Box display='flex' justifyContent='center'>
+              <Button type="submit" variant="contained" disabled={isLoading} 
+               sx={{ width: '50%',textTransform:'unset' }}
+               fontWeight={550} fontFamily={'Nunito'}
+>
+                Send Code
+              </Button>
+              </Box>
+            </Stack>
+ 
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <img
+            src={image}
+            alt="Sample image"
+            style={{ maxWidth: "90%", height: "auto" }}
+          />
+        </Grid>
+      </Grid>
       </Box>
     </Box>
-  );
+  </>
+);
+
 }
 
 export default ForgetPassword;

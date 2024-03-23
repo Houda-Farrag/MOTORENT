@@ -15,7 +15,7 @@ import useCars from "../Cars/useCars";
 const CarDetails = () => {
   const location = useLocation();
   const { car: carDetails } = location?.state || {};
-  console.log(carDetails)
+  console.log(carDetails,"from car details")
   // const { } = carDetails;
 const {length,setLenght}=useState(0)
 
@@ -36,7 +36,7 @@ const {length,setLenght}=useState(0)
     </Stack>
  
           <Grid item sm={12} boxShadow={3} borderRadius={8} mt={2} >
-          <Review></Review>
+          <Review carDetails={carDetails}></Review>
         </Grid>
         <Grid sm={12}>
 

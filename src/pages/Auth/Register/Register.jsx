@@ -191,6 +191,10 @@ function Register() {
                 type="text"
                 {...register("driverLicense", {
                   required: "Driver License is Required",
+                  minLength: {
+                    value: 6,
+                    message: "At least 6 chars",
+                  },
                 })}
                 error={errors?.driverLicense?.message}
                 helperText={

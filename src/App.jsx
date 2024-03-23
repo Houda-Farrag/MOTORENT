@@ -25,6 +25,7 @@ import RentalInfo from "./pages/RentalInfo/RentalInfo";
 import PaymentRes from "./pages/PaymentRes/PaymentRes";
 import LayOut from "./pages/LayOut/LayOut";
 import PaymentFail from "./pages/PaymentRes/PaymentFail";
+import VerifyEmail from "./pages/Auth/VerifyEmail/VerifyEmail";
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const rental = {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "verifyEmail/:verifyToken",
+    element: <VerifyEmail />,
+  },
+  {
     path: "card",
     element: <CarCard />,
   },
@@ -73,7 +78,7 @@ const router = createBrowserRouter([
     element: <ForgetPassword />,
   },
   {
-    path: "resetPassword",
+    path: "resetPassword/:code",
     element: <ResetPassword />,
   },
   {
