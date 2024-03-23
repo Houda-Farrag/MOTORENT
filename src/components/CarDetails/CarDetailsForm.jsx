@@ -5,7 +5,7 @@ const CarDetailsForm = ({ car }) => {
   
 
   return<>
-<Card sx={{p:3,backgroundColor:"#ffffff"}} >
+<Card  sx={{p:3,backgroundColor:"#ffffff",height:'100%'}} >
 <Grid container spacing={2} height={"100%"}>
 <Grid item xs={6} sm={8}>
 <Typography variant="h5" component="h2" gutterBottom sx={{color:"#1A202C",
