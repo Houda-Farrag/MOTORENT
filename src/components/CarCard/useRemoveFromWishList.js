@@ -10,8 +10,8 @@ function useRemoveFromWishList(){
             queryClient.invalidateQueries(["user"])
         },
 
-        onError : ()=> {
-            toast.error("Something wrong")
+        onError : (error)=> {
+            toast.error(error.response.data.message === "jwt malformed" ? "please login first" :  error.response.data.message)
         }
     })
 

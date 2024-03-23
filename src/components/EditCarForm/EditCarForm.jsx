@@ -7,7 +7,9 @@ import useCategories from '../../pages/Cars/useCategories';
 import useBrands from "../../pages/Cars/useBrands"
 import useEditCar from '../../pages/Profile/useEditCar';
 
-export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) {
+const plateNumberRegex = /^\d{1,4}( \d{1,4}){0,3} ((?:[A-Za-z]|[\u0600-\u06FF])(?: (?:(?<=\p{Arabic})\s*(?=\p{Arabic}))?)){1,4}( ((?:[A-Za-z]|[\u0600-\u06FF])(?: (?:(?<=\p{Arabic})\s*(?=\p{Arabic}))?)){1,4}){0,3}$/
+
+export default function EditCarForm({car = {} ,setSelectedCarId}) {
     const {carBrands , isGettingCarBrands} = useBrands()
     const {carCategories , isGettingCategories} = useCategories()
     const {editCar , editingCar} = useEditCar()
@@ -109,11 +111,14 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   id="manufacturingYear"
                   label="Year Model"
                   defaultValue={editValues?.manufacturingYear}
-                  {...register("manufacturingYear", { required: "Year Model is Required" })}
-                  error={errors?.manufacturingYear?.message}
-                  helperText={
-                    !errors?.manufacturingYear?.message ? "" : errors?.manufacturingYear?.message
-                  }
+                  {...register("manufacturingYear", { required: "Year Model is Required"  , validate: (value)=> {
+                    const currentYear = new Date().getFullYear();
+                    if (value < 2000 || value > currentYear) {
+                      return false; 
+                    } else {
+                      return true;
+                    }
+                }})}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -151,10 +156,10 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   required
                   type='number'
                   size="small"
-                  id="average"
+                  id="totalKM"
                   defaultValue={editValues?.average}
                   label="Average KM"
-                  {...register("average", { required: "Average is Required" })}
+                  {...register("totalKM", { required: "Average is Required" })}
                   error={errors?.average?.message}
                   helperText={
                     !errors?.average?.message ? "" : errors?.average?.message
@@ -202,11 +207,16 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   id="plateNumber"
                   defaultValue={editValues?.plateNumber}
                   label="Plate Number"
-                  {...register("plateNumber")}
-                  error={errors?.plateNumber?.message}
-                  helperText={
-                    !errors?.plateNumber?.message ? "" : errors?.plateNumber?.message
-                  }
+                  {...register("plateNumber" , {required : "This Field is Required" , 
+                pattern : {
+                  value : plateNumberRegex,
+                  message : "Please Enter A valid Plate Number"
+                }
+              })}
+                error={errors?.plateNumber?.message}
+                helperText={
+                  !errors?.plateNumber?.message ? "" : errors?.plateNumber?.message
+                }
                 />
               </Grid>
             </>
@@ -223,12 +233,6 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   onChange={(e) => setCategory(e.target.value)}
                   defaultValue={editValues?.category}
                 >
-                  {/* <MenuItem value="CONVERTIBLE">CONVERTIBLE</MenuItem>
-                  <MenuItem value="COUPE">COUPE</MenuItem>
-                  <MenuItem value="HATCHBACK">HATCHBACK</MenuItem>
-                  <MenuItem value="SUV">SUV</MenuItem>
-                  <MenuItem value="WAGON">WAGON</MenuItem>
-                  <MenuItem value="SEDAN">SEDAN</MenuItem> */}
                   {carCategories?.data.map(category => <MenuItem value={category} key={category}>{category}</MenuItem>)}
                 </Select>
               </Grid>
@@ -257,7 +261,10 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   type="file"
                   multiple={false}
                   {...register("insurance", { required: "Upload The Insurance Photo" })}
-                  // defaultValue={editValues.documents.insurance.url}
+                  error={errors?.insurance?.message}
+                  helperText={
+                    !errors?.insurance?.message ? "" : errors?.insurance?.message
+                  }
                 />
                 <label htmlFor={`insurance`}>
                   <Button variant="contained" size="small" component="span">
@@ -271,7 +278,10 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   type="file"
                   multiple={false}
                   {...register("carLicense", { required: "Upload The CarLicense Photo" })}
-                  // defaultValue={editValues.documents.carLicense.url}
+                error={errors?.carLicense?.message}
+                helperText={
+                  !errors?.carLicense?.message ? "" : errors?.carLicense?.message
+                }
                 />
                 <label htmlFor={`carLicense`}>
                   <Button variant="contained" size="small" component="span">
@@ -285,7 +295,10 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   type="file"
                   multiple={false}
                   {...register("carInspection", { required: "Upload The carInspection Photo" })}
-                  // defaultValue={editValues.documents.carInspection.url}
+                  error={errors?.carInspection?.message}
+                  helperText={
+                    !errors?.carInspection?.message ? "" : errors?.carInspection?.message
+                  }
                 />
                 <label htmlFor={`carInspection`}>
                   <Button variant="contained" size="small" component="span">
@@ -301,7 +314,10 @@ export default function EditCarForm({car = {} , setShowForm ,setSelectedCarId}) 
                   type="file"
                   multiple
                   {...register("images", { required: "Images are Required" })}
-                  // defaultValue={editValues.images}
+                  error={errors?.images?.message}
+                  helperText={
+                    !errors?.images?.message ? "" : errors?.images?.message
+                  }
                 />
                 <label htmlFor={`images`}>
                   <Button variant="contained" size="small" component="span">

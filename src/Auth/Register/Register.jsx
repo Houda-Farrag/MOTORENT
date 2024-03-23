@@ -13,6 +13,7 @@ import image from '../../../assets/signup.webp'
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[.,\-#_])(?=.*\d).{8,}$/
+const phoneNumberRegex = /^01[0125]\d{8}$/
 
 function Register() {
   const navigate = useNavigate();
@@ -178,6 +179,10 @@ function Register() {
                 type="text"
                 {...register("phone", {
                   required: "phone is Required",
+                  pattern : {
+                    value : phoneNumberRegex,
+                    message : "Plese Enter an Egptian Phone Number"
+                  }
                 })}
                 error={errors?.phone?.message}
                 helperText={!errors?.phone?.message ? "" : errors?.phone?.message}

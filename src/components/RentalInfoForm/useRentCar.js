@@ -10,7 +10,7 @@ function useRentCar(){
             toast.success("Please Enter Your Payment Info")
         },
         onError : (error) => {
-            toast.error(error.response.data.message)
+            toast.error(error.response.data.message === "jwt malformed" ? "please login first" :  error.response.data.message)
         }
     })
         return {rentCarMutate , isLoading }
