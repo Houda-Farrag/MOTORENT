@@ -1,9 +1,10 @@
 import React from 'react';
 import { Rating, Typography, Button , Grid, Card} from '@mui/material';
-import FilledFavHeart from '../FilledFavHeart/FilledFavHeart'
-const CarDetailsForm = ({ car }) => {
-  
+import { useNavigate } from 'react-router-dom';
 
+const CarDetailsForm = ({ car }) => {
+  const navigate = useNavigate()
+  console.log(car)
   return<>
 <Card  sx={{p:3,backgroundColor:"#ffffff",height:'100%'}} >
 <Grid container spacing={2} height={"100%"}>
@@ -18,12 +19,9 @@ const CarDetailsForm = ({ car }) => {
             {car?.brand.brand}
           </Typography>
           <Rating name="read-only" value={car?.rating} readOnly />
-          <Typography variant="body1" color="textSecondary">
-            {`${car?.rating}+ reviewer(s)`}
+          <Typography variant="h4" color="textSecondary">
+            {`${car?.category}`}
           </Typography>
-</Grid>
-<Grid item xs={6} sm={4} sx={{display:"flex",justifyContent:"flex-end"}}>
-<FilledFavHeart/>
 </Grid>
 <Grid item sm={12}>
 <Typography sx={{color:"#596780",font:"Plus Jakarta Sans",fontSize:"20px",lineHeight:"40px"}}>{car?.brand?.brand} has become the embodiment of  outstanding performance, inspired by the most unforgiving,
@@ -92,7 +90,7 @@ Streening
     fontWeight:700,
     font:"Plus Jakarta Sans",
     textTransform:"unset"
-    }} >Rent Now</Button>
+    }} onClick={() => navigate("/rentalInfo", { state: { car } })}>Rent Now</Button>
 </Grid>
 </Grid>
 </Card>

@@ -11,8 +11,8 @@ function useAddToWishList(){
             queryClient.invalidateQueries(["user"])
             res = data
         },
-        onError : ()=> {
-            toast.error("Something Wrong")
+        onError : (error)=> {
+            toast.error(error.response.data.message === "jwt malformed" ? "please login first" :  error.response.data.message)
         }
     })
 

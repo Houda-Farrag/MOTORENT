@@ -5,27 +5,24 @@ import {
     FormControl,
     FormLabel,
     Grid,
-    MenuItem,
-    Select,
     Box,
-    Button
+    Button,
+    TextField
   } from "@mui/material";
 
 import {useForm} from 'react-hook-form'
 import { useLocation } from "react-router-dom";
 import LoadingIndicator from "../../ui/LoadingIndicator";
 import {rentCar} from "../../service/carApi"
-// import { rentCar } from "../../service/carApi";
-// import useRentCar from "./useRentCar";
-
 
 const RentalInfoForm =()=>{
     const Location = useLocation()
     const carId = Location.state.car.id;
+    const carLocation = Location.state.car.location.city;
     const [isLoading , setIsLoading] = useState(false)
     const {register , formState , handleSubmit} = useForm({mode:"all"})
     const {errors}=formState
-
+    console.log(carLocation)
    async function submit(val){
       const values = {
         car : carId,
@@ -77,20 +74,17 @@ const RentalInfoForm =()=>{
         <FormControl fullWidth>
         <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
                 fontWeight:600, fontSize:"18px"}}>Location</FormLabel>
-        <Select
+        <TextField
           labelId="pickLocation"
           id="pickLocation"
-          value="Cairo"
+          value={carLocation}
           placeholder="Select your City"
           sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
           {...register('pickLocation',{required:{
             message:"This Filed is required"}})}
             error={!!errors.message}
         >
-          <MenuItem value={"Beni Seuf"}>Beni Seuf</MenuItem>
-          <MenuItem value={"Cairo"}>Cairo</MenuItem>
-          <MenuItem value={"Alex"}>Alex</MenuItem>
-        </Select>
+        </TextField>
       </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -128,20 +122,17 @@ const RentalInfoForm =()=>{
         <FormControl fullWidth>
         <FormLabel component="legend" sx={{color:'#1A202C',font:"Plus Jakarta Sans",
                 fontWeight:600, fontSize:"18px"}}>Location</FormLabel>
-        <Select
-          labelId="dropLocation"
-          id="dropLocation"
-          value="Cairo"
+        <TextField
+          labelId="dropofLocation"
+          id="dropofLocation"
+          value={carLocation}
           placeholder="Select your City"
           sx={{backgroundColor:"#F6F7F9",borderRadius:"10px",mt:3,border:"none" ,"&:hover":{border:"1px solid #F6F7F9"}}}
-          {...register('dropLocation',{required:{
+          {...register('pickLocation',{required:{
             message:"This Filed is required"}})}
             error={!!errors.message}
         >
-          <MenuItem value={"Beni Seuf"}>Beni Seuf</MenuItem>
-          <MenuItem value={"Cairo"}>Cairo</MenuItem>
-          <MenuItem value={"Alex"}>Alex</MenuItem>
-        </Select>
+        </TextField>
       </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>

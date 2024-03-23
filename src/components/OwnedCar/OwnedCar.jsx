@@ -11,6 +11,7 @@ import LoadingIndicator from '../../ui/LoadingIndicator';
 import styles from "./OwnedCar.module.css"
 import useDeleteCar from './useDeleteCar';
 import EditCarForm from '../EditCarForm/EditCarForm';
+import { useNavigate } from 'react-router-dom';
 
 
 const Accordion = styled(MuiAccordion)(({ theme }) => ({
@@ -46,6 +47,7 @@ export default function OwnedCar({setShowForm}) {
     const {data , isLoading } = useUser()
     const {deleteCar , isDeleting , token} = useDeleteCar()
     const [selectedCarId, setSelectedCarId] = useState(null);
+    const navigate = useNavigate()
     
   const [expanded, setExpanded] = useState('panel1');
   const handleChange = (panel) => () => {
@@ -77,7 +79,8 @@ export default function OwnedCar({setShowForm}) {
                         <Box sx={{
                             width : "200px",
                             height : "150px",
-                        }}>
+                            cursor : "pointer",
+                        }} onClick={()=>navigate("/carDetails" , {state : {car}})}>
                             <img className={styles.image} src={car.images[0].url} alt={car.images[0]._id} />
                         </Box>
                         <Box>    

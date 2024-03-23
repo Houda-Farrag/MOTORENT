@@ -10,9 +10,10 @@ import Navbar from "../../../components/NavBar/NavBar";
 import image from '../../../assets/signup.webp'
 
 // import { useSignup } from "../Register/useSignup";
-
+const phoneNumberRegex = /^01[0125]\d{8}$/
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
-const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&.])[A-Za-z\d@$!%?&.]+$/
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]+$/
+const driverLiesenseRegex = /^\d{14}$/
 
 function Register() {
   const navigate = useNavigate();
@@ -178,6 +179,10 @@ function Register() {
                 type="text"
                 {...register("phone", {
                   required: "phone is Required",
+                  pattern : {
+                    value : phoneNumberRegex,
+                    message : "Plese Enter an Egptian Phone Number"
+                  }
                 })}
                 error={errors?.phone?.message}
                 helperText={!errors?.phone?.message ? "" : errors?.phone?.message}
@@ -191,10 +196,10 @@ function Register() {
                 type="text"
                 {...register("driverLicense", {
                   required: "Driver License is Required",
-                  minLength: {
-                    value: 6,
-                    message: "At least 6 chars",
-                  },
+                  pattern : {
+                    value  : driverLiesenseRegex,
+                    message : "Please Enter A Valid Driver"
+                  }
                 })}
                 error={errors?.driverLicense?.message}
                 helperText={

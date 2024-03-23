@@ -31,7 +31,7 @@ function Cars() {
     { id: 6, checked: false, label: 6 },
     { id: 7, checked: false, label: 7 },
   ])
-  const [selectedPrice, setSelectedPrice] = useState([500, 2500]);
+  const [selectedPrice, setSelectedPrice] = useState([100, 2500]);
   const [filteredCars, setFilteredCars] = useState([]);
   
   const handleChangeCheckedCategories = (id) => {
@@ -110,12 +110,6 @@ function Cars() {
         </Hidden>
         <Grid item xs={12} sm={9} className={styles.carspage}>
           <Grid container className={styles.locationContainer} sx={{ mt: 2 }}>
-            <Grid item xs={12} sm={6}>
-              <Location />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Location />
-            </Grid>
             <Grid container rowGap={1}>
               {filteredCars?.map((car) => (
                 <Grid item xs={12} ms={6} md={4} key={car.id}>

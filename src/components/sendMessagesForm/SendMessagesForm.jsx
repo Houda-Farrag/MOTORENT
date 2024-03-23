@@ -15,7 +15,7 @@ const UserSendMessageForm = () => {
   const form = useForm({
     mode: "all"
   });
-  const { register, formState, handleSubmit } = form;
+  const { register, formState, reset ,  handleSubmit } = form;
   const { errors } = formState;
   const { sendMessage, isSending } = useSendMessage();
   async function submit(values) {
@@ -26,8 +26,8 @@ const UserSendMessageForm = () => {
     };
 
     try {
-      const res = await sendMessage(data);
-      console.log(data);
+      await sendMessage(data);
+      reset()
     } catch (error) {
       // console.log(error)
     }
