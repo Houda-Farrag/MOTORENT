@@ -12,7 +12,7 @@ import image from '../../../assets/signup.webp'
 // import { useSignup } from "../Register/useSignup";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/gi;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[.,\-#_])(?=.*\d).{8,}$/
+const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&.])[A-Za-z\d@$!%?&.]+$/
 
 function Register() {
   const navigate = useNavigate();

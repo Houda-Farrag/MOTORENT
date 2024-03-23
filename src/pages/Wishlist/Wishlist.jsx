@@ -7,6 +7,7 @@ import Navbar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import "./style.css"
 
 
 const Wishlist=()=>{
@@ -21,20 +22,19 @@ const Wishlist=()=>{
     }
     return (
       <>
-       <Navbar></Navbar>
+     
         {clearingWishList && <LoadingIndicator load={clearingWishList} />}
-        <Box p={5} display={'flex'} justifyContent={'center'}>
-        <Card sx={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.2)', 
-       width:'75%' ,borderRadius:"10px" }}>
+      
+       
         <div>
        
         {isLoading && <LoadingIndicator load={isLoading}/>}
-        <Box sx={{width:'100%'}}  >
+        <Box  >
           <Accordion
             disableGutters
-            className="accordion-container"
+           
             defaultExpanded
-            sx={{ border: "none !important" ,ml:3}}
+            sx={{ border: "none !important" ,width:"100%",ml:3,mt:1}}
           >
             <AccordionSummary
               className="accordion-summary"
@@ -60,9 +60,7 @@ const Wishlist=()=>{
     
     
     </div>
-    </Card>
-    </Box>
-    <Footer></Footer>
+   
 
 
     </>

@@ -7,7 +7,7 @@ import useUser from "../../Auth/useUser"
 import useAddReview from "./useAddReview"
 import useGetAllReviews from './useGetAllReviews';
 import LoadingIndicator from '../../ui/LoadingIndicator';
-import { useQueryClient } from '@tanstack/react-query';
+// import { useQueryClient } from '@tanstack/react-query';
 import { MdDelete } from "react-icons/md";
 import useDeleteReview from './useDeleteReview';
 import { BsPencilSquare } from "react-icons/bs";
