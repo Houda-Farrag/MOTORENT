@@ -4,6 +4,7 @@ import { Grid, Card, CardMedia, CardContent, CardActions, Stack, Box } from '@mu
 // import img2 from '../../assets/2 (2).png'
 
 const ImageCars = ({car}) => {
+  console.log(car)
   return (
   <>
  <Card >
@@ -19,12 +20,12 @@ const ImageCars = ({car}) => {
 </Grid>
     
   
-{car.images.map((image,index) => (
+{car?.images.map((image,index) => (
         <Grid key={index} mt={4} sm={4} height={"15%"} item>
           <Stack  p={1} borderRadius={8}>
             <img
-              src={image.url}
-              alt={`Car Image ${index + 1}`}
+              src={car.url}
+              alt={car.id}
               style={{
                 width:'100%',
                 borderRadius: index === 0 ? 15 : 20,              
