@@ -30,7 +30,7 @@ const {length,setLenght}=useState(0)
     <Stack mt={2}  height={'85vh'}display={'flex'} flexDirection={'row'} justifyContent={'space-evenly'}>
 
     <Grid item sm={5}><Box height={'100%' } width={'100%'} display={"flex"} justifyContent={"center"} >
-  <ImageCars car={carDetails}></ImageCars  ></Box></Grid>
+  <ImageCars car={carDetails}></ImageCars ></Box></Grid>
   <Grid item xs={12} sm={5}><Box display={"flex"} justifyContent={"center"} width={'100%'}  height={"100%"}>
           <CarDetailsForm   car={carDetails} ></CarDetailsForm></Box></Grid>
     </Stack>

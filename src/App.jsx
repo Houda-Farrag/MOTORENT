@@ -11,10 +11,8 @@ import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Cars from "./pages/Cars/Cars";
 import Profile from "./pages/Profile/Profile";
-// import UserProfille from "./pages/userProfile/userProfile";
 import UserProfileDetailsForm from "./components/userProfileDetailsForm/UserProfileDetailsForm"
 import { RentedCars } from "./components/RentedCars/RentedCars";
-import AddCarForm from "./components/AddCarForm/AddCarForm";
 import UserSendMessageForm from "./components/sendMessagesForm/SendMessagesForm";
 import RecviedMessagesUser from "./components/RecviedMessagesUser/RecviedMessagesUser";
 import PersistentDrawerLeft from "./components/Test/Test";
@@ -25,7 +23,7 @@ import RentalInfo from "./pages/RentalInfo/RentalInfo";
 import PaymentRes from "./pages/PaymentRes/PaymentRes";
 import LayOut from "./pages/LayOut/LayOut";
 import PaymentFail from "./pages/PaymentRes/PaymentFail";
-// import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { CarHistoryWrapper } from "./components/CarHistoryWrapper/CarHistoryWrapper";
 
 const rental = {
   name: 'Nissan GT-R',
@@ -99,8 +97,8 @@ const router = createBrowserRouter([
     {path:"profiledetalis"
     ,element:<UserProfileDetailsForm/>
     },
-    {path:"addcar",
-    element:<AddCarForm/>
+    {path:"history",
+    element:<CarHistoryWrapper />
     },
     {path:"collection",
     element:<RentedCars/>
