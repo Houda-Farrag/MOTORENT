@@ -1,23 +1,15 @@
 import React from 'react';
 import {
   Typography,
-  Grid,
-  Rating,
   Button,
   Stack,
-IconButton,
-Card,
-Divider,
 Box,
 AccordionSummary,
 Accordion,
 AccordionDetails,
 } from "@mui/material";
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useNavigate } from 'react-router-dom';
 
 const CarWishList=({car})=>{
@@ -26,7 +18,7 @@ const CarWishList=({car})=>{
 return (
   <>
  
-<Box sx={{width : "100%" , border : "1px solid #3563E9" , borderRadius :"6px"}}> 
+
 
 <Accordion expanded key={car.id} >
 <AccordionSummary aria-controls={`${car.id}-content`} id={`${car.id}-header`} expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}>
@@ -87,7 +79,6 @@ return (
 
 
 </Accordion>
-</Box>
 </>
 )
 }
