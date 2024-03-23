@@ -137,7 +137,7 @@ function CarCard({car , LoadingCars}) {
                <CardContent>
                  <Stack
                    direction="row"
-                   spacing={10}
+                   spacing={2}
                    display="flex"
                    alignItems="center"
                    className={styles.priceAction}
@@ -151,7 +151,15 @@ function CarCard({car , LoadingCars}) {
                     >EGP{car.priceForDay}/</Typography>day
                    </Box>
                    <Box>
-                     <Button variant="contained" onClick={()=> navigate("/rentalInfo" , {state : {car}})}>Rent</Button>
+                   {car.active ? (
+  <Button variant="contained" onClick={() => navigate("/rentalInfo", { state: { car } })}>
+    Rent
+  </Button>
+) : (
+  <Button variant="contained"  sx={{textTransform:"unset"}} disabled>
+ Rented
+  </Button>
+)}
                    </Box>
                  </Stack>
                </CardContent> 

@@ -8,126 +8,89 @@ import {
 IconButton,
 Card,
 Divider,
+Box,
+AccordionSummary,
+Accordion,
+AccordionDetails,
 } from "@mui/material";
-
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 
-const CarWishList=(car)=>{
+const CarWishList=({car})=>{
   const navigate = useNavigate()
 
 return (
   <>
-  <Card sx={{p:1 ,borderRadius:8}}>
-  <Grid container >
-  <Grid item xs={6} sm={4}>
-         <Stack p={1} borderRadius={8} backgroundColor="#3563E9">
-          <img src={car?.car.images[0].url} alt={car?.brand?.brand} style={{
-            width: 'auto',
-            height: 'auto',
-          }} />
-          </Stack> 
-        </Grid>
-        <Grid item xs={6}ml={1} sm={4}>
+ 
+<Box sx={{width : "100%" , border : "1px solid #3563E9" , borderRadius :"6px"}}> 
 
-  <Typography variant="h5" component="h2" gutterBottom sx={{color:"#1A202C",
-            fontSize:"32px",
-            fontWeight:700,
-            font:"Plus Jakarta Sans",
-            fontStyle:"bold",
-            lineHeight:"48px"
-            }}>
-          </Typography>
-          <Rating name="read-only" value={car.reviewer} readOnly />
-          <Typography variant="body1" color="textSecondary">
-            {`440+ reviewer(s)`}
-          </Typography>
-          <Typography sx={{color:"#596780",font:"Plus Jakarta Sans",fontSize:"20px",lineHeight:"40px"}}>
-NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".</Typography>
-</Grid>
+<Accordion expanded key={car.id} >
+<AccordionSummary aria-controls={`${car.id}-content`} id={`${car.id}-header`} expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}>
+  <Typography sx={{color : "#000" , fontFamily: "Nunito" ,fontWeight:700, fontSize : "1.2rem"}}>{car.model}</Typography>
+</AccordionSummary> 
 
-<Grid item  xs={6} sm={3} display={"flex"} justifyContent={"center"} alignItems={'flex-start'}>
-<IconButton size="large"  onClick={''} aria-label="delete">
-  <DeleteIcon sx={{fontSize:"32px"}} />
-</IconButton>
-</Grid>
-<Grid container sx={{m:2}} spacing={2}>
-<Grid item sm={12}><Divider></Divider></Grid>
-<Grid item sm={3}>
-   
-<Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-              Type Car
-              </Typography>
-</Grid>
-<Grid item sm={3}>
-<Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car?.car.category}
-              </Typography>
-</Grid>
-<Grid item sm={3}>
-<Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-              Capacity
-              </Typography>
-</Grid>
-<Grid item sm={3}>
-<Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-            {car?.car.capacity} Person
-              </Typography>
-</Grid>
-<Grid item sm={3}>
-<Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-            Tank
-              </Typography>
-</Grid>
-<Grid item sm={3}>
-<Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-    {car?.car.tankCapacity}
-              </Typography>
-</Grid>
-<Grid item sm={3}>
-<Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-          Streening
-              </Typography>
-             
-</Grid>
-<Grid item sm={3}>
-<Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
-             {car?.car.transmission}
-              </Typography>
-            
-</Grid>
 
-</Grid>
-<Grid item sm={12}><Divider></Divider></Grid>
-<Grid item mt={2} sm={7} display={'flex'} justifyContent={'end'}>
-<Typography variant="h5" noWrap component="div"   sx={{color:"#1A202C",
-            fontSize:"28px",
-            fontWeight:700,
-            font:"Plus Jakarta Sans",
-            fontStyle:"bold",
-          lineHeight:"35.5px"
-            }} >
-Price Now! {car?.car.priceForDay}<span style={{color:"#90A3BF",font:"Plus Jakarta Sans",fontSize:"16px"}}>/day</span>`
-     {/* <h5 style={{fontWeight:600,font:"Plus Jakarta Sans",color:"#90A3BF",fontSize:"20px", textDecoration: 'line-through' }}> Price before:88</h5> */}
-      </Typography>
-</Grid>
-<Grid item sm={5} mt={2} display={'flex'} justifyContent={'center'}>
-  <Button size='medium' variant="contained" sx={{
-    bgcolor:"#3563E9",
-    fontSize:"16px",
-    lineHeight:"24px",
-    fontWeight:700,
-    width:'120px',
-    height:"56px",
-    font:"Plus Jakarta Sans",
-    textTransform:"unset"
-  }} 
-  onClick={()=> navigate("/rentalInfo" , {state : {car}})}
-  >Rent Now</Button>
-</Grid>
-</Grid>
-</Card>
+        <AccordionDetails>
+        <Box className="cardetails">
+            <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row" >
+                <Box sx={{
+                    width : "200px",
+                    height : "150px",
+                }}>
+                    <img style={{width:'100%',border:'1px solid transparent',borderRadius:'50px'}} src={car.images[0].url} alt={car.images[0]._id} />
+                </Box>
+                <Box>    
+                  
+                    <div>
+                    <span style={{fontWeight:700}}>Transission :</span> <span>{car.transmission}</span>
+                    </div>                            
+                    <div>
+                   <span style={{fontWeight:700}}> Capacity :</span> <span>{car.capacity} Person</span>
+                    </div>
+                    <div>
+                 <span style={{fontWeight:700}}>  Category :</span> <span>{car.category}</span>
+                    </div>
+                    <div>
+                 <span style={{fontWeight:700}}>   City :</span> <span>{car.location.city}</span>
+                    </div>
+                    <div>
+                    <span style={{fontWeight:700}}>   Area :</span> <span>{car.location.area}</span>
+                    </div>
+                    <div>
+                    <span style={{fontWeight:700}}>   TankCapacity :</span> <span>{car.tankCapacity} LT</span>
+                    </div>
+                    <div>
+                    <span style={{fontWeight:700}}>   Price / Day :</span> <span>{car.priceForDay} EGP</span>
+                    </div>
+                    <div>
+                    <span style={{fontWeight:700}}>  Total KM :</span> <span>{car.totalKM} KM</span>
+                    </div>
+                    <div>
+                    <span style={{fontWeight:700}}>  Plate Number :</span> <span>{car.plateNumber}</span>
+                    </div>
+                </Box>
+            </Stack>
+            <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row" marginTop={2}>
+                <Box>
+                    <Button  variant='contained' size='small' color='error' >Delete</Button>
+                </Box>
+                <Box>
+                    <Button variant='contained' size='small'onClick={()=> navigate("/rentalInfo" , {state : {car}})}  >Rent</Button>
+                </Box>
+            </Stack>
+        </Box>
+</AccordionDetails>
+
+
+</Accordion>
+</Box>
 </>
 )
 }
 export default CarWishList;
+
+
