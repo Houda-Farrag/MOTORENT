@@ -292,6 +292,9 @@ const token= localStorage.getItem("token")
         aria-label="wishlist"
         color="inherit"
         sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
+      onClick={()=>{
+        navigate('user/wishlist')
+      }}
       >
         <FavoriteIcon />
       </IconButton>
@@ -326,11 +329,10 @@ const token= localStorage.getItem("token")
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        {/* Notification items */}
+       
         <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
-        {/* You can map over a list of notifications to generate menu items */}
       </Menu>
       <IconButton
         size="large"
@@ -392,7 +394,6 @@ const token= localStorage.getItem("token")
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        {/* Notification items */}
         <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>

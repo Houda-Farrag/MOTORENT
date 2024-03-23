@@ -38,14 +38,7 @@ const rental = {
 };
 
 
-const reviews = 
-  {
-    name: 'Alex Stanton',
-    position: 'CEO at Bukalapak',
-    date: '21 July 2022',
-    review: 'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition,the service provided by the officers is also very friendly and very polite.',
-    rating: 4.5
-  }
+
 
 const router = createBrowserRouter([
   {
@@ -106,6 +99,10 @@ const router = createBrowserRouter([
     {path:"history",
     element:<CarHistoryWrapper />
     },
+    {
+      path:"wishlist",
+      element:<Wishlist></Wishlist>
+    },
     {path:"collection",
     element:<RentedCars/>
     
@@ -130,9 +127,6 @@ const router = createBrowserRouter([
   },{
     path:"rental",
     element:<RentalSummary rental={rental}></RentalSummary>
-  },{
-    path:"wishlist",
-    element:<Wishlist></Wishlist>
   },
   {
     path : "rentalInfo",

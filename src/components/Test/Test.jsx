@@ -355,7 +355,7 @@ const handleMenuClose = () => {
 
           <ListItemButton 
             onClick={() => {
-              navigate("/wishlist");
+              navigate("wishlist");
             }}
           >
             <ListItemIcon>
