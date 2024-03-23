@@ -18,10 +18,8 @@ const RecviedMessagesUser = () => {
 
   const { data: userMessageData, isLoading: isLoadingMessage, error: errorUserMessage } = useGetUserMessage();
 
-  const { data: adminReply, isLoading: LoadingAdminReply, error: errorAdminReply } = useGetReplyAdmin();
-  console.log(adminReply);
-
-
+  console.log(userMessageData);
+  // const { data: adminReply, isLoading: LoadingAdminReply, error: errorAdminReply } = useGetReplyAdmin();
 
   return (
     <>
@@ -55,16 +53,9 @@ const RecviedMessagesUser = () => {
           </AccordionSummary>
 
           <Box>
-            {userMessageData && userMessageData.data && userMessageData.data.map((message, index) => (
+            {userMessageData && userMessageData.data && [...userMessageData.data].reverse().map((message, index) => (
               <AccordionDetails key={index} className="accordion-details">
                 <Box
-                  sx={{
-                    // display: "flex",
-                    // justifyContent: "flex-start",
-                    // flexDirection:"column"
-                    // gap: "200px",
-                    // alignItems: "center",
-                  }}
                 >
                   <Box m={2}>
                     <DraftsIcon fontSize="xl2" sx={{ mx: 1, color: "red" }} />
@@ -81,8 +72,8 @@ const RecviedMessagesUser = () => {
                     <Typography component="span" fontWeight={600}>Reply:</Typography>
 
                     <Typography component="span">{message?.replay ? message.replay : "Pending"}</Typography>
-                    <img src={message?.attachments?.url} alt="" />
                   </Box>
+                    <img src={message?.attachments?.url} alt="" style={{width:'50%'}} />
 
                   {/* <Typography>{message.title}</Typography>
                 <Typography>{message.body}</Typography> */}
