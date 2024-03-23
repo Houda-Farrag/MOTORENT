@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid, Card,  Stack } from '@mui/material';
 
 
-const ImageCars = ({car}) => {
 const ImageCars = ({ car }) => {
   return (
     <Card sx={{height:"100%"}}>
