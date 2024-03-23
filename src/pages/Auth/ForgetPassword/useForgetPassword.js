@@ -13,10 +13,10 @@ function useForgetPassword() {
     mutationFn: forgetPasswordApi,
     onSuccess: (user) => {
       toast.success("An Email is sent to your Email Address");
-      navigate("/resetPassword");
+      // navigate("/resetPassword");
     },
     onError: () => {
-      toast.error("Something went wrong, pleae try again");
+      toast.error("Something went wrong, please try again");
     },
   });
 
