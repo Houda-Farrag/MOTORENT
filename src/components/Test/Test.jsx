@@ -366,13 +366,13 @@ const handleMenuClose = () => {
 
           <ListItemButton
             onClick={() => {
-              navigate("./addcar");
+              navigate("./history");
             }}
           >
             <ListItemIcon>
               <GarageIcon sx={{ color: "#3563E9" }} />
             </ListItemIcon>
-            <ListItemText primary="Add Car To Rent" />
+            <ListItemText primary="My history" />
           </ListItemButton>
 
 

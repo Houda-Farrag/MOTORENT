@@ -94,9 +94,7 @@ Streening
     textTransform:"unset"
     }} >Rent Now</Button>
 </Grid>
-
 </Grid>
-
 </Card>
 
   </>
