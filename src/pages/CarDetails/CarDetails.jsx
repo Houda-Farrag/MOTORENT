@@ -49,7 +49,7 @@ const CarDetails = () => {
               borderRadius={8}
               mt={3}
             >
-              <Review    />
+              <Review carDetails={carDetails}   />
             </Box>
           </Grid>
 
