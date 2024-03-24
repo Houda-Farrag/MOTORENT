@@ -3,12 +3,12 @@ import { Box, Stack, TextField, Button, Typography, Grid } from "@mui/material";
 import image from '../../../assets/resetPass.jpg'
 import useUpdatePassword from "./useUpdatePassword";
 import LoadingIndicator from "../../../ui/LoadingIndicator";
-import { useNavigate } from "react-router-dom";
+
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]+$/
 
 function UpdatePassword() {
-    const navigate = useNavigate()
+
     const { register, handleSubmit,getValues, reset,formState } = useForm({
       mode: "all",
     });
@@ -18,7 +18,10 @@ function UpdatePassword() {
 
     async function submit(values) {
       try {
-        await mutatePassword(values);        
+        await mutatePassword(values);
+        setTimeout(function(){
+          localStorage.removeItem("token")
+        } , 3000)      
       } catch (error) {
         console.log(error)
       }

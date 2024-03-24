@@ -27,6 +27,7 @@ const Review = ({carDetails}) => {
   const [change , setChange] = useState(false)
 
   const reviewField = watch("review")
+  const reviewFieldUpdate = watch("updatedreview")
 
   async function handleDeleteReview(id){
     try {
@@ -193,7 +194,7 @@ return<>
         <Button onClick={(e)=> { e.preventDefault();
                                 setShowUpdateForm(false) }} sx={{ml:2,mr:2,font:"Plus Jakarta Sans",
                                 fontWeight:600, backgroundColor:'#3563E9',textTransform:"unset"}} variant="contained" size="medium">Back</Button>
-        <Button size="medium" type="submit" sx={{ml:2,mr:2,font:"Plus Jakarta Sans",
+        <Button size="medium" disabled={!reviewFieldUpdate} type="submit" sx={{ml:2,mr:2,font:"Plus Jakarta Sans",
             fontWeight:600, backgroundColor:'#3563E9',textTransform:"unset"}} variant="contained" >
             Update Your Review 
         </Button>
