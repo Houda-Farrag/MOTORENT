@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 import { Box, Button, Grid } from '@mui/material';
 import LoadingIndicator from '../../ui/LoadingIndicator';
 import CarCard from '../CarCard/CarCard';
-import useCars from '../../pages/Cars/useCars';
 import { useNavigate } from 'react-router';
+import useAvailableCars from '../../pages/Cars/useِAvailableCars';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -52,11 +52,11 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   alignItems : "center"
 }));
 
-export default function AllCars() {
+export default function AllAvailableCars() {
   const navigate = useNavigate()
   const [expanded, setExpanded] = useState('panel1');
-  const {data : allCars , isLoading : LoadingCars} = useCars();
-  // const [showAll, setShowAll] = useState(false);
+  const {data : allCars , isLoading : LoadingCars} = useAvailableCars();
+  const [showAll, setShowAll] = useState(false);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -99,13 +99,10 @@ export default function AllCars() {
           alignItems : "center",
           width : "100%"
       }}>
-        <Typography  sx={{ color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }}>All Cars</Typography>
-        <Button sx={{ textTransform:'unset', color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }} onClick={() => navigate('/cars')}>
-        showAll
-        </Button>
-        {/* <Button sx={{ textTransform:'unset', color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }} onClick={() => setShowAll(!showAll)}>
+        <Typography  sx={{ color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }}>All Available Cars</Typography>
+        <Button sx={{ textTransform:'unset', color: "#90A3BF", fontWeight: 600, fontFamily: "Nunito" }} onClick={() => setShowAll(!showAll)}>
           {showAll ? "Hide All" : "View All"}
-        </Button> */}
+        </Button>
       </Box>
 
       <Grid container padding={1}>
@@ -113,8 +110,7 @@ export default function AllCars() {
           <Grid item xs={12} ms={6} md={4} lg={3} key={car.id}>
             <CarCard  car={car} LoadingCars={LoadingCars} key={car.id}/>
           </Grid>
-        ).slice(0,  4)}
-        {/* ).slice(0, showAll ? allCars.data.length : 4)} */}
+        ).slice(0, showAll ? allCars.data.length : 4)}
       </Grid>
     </div>
   );
