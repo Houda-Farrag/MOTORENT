@@ -153,7 +153,6 @@ if (error) console.log(error,"error")
 if (data){
 
   queryClient.invalidateQueries('userMessages');
-  console.log(data,"data")
 } 
   
 }

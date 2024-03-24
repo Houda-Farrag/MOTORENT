@@ -82,7 +82,7 @@ function Navbar({ user = {}, cars = [] }) {
   let unseenMessagesCount = 0;
   if (!errorUserMessage){
      unseenMessagesCount = userMessageData && userMessageData.data ? userMessageData.data.filter(message => !message.seen && message.status==='solved').length : 0;
-    console.log(unseenMessagesCount,"unseenMessagesCount")
+    // console.log(unseenMessagesCount,"unseenMessagesCount")
   }
 
  const  handleSeenMessages = ()=>{

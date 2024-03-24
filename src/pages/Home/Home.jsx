@@ -14,6 +14,7 @@ import TopFiveCheapestCars from "../../components/TopFiveCheapestCars/TopFiveChe
 import TopFiveCars from "../../components/TopFiveCars/TopFiveCars";
 import AllCars from "../../components/AllCars/AllCars";
 import AdvertiseTwo from "../../ui/AdvertiseTwo";
+import AllAvailableCars from "../../components/AllAvailableCars/AllAvailableCars";
 
 
 function Home() {
@@ -33,11 +34,13 @@ function Home() {
             <AdvertiseTwo item sm={6} />
           </Grid>
         </Box>
-        {/* <Grid container className={styles.loc}>
-          <Location  item sm={5} />
-          <SwapHorizOutlinedIcon   item sm={2} className={styles.swap} />
-         <Location item sm={5} />
-        </Grid> */}
+
+          <Box sx={{padding : "25px"}}>
+            <AllCars />
+          </Box>
+          <Box sx={{padding : "25px"}}>
+            <AllAvailableCars />
+          </Box>
           <Box sx={{padding : "25px"}}>
             <TopFiveExpensiveCars />
           </Box>
@@ -46,10 +49,6 @@ function Home() {
           </Box>
           <Box sx={{padding : "25px"}}>
             <TopFiveCars  />
-          </Box>
-          <Box sx={{padding : "25px"}}>
-            <AllCars />
-    
           </Box>
         <Footer />
       </Box>
