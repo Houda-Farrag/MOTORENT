@@ -45,6 +45,19 @@ export async function resetPassword(values) {
   return data;
 }
 
+export async function updateMyProfile(values){
+  const {data , error} = await axios.patch(`http://localhost:3000/api/v1/users/userProfile` , values , {
+    headers : {
+      Authorization : `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+
+  if(error) return error;
+
+  return data;
+  
+}
+
 export async function getUser(token) {
   const { error, data } = await axios.get(
     `http://localhost:3000/api/v1/users/userProfile`,

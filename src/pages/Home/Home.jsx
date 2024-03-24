@@ -14,13 +14,13 @@ import TopFiveCheapestCars from "../../components/TopFiveCheapestCars/TopFiveChe
 import TopFiveCars from "../../components/TopFiveCars/TopFiveCars";
 import AllCars from "../../components/AllCars/AllCars";
 import AdvertiseTwo from "../../ui/AdvertiseTwo";
-import { useState } from "react";
+
 
 function Home() {
   const { data: user, isLoading : LoadingUser } = useUser();
   const {data : cars , isLoading } = useCars()
 
-
+  console.log(cars)
   return (
       <Box className={styles.home}> 
       {(LoadingUser || isLoading)  && (

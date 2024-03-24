@@ -3,9 +3,8 @@ import { getAllCarReviwes } from "../../service/reviewApi";
 
 function useGetAllReviews(id){
     const {data , isLoading} = useQuery({
-        queryKey : ["reviews", id],
-        queryFn :  () => getAllCarReviwes(id),
-        // enabled : !!id,
+        queryKey : ["reviews"],
+        queryFn :  () => getAllCarReviwes(id)
     })
 
     console.log(data)

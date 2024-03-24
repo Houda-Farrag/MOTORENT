@@ -15,9 +15,9 @@ const UserProfille = () => {
      <>
       <CssBaseline />
       <Stack sx={{ width:{ sm:`calc(100% - ${drawerWidth}%)` }, ml:`${drawerWidth}%` }}>
-<Navbar></Navbar>
-<UserSendMessageForm></UserSendMessageForm>
-{/* <RentedCars></RentedCars> */}
+      <Navbar></Navbar>
+      <UserSendMessageForm></UserSendMessageForm>
+      {/* <RentedCars></RentedCars> */}
       </Stack>
       <SiderBarUser DrawerWidth={drawerWidth} />
       <Stack direction="row" spacing={2} sx={{ p: 2 }}>
