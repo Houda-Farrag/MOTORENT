@@ -24,9 +24,15 @@ import useUpdateProfile from "./useUpdateProfile";
       const {updateMyProfile , updatingProfile} = useUpdateProfile()
 
       async function submit(values){
+        const formData = new FormData();
+        formData.append('firstName', values.firstName);
+        formData.append('lastName', values.lastName);
+        formData.append('address', values.address);
+        formData.append('phone', values.phone);
+        // formData.append('image', values.image[0] || []);
+
         try {
-          await updateMyProfile(values)
-          console.log(values)
+          await updateMyProfile(formData)
         } catch(error) {
           console.log(error)
         }
@@ -169,7 +175,7 @@ import useUpdateProfile from "./useUpdateProfile";
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <FormLabel component="legend"sx={{color:'#1A202C',font:"Plus Jakarta Sans",
               fontWeight:600, fontSize:"16px"}}></FormLabel>
               <label htmlFor={`image`}>
@@ -185,7 +191,7 @@ import useUpdateProfile from "./useUpdateProfile";
                 multiple={false}
                 {...register("image")}
               />
-            </FormControl>
+            </FormControl> */}
           </Grid>
           <Grid>
           <Box sx={{
