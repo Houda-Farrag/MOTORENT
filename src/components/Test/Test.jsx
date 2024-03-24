@@ -21,6 +21,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Person2Icon from "@mui/icons-material/Person2";
+import LockResetIcon from '@mui/icons-material/LockReset';
 import GarageIcon from "@mui/icons-material/Garage";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
 import EmailIcon from "@mui/icons-material/Email";
@@ -375,6 +376,17 @@ const handleMenuClose = () => {
               <Person2Icon sx={{ color: "#3563E9" }} />
             </ListItemIcon>
             <ListItemText primary="Profile Details" />
+          </ListItemButton>
+
+          <ListItemButton 
+            onClick={() => {
+              navigate("./updatepassword");
+            }}
+          >
+            <ListItemIcon>
+              <LockResetIcon sx={{ color: "#3563E9" }} />
+            </ListItemIcon>
+            <ListItemText primary="Update Password" />
           </ListItemButton>
 
           <ListItemButton 

@@ -58,6 +58,18 @@ export async function updateMyProfile(values){
   
 }
 
+export async function updatePassword(values){
+  const {data , error} = await axios.patch(`http://localhost:3000/api/v1/users/userProfile/updatePassword` , values , {
+    headers : {
+      Authorization : `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+
+  if (error) return error;
+
+  return data;
+}
+
 export async function getUser(token) {
   const { error, data } = await axios.get(
     `http://localhost:3000/api/v1/users/userProfile`,
@@ -74,13 +86,13 @@ export async function getUser(token) {
   return data;
 }
 
-export async function logout(token) {
+export async function logout() {
   const { error, data } = await axios.post(
     `http://localhost:3000/api/v1/users/logout`,
     null,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }
   );

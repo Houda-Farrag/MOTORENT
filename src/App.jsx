@@ -20,11 +20,12 @@ import CarDetails from "./pages/CarDetails/CarDetails";
 import RentalSummary from "./components/FormSummaryRental/FormSummaryRental";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import RentalInfo from "./pages/RentalInfo/RentalInfo";
+import UpdatePassword from "./pages/Auth/UpdatePassword/UpdatePassword"
 import PaymentRes from "./pages/PaymentRes/PaymentRes";
 import LayOut from "./pages/LayOut/LayOut";
 import PaymentFail from "./pages/PaymentRes/PaymentFail";
 import VerifyEmail from "./pages/Auth/VerifyEmail/VerifyEmail";
-// import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import NotFound from "./pages/NotFound/NotFound"
 import { CarHistoryWrapper } from "./components/CarHistoryWrapper/CarHistoryWrapper";
 
 const rental = {
@@ -36,9 +37,6 @@ const rental = {
     tax: 0,
   },
 };
-
-
-
 
 const router = createBrowserRouter([
   {
@@ -73,11 +71,8 @@ const router = createBrowserRouter([
   },
   {
     path : "cars",
-    element : (
-      <ProtectedRoute>
+    element : 
         <Cars />
-      </ProtectedRoute>
-    )
   },
   {
     path : "profile",
@@ -89,12 +84,16 @@ const router = createBrowserRouter([
   },
    {
      path : "user",
-     element :<PersistentDrawerLeft/>,children:[
+     element :<ProtectedRoute><PersistentDrawerLeft/></ProtectedRoute>,children:[
       {path:""
       ,element:<UserProfileDetailsForm/>
     },
     {path:"profiledetalis"
     ,element:<UserProfileDetailsForm/>
+    },
+    {
+      path : "updatepassword",
+      element : <UpdatePassword />
     },
     {path:"history",
     element:<CarHistoryWrapper />
@@ -133,19 +132,21 @@ const router = createBrowserRouter([
     element : <LayOut /> , children : [
       {
         index : true,
-        element : <RentalInfo />
+        element : <ProtectedRoute><RentalInfo /></ProtectedRoute>
       },
       {
         path : "payRes/:rentId",
-        element : <PaymentRes />
+        element : <ProtectedRoute><PaymentRes /></ProtectedRoute>
       },
       {
         path : "payFail/:rentId",
-        element : <PaymentFail />
+        element : <ProtectedRoute><PaymentFail /></ProtectedRoute>
       }
     ]
+  }, {
+    path : "*",
+    element :<NotFound />
   }
-
 ]);
 
 const queryClient = new QueryClient({
