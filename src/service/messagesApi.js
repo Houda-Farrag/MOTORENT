@@ -58,6 +58,7 @@ if(error){
         return error 
 }
   }
+
   export  async function getAdminReplyForUserMessage(id){
 const { data, error}=await axios.get(`http://localhost:3000/api/v1/messages/${id}`,{
     headers:{
@@ -72,6 +73,5 @@ const { data, error}=await axios.get(`http://localhost:3000/api/v1/messages/${id
     console.log("error with admin reply ",error)
     throw error 
 } 
-
-
 }
+

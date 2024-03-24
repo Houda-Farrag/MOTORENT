@@ -37,6 +37,9 @@ import Person3Icon from '@mui/icons-material/Person3';
 import CommuteIcon from '@mui/icons-material/Commute';
 import LoginIcon from '@mui/icons-material/Login';
 import Footer from '../Footer/Footer';
+import { useGetUserMessage } from '../RecviedMessagesUser/useGetUserMessage';
+import axios from 'axios';
+import { useQueryClient } from '@tanstack/react-query';
 
 
 
@@ -132,6 +135,30 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
   const PersistentDrawerLeft = () => {
+    //?-------------------------------------------------------
+    const queryClient = useQueryClient();
+    const { data: userMessageData, isLoading: isLoadingMessage, error: errorUserMessage } = useGetUserMessage();
+    const unseenMessagesCount = userMessageData && userMessageData.data ? userMessageData.data.filter(message => !message.seen && message.status==='solved').length : 0;
+console.log(unseenMessagesCount,"unseenMessagesCount")
+
+const handleSeenMessages = async ()=>{
+if (unseenMessagesCount>0){
+
+  const {data,error} = await axios.get('http://localhost:3000/api/v1/messages/seenMyMessages',{
+    headers:{
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+  })
+if (error) console.log(error,"error")
+if (data){
+
+  queryClient.invalidateQueries('userMessages');
+  console.log(data,"data")
+} 
+  
+}
+}
+//?-----------------------------------------------------------------
     const [anchorEl, setAnchorEl] = useState(null);
 const [notifications, setNotifications] = useState(5); // Number of notifications
 const handleDrawerOpen = () => {
@@ -276,22 +303,20 @@ const handleMenuClose = () => {
         aria-haspopup="true"
         onClick={handleMenuOpen}
       >
-        <Badge badgeContent={notifications} color="error">
+        <Badge badgeContent={unseenMessagesCount} color="error">
           <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
         </Badge>
       </IconButton>
-      <Menu
+      {/* <Menu
         id="notifications-menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        {/* Notification items */}
         <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
-        {/* You can map over a list of notifications to generate menu items */}
-      </Menu>
+      </Menu> */}
       <IconButton
         size="large"
         aria-label="pages"
@@ -409,11 +434,14 @@ const handleMenuClose = () => {
               <ListItemButton
                 sx={{ pl: 4 }}
                 onClick={() => {
+                  handleSeenMessages();
                   navigate("./recviedmessage");
                 }}
               >
                 <ListItemIcon>
+                <Badge badgeContent={unseenMessagesCount} color="error">
                   <MarkEmailUnreadIcon sx={{ color: "#3563E9" }} />
+                  </Badge>
                 </ListItemIcon>
                 <ListItemText primary="Recivied Messages" />
               </ListItemButton>

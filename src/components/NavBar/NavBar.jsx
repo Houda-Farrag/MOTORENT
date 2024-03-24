@@ -24,6 +24,8 @@ import CommuteIcon from '@mui/icons-material/Commute';
 import LoginIcon from '@mui/icons-material/Login';
 import Person3Icon from '@mui/icons-material/Person3';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useGetUserMessage } from '../RecviedMessagesUser/useGetUserMessage';
+import { useQueryClient } from '@tanstack/react-query';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -77,6 +79,21 @@ function Navbar({ user = {}, cars = [] }) {
 
   const [notifications, setNotifications] = useState(5); // Number of notifications
   const navigate = useNavigate()
+  //?-----------------------
+  const queryClient = useQueryClient();
+  const { data: userMessageData, isLoading: isLoadingMessage, error: errorUserMessage } = useGetUserMessage();
+  let unseenMessagesCount = 0;
+  if (!errorUserMessage){
+     unseenMessagesCount = userMessageData && userMessageData.data ? userMessageData.data.filter(message => !message.seen && message.status==='solved').length : 0;
+    console.log(unseenMessagesCount,"unseenMessagesCount")
+  }
+
+ const  handleSeenMessages = ()=>{
+  if (unseenMessagesCount>0){
+    queryClient.invalidateQueries('userMessages');
+  }
+   navigate('/user/recviedmessage')
+  }
   //?-----------------------
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -317,9 +334,10 @@ const token= localStorage.getItem("token")
         sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
         aria-controls="notifications-menu"
         aria-haspopup="true"
-        onClick={handleMenuOpen}
+        onClick={handleSeenMessages}
+        // onClick={handleMenuOpen}
       >
-        <Badge badgeContent={notifications} color="error">
+        <Badge badgeContent={unseenMessagesCount} color="error">
           <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
         </Badge>
       </IconButton>
@@ -388,7 +406,7 @@ const token= localStorage.getItem("token")
           <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
         </Badge>
       </IconButton>
-      <Menu
+      {/* <Menu
         id="notifications-menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -398,7 +416,7 @@ const token= localStorage.getItem("token")
         <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
       
-      </Menu>
+      </Menu> */}
     
     </Box>
    
