@@ -16,7 +16,7 @@ import useUpdatedReview from './useUpdatedReview';
 
 const Review = ({carDetails}) => {
   const {data : user} = useUser()
-  const {register , handleSubmit , reset } = useForm()
+  const {register , handleSubmit , reset  , watch} = useForm()
   const [rating , setRating] = useState(1);
   const {addReview , creatingReview} = useAddReview()
   const {data : reviews , isLoading : loadingReviews} = useGetAllReviews(carDetails?._id)
@@ -25,6 +25,8 @@ const Review = ({carDetails}) => {
   const [updatedReview , setUpdatedReview] = useState(null)
   const {updateReview , updatingReview} = useUpdatedReview()
   const [change , setChange] = useState(false)
+
+  const reviewField = watch("review")
 
   async function handleDeleteReview(id){
     try {
@@ -134,7 +136,7 @@ return<>
        />
         </Grid>
         <Grid sm={12} item display={"flex"}  flexDirection={'row'} justifyContent={'flex-end'}>
-        <Button disabled={creatingReview} size="medium" type="submit" sx={{ml:2,mr:2,font:"Plus Jakarta Sans",
+        <Button size="medium" type="submit" disabled={!reviewField} sx={{ml:2,mr:2,font:"Plus Jakarta Sans",
             fontWeight:600, backgroundColor:'#3563E9',textTransform:"unset"}} variant="contained" >
             Add Review 
         </Button>
