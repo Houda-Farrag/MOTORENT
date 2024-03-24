@@ -60,14 +60,28 @@ Gasoline
              {car?.tankCapacity}L
               </Typography>
 </Grid>
+
 <Grid item sm={3}>
 <Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
 Streening
-              </Typography>
+</Typography>
+
 </Grid>
 <Grid item sm={3}>
 <Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
              {car?.transmission}
+              </Typography>
+</Grid>
+
+<Grid item sm={3}>
+<Typography variant="body2" color="#90A3BF" sx={{fontWeight:400,font:"Plus Jakarta Sans",fontSize:"20px"}}>
+Location
+</Typography>
+
+</Grid>
+<Grid item sm={3}>
+<Typography variant="body2" color="#596780" sx={{fontWeight:600,font:"Plus Jakarta Sans",fontSize:"20px"}}>
+             {car?.location.city}/{car?.location.area}
               </Typography>
 </Grid>
 </Grid>

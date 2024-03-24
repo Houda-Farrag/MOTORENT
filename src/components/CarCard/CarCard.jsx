@@ -53,6 +53,7 @@ function CarCard({car , LoadingCars}) {
       console.log(error)
     } 
   }
+
   async function handleRemoveFromWishList(id){
     try {
       await removeFromWishList(id)
@@ -151,13 +152,13 @@ function CarCard({car , LoadingCars}) {
                     >EGP{car.priceForDay}/</Typography>day
                    </Box>
                    <Box>
-                   {car.active ? (
-  <Button variant="contained" onClick={() => navigate("/rentalInfo", { state: { car } })}>
-    Rent
+                   {(car.status === "rented")  ? (
+  <Button variant="contained" disabled >
+    Rented
   </Button>
 ) : (
-  <Button variant="contained"  sx={{textTransform:"unset"}} disabled>
- Rented
+  <Button variant="contained"  sx={{textTransform:"unset"}} onClick={() => navigate("/rentalInfo", { state: { car } })}>
+ Rent
   </Button>
 )}
                    </Box>

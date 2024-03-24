@@ -1,10 +1,8 @@
 import CarWishList from "../../components/CarWishlist/CarWishlist";
-import { Accordion, AccordionSummary, Box, Button, Card, Divider, FormHelperText, Grid, Stack, Typography } from "@mui/material";
+import { Accordion, AccordionSummary, Box, Button, Typography } from "@mui/material";
 import useUser from "../Auth/useUser";
 import LoadingIndicator from "../../ui/LoadingIndicator";
 import useClearWishList from "./useClearWishList";
-import Navbar from "../../components/NavBar/NavBar";
-import Footer from "../../components/Footer/Footer";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import "./style.css"

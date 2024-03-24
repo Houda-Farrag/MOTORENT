@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {Typography,  Box, Button, Grid, Avatar, Rating, TextField, Stack } from '@mui/material';
 import {  deepPurple } from '@mui/material/colors';
 
@@ -7,12 +7,12 @@ import useUser from "../../Auth/useUser"
 import useAddReview from "./useAddReview"
 import useGetAllReviews from './useGetAllReviews';
 import LoadingIndicator from '../../ui/LoadingIndicator';
-// import { useQueryClient } from '@tanstack/react-query';
 import { MdDelete } from "react-icons/md";
 import useDeleteReview from './useDeleteReview';
 import { BsPencilSquare } from "react-icons/bs";
 import { getReviewById } from '../../service/reviewApi';
 import useUpdatedReview from './useUpdatedReview';
+
 
 const Review = ({carDetails}) => {
   const {data : user} = useUser()
@@ -25,15 +25,6 @@ const Review = ({carDetails}) => {
   const [updatedReview , setUpdatedReview] = useState(null)
   const {updateReview , updatingReview} = useUpdatedReview()
   const [change , setChange] = useState(false)
-
-    console.log(user?.data.rentedCars)
-    console.log(carDetails?._id)
-
-    useEffect(function() {
-      
-    },[change])
-    
-
 
   async function handleDeleteReview(id){
     try {

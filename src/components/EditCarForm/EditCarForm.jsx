@@ -9,7 +9,7 @@ import useEditCar from '../../pages/Profile/useEditCar';
 
 const plateNumberRegex = /^\d{1,4}( \d{1,4}){0,3} ((?:[A-Za-z]|[\u0600-\u06FF])(?: (?:(?<=\p{Arabic})\s*(?=\p{Arabic}))?)){1,4}( ((?:[A-Za-z]|[\u0600-\u06FF])(?: (?:(?<=\p{Arabic})\s*(?=\p{Arabic}))?)){1,4}){0,3}$/
 
-export default function EditCarForm({car = {} ,setSelectedCarId}) {
+export default function EditCarForm({car = {}}) {
     const {carBrands , isGettingCarBrands} = useBrands()
     const {carCategories , isGettingCategories} = useCategories()
     const {editCar , editingCar} = useEditCar()
@@ -32,7 +32,7 @@ export default function EditCarForm({car = {} ,setSelectedCarId}) {
     const { errors } = formState;
   
     function handleBack() {
-      if (step < 1) setSelectedCarId(null)
+      if (step < 1) return;
       setStep(step => step - 1);
     }
     async function submit(values) {
@@ -156,10 +156,10 @@ export default function EditCarForm({car = {} ,setSelectedCarId}) {
                   required
                   type='number'
                   size="small"
-                  id="totalKM"
+                  id="average"
                   defaultValue={editValues?.average}
                   label="Average KM"
-                  {...register("totalKM", { required: "Average is Required" })}
+                  {...register("average", { required: "Average is Required" })}
                   error={errors?.average?.message}
                   helperText={
                     !errors?.average?.message ? "" : errors?.average?.message

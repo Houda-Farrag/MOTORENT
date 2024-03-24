@@ -9,10 +9,14 @@ import Navbar from "../../components/NavBar/NavBar";
 import TopFiveCars from "../../components/TopFiveCars/TopFiveCars";
 import TopFiveExpensiveCars from "../../components/TopFiveExpensiveCars/TopFiveExpensiveCars";
 import Footer from "../../components/Footer/Footer";
+
+
+
 const CarDetails = () => {
   const location = useLocation();
   const { car: carDetails } = location?.state || {};
   console.log(carDetails)
+
 
 
   return <>

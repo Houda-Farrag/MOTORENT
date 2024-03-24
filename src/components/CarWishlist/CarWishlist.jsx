@@ -9,30 +9,39 @@ Accordion,
 AccordionDetails,
 } from "@mui/material";
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-
 import { useNavigate } from 'react-router-dom';
+import useRemoveFromWishList from '../CarCard/useRemoveFromWishList';
+import LoadingIndicator from '../../ui/LoadingIndicator';
 
 const CarWishList=({car})=>{
   const navigate = useNavigate()
+       const {removeFromWishList , removingFromWishList} = useRemoveFromWishList();
+
+    async function handleRemoveFromWishList(id){
+    try {
+      await removeFromWishList(id)
+    } catch(error) {
+      console.log(error)
+    } 
+  }
 
 return (
   <>
- 
-
-
+  {removingFromWishList && <LoadingIndicator load={removingFromWishList}/>}
 <Accordion expanded key={car.id} >
 <AccordionSummary aria-controls={`${car.id}-content`} id={`${car.id}-header`} expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}>
   <Typography sx={{color : "#000" , fontFamily: "Nunito" ,fontWeight:700, fontSize : "1.2rem"}}>{car.model}</Typography>
 </AccordionSummary> 
-
-
         <AccordionDetails>
         <Box className="cardetails">
             <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row" >
                 <Box sx={{
                     width : "200px",
                     height : "150px",
-                }}>
+                    cursor : "pointer"
+                }}
+                onClick={()=>navigate("/carDetails" , {state : {car}})}
+                >
                     <img style={{width:'100%',border:'1px solid transparent',borderRadius:'50px'}} src={car.images[0].url} alt={car.images[0]._id} />
                 </Box>
                 <Box>    
@@ -68,7 +77,7 @@ return (
             </Stack>
             <Stack display="flex" justifyContent="space-around" alignItems="center" flexDirection="row" marginTop={2}>
                 <Box>
-                    <Button  variant='contained' size='small' color='error' >Delete</Button>
+                    <Button  variant='contained' size='small' color='error' onClick={()=>handleRemoveFromWishList(car.id)}>Delete</Button>
                 </Box>
                 <Box>
                     <Button variant='contained' size='small'onClick={()=> navigate("/rentalInfo" , {state : {car}})}  >Rent</Button>
@@ -76,7 +85,6 @@ return (
             </Stack>
         </Box>
 </AccordionDetails>
-
 
 </Accordion>
 </>

@@ -1,13 +1,14 @@
-import { useMutation, useQueries, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addReview as addReviewApi } from "../../service/reviewApi";
 import toast from "react-hot-toast";
 
-function useAddReview(){
+function useAddReview(id){
+
     const queryClient = useQueryClient()
+
     const {mutate : addReview , isLoading : creatingReview} = useMutation({
         mutationFn : addReviewApi,
-        onSuccess : (data)=> {
-            toast.success("Review Added Succsefully")
+        onSuccess : ()=> {
             queryClient.invalidateQueries(["reviews"])
         },
 

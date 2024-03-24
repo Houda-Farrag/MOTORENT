@@ -21,7 +21,7 @@ function AddCarForm({car = {}}) {
 
   const {id : EditId , ...editValues} = car;
   // const EditSession = Boolean(EditId);
-  const { register, formState, handleSubmit , getValues} = useForm({
+  const { register, formState, handleSubmit } = useForm({
     mode: "all",
   });
   
@@ -35,7 +35,7 @@ console.log(editValues)
   const { errors } = formState;
 
   function handleBack() {
-    if (step < 1) ;
+    if (step < 1) return;
     setStep(step => step - 1);
   }
 
@@ -47,7 +47,7 @@ console.log(editValues)
     formData.append('brand', brand);
     formData.append('transmission', transmission);
     formData.append('category', category);
-    formData.append('average', values.average);
+    formData.append('average', +values.average);
     formData.append('capacity', values.capacity);
     formData.append('doc-carLicense', values.carLicense[0]);
     formData.append('doc-carInspection', values.carInspection[0]);
@@ -65,6 +65,7 @@ console.log(editValues)
     formData.append('tankCapacity', values.tankCapacity);
   
     try {
+      console.log(formData)
       await addCar(formData);
     } catch (error) {
       console.log(error);
@@ -161,10 +162,10 @@ console.log(editValues)
                 required
                 type='number'
                 size="small"
-                id="totalKM                "
+                id="average"
                 defaultValue={editValues?.average}
                 label="Average KM"
-                {...register("totalKM", { required: "Average is Required" })}
+                {...register("average", { required: "Average is Required" })}
                 error={errors?.average?.message}
                 helperText={
                   !errors?.average?.message ? "" : errors?.average?.message

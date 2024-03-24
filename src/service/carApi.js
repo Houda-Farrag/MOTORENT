@@ -58,9 +58,6 @@ export async function getAllBrands(){
   return data;
 }
 
-export async function getCarsByCategorgy(){
-  
-}
 
 export async function deleteCar(id){
 
@@ -112,7 +109,7 @@ export async function rentCar(values){
 }
 
 export async function getCarById(id){
-
+  console.log(id)
   const {data , error} = await axios.get(`http://localhost:3000/api/v1/cars/${id}` , {
     headers : {
       Authorization : `Bearer ${localStorage.getItem("token")}`
