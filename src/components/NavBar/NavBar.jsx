@@ -12,18 +12,15 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, CardMedia, Divider, SvgIcon } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Button, CardMedia, Divider } from '@mui/material';
 import PagesIcon from '@mui/icons-material/Pages';
 import HomeIcon from '@mui/icons-material/Home';
 import CommuteIcon from '@mui/icons-material/Commute';
 import LoginIcon from '@mui/icons-material/Login';
 import Person3Icon from '@mui/icons-material/Person3';
-import LogoutIcon from '@mui/icons-material/Logout';
 import { useGetUserMessage } from '../RecviedMessagesUser/useGetUserMessage';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -145,6 +142,7 @@ const handleMenuItemClick = (page) => {
   else if (page === 'user') {
     navigate('/user');
   }
+
   else if (page === 'login') {
     navigate('/login');
     localStorage.removeItem("token")
@@ -310,7 +308,7 @@ const token= localStorage.getItem("token")
         color="inherit"
         sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
       onClick={()=>{
-        navigate('user/wishlist')
+        navigate('/user/wishlist')
       }}
       >
         <FavoriteIcon />
@@ -361,7 +359,7 @@ const token= localStorage.getItem("token")
         onClick={handleClickPageUser}
         sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
       >
-        <AccountCircle />
+        <AccountCircle user={user}/>
       </IconButton>
       <PositionedMenuProfile/>
     </Box>
@@ -376,8 +374,8 @@ const token= localStorage.getItem("token")
         aria-label="wishlist"
         color="inherit"
         sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
-     onClick={()=>{
-      navigate('/login')
+        onClick={()=>{
+        navigate('/login')
      }}
      >
         <LoginIcon />

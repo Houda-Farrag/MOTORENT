@@ -9,7 +9,8 @@ function useAddReview(id){
     const {mutate : addReview , isLoading : creatingReview} = useMutation({
         mutationFn : addReviewApi,
         onSuccess : ()=> {
-            queryClient.invalidateQueries(["reviews"])
+            toast.success("Reviews Added Successfully")
+            queryClient.invalidateQueries(["reviews" , id])
         },
 
         onError : ()=> {
