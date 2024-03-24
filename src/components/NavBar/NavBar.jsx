@@ -339,7 +339,7 @@ const token= localStorage.getItem("token")
           <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
         </Badge>
       </IconButton>
-      <Menu
+      {/* <Menu
         id="notifications-menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -349,7 +349,7 @@ const token= localStorage.getItem("token")
         <MenuItem onClick={handleMenuClose}>Notification 1</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 2</MenuItem>
         <MenuItem onClick={handleMenuClose}>Notification 3</MenuItem>
-      </Menu>
+      </Menu> */}
       <IconButton
         size="large"
         aria-label="pages"
@@ -392,7 +392,7 @@ const token= localStorage.getItem("token")
         <PagesIcon />
       </IconButton>
      <PositionedMenu/>
-      <IconButton
+      {/* <IconButton
         size="large"
         aria-label="show 17 new notifications"
         sx={{ color: '#596780', bgcolor: 'white', borderRadius: '50%', border: '1px solid #C3D4E9', mr: 2 }}
@@ -403,7 +403,7 @@ const token= localStorage.getItem("token")
         <Badge badgeContent={notifications} color="error">
           <NotificationsIcon sx={{ "&:hover": { color: "#FBB917" }, "&:click": { color: "#FBB917" } }} />
         </Badge>
-      </IconButton>
+      </IconButton> */}
       {/* <Menu
         id="notifications-menu"
         anchorEl={anchorEl}
