@@ -93,7 +93,7 @@ Location
             fontStyle:"bold",
           lineHeight:"35.5px"
             }} >
-{car?.priceForDay} EGP<span style={{color:"#90A3BF",font:"Plus Jakarta Sans",fontSize:"16px"}}>/days</span>`
+{car?.priceForDay} EGP<span style={{color:"#90A3BF",font:"Plus Jakarta Sans",fontSize:"16px"}}>/day</span>
      
       </Typography>
 </Grid>

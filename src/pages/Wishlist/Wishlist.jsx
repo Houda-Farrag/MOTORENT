@@ -20,17 +20,12 @@ const Wishlist=()=>{
     }
     return (
       <>
-     
         {clearingWishList && <LoadingIndicator load={clearingWishList} />}
-      
-       
         <div>
-       
         {isLoading && <LoadingIndicator load={isLoading}/>}
         <Box  >
           <Accordion
             disableGutters
-           
             defaultExpanded
             sx={{ border: "none !important" ,width:"100%",ml:3,mt:1}}
           >
@@ -55,12 +50,7 @@ const Wishlist=()=>{
       </Box>   
       }
       </Box>
-    
-    
     </div>
-   
-
-
     </>
 )
 }

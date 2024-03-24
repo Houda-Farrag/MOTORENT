@@ -56,7 +56,7 @@ function Footer() {
       </Grid>
       <Grid container className={styles.lower} spacing={2}>
         <Grid item xs={12} sm={6}>
-          &copy;2024 MotoRent. All Rights Reserved to Team El 3atawla
+          &copy;2024 MotoRent. All Rights Reserved to <strong>Team 4 💖</strong>
         </Grid>
         <Grid item xs={6} sm={2} className={styles.policy}>
           <h4>Privacy&Policy</h4>
