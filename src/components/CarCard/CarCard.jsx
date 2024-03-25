@@ -152,9 +152,9 @@ function CarCard({car , LoadingCars}) {
                     >EGP{car.priceForDay}/</Typography>day
                    </Box>
                    <Box>
-                   {(car.status === "rented")  ? (
+                   {(car.status !== "available" )  ? (
   <Button variant="contained" disabled >
-    Rented
+    Not Avail
   </Button>
 ) : (
   <Button variant="contained"  sx={{textTransform:"unset"}} onClick={() => navigate("/rentalInfo", { state: { car } })}>

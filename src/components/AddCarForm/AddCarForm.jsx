@@ -112,14 +112,7 @@ console.log(editValues)
                 id="manufacturingYear"
                 label="Year Model"
                 defaultValue={editValues?.manufacturingYear}
-                {...register("manufacturingYear", { required: "Year Model is Required"  , validate: (value)=> {
-                  const currentYear = new Date().getFullYear();
-                  if (value < 2000 || value > currentYear) {
-                    return false; 
-                  } else {
-                    return true;
-                  }
-              }})}
+                {...register("manufacturingYear", { required: "Year Model is Required"  , min : {value : 1999 , message : "We Accept only Cars after 2000s"} , max : {value : new Date().getFullYear() , message : "we are not there yet"}})}
                 error={errors?.manufacturingYear?.message}
                 helperText={
                   !errors?.manufacturingYear?.message ? "" : errors?.manufacturingYear?.message
@@ -149,7 +142,7 @@ console.log(editValues)
                 id="tankCapacity"
                 defaultValue={editValues?.tankCapacity}
                 label="Tank Capacity"
-                {...register("tankCapacity", { required: "Tank Capacity is Required" })}
+                {...register("tankCapacity", { required: "Tank Capacity is Required"  , min : {value : 0 , message : "not allowed"} , max : {value : 90 , message : "Please Enter a reasonable capacity"}})}
                 error={errors?.tankCapacity?.message}
                 helperText={
                   !errors?.tankCapacity?.message ? "" : errors?.tankCapacity?.message
@@ -165,7 +158,7 @@ console.log(editValues)
                 id="average"
                 defaultValue={editValues?.average}
                 label="Average KM"
-                {...register("average", { required: "Average is Required" })}
+                {...register("average", { required: "Average is Required" , min : {value : 0 , message : "minus values are not allowed"} , max : {value : 200000 , message : "to much , maximum 200000 Km"}})}
                 error={errors?.average?.message}
                 helperText={
                   !errors?.average?.message ? "" : errors?.average?.message
@@ -181,7 +174,7 @@ console.log(editValues)
                 id="capacity"
                 label="Capacity"
                 defaultValue={editValues?.capacity}
-                {...register("capacity", { required: "Capacity" })}
+                {...register("capacity", { required: "Capacity"   , min : {value : 1 , message : "not allowd"} , max : {value : 7 , message : "7 persons are the maximum"}})}
                 error={errors?.capacity?.message}
                 helperText={
                   !errors?.capacity?.message ? "" : errors?.capacity?.message
@@ -197,7 +190,7 @@ console.log(editValues)
                 id="priceForDay"
                 defaultValue={editValues?.priceForDay}
                 label="Rate Per Day"
-                {...register("priceForDay", { required: "Rate Per Day is Required" })}
+                {...register("priceForDay", { required: "Rate Per Day is Required" ,  min : {value : 0 , message : "minus values are not allowed"}})}
                 error={errors?.priceForDay?.message}
                 helperText={
                   !errors?.priceForDay?.message ? "" : errors?.priceForDay?.message
