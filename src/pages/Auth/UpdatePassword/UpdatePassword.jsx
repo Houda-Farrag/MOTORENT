@@ -20,7 +20,6 @@ function UpdatePassword() {
       try {
         await mutatePassword(values);
         setTimeout(function(){
-          localStorage.removeItem("token")
         } , 3000)      
       } catch (error) {
         console.log(error)
