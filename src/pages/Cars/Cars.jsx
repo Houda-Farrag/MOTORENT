@@ -94,11 +94,11 @@ function Cars() {
       {loadingCars && <LoadingIndicator />}
       <Grid container justifyContent="space-between" spacing={2}>
         <Grid item xs={12}>
-          <Navbar />
+          <Navbar cars={data}/>
         </Grid>
         <Hidden xsDown>
           <Grid item xs={3}>
-            <Sidebar 
+            <Sidebar
             categories={categories}
             handleChangeChecked={handleChangeCheckedCategories}
             capacities={capacities}
