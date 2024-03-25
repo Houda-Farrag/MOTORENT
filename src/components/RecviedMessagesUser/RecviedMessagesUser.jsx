@@ -82,8 +82,7 @@ const RecviedMessagesUser = () => {
             ))}
           </Box>
         </Accordion>
-      </Box>/
-      );
+      </Box>
     </>);
 };
 export default RecviedMessagesUser;

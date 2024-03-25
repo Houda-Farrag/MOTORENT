@@ -48,7 +48,7 @@ export default function History() {
     const navigate = useNavigate()
     const {data , isLoading } = useUser()    
   const [expanded, setExpanded] = useState('panel1');
-    console.log(data?.data.rentedCars)
+
   const handleChange = (panel) => () => {
     setExpanded((prevExpanded) => (prevExpanded !== panel ? panel : false));
   };

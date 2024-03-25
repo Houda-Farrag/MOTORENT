@@ -122,11 +122,7 @@ const UserSendMessageForm = () => {
 
                 sx={{ backgroundColor: "#F6F7F9", borderRadius: "10px", mt: 3, border: "none", "&:hover": { border: "1px solid #F6F7F9" } }}
                 error={!!errors.message}
-
               />
-
-
-
             </Grid>
             <Grid item sm={6}>
               <Button disabled={isSending} size="large" sx={{
@@ -139,7 +135,6 @@ const UserSendMessageForm = () => {
 
         </form>
       </Stack>
-
     </>);
 };
 export default UserSendMessageForm;
