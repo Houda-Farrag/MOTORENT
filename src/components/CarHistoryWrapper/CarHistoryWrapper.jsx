@@ -5,8 +5,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Typography } from "@mui/material";
 import "./styles.css"
 import CarHistory from "../CarHistory/CarHistory"
-// import sadf from "../../assets/logo."
-
+import imageCar from "../../assets/logo.jpg"
 
 export const CarHistoryWrapper= () => {
   return (
@@ -26,7 +25,7 @@ export const CarHistoryWrapper= () => {
               id="panel1-header"
             >
               <Box className="accordion-header">
-                <img src="../../assets/logo.jpg" alt="logo" width="80px" height="80px"/>
+                <img src={imageCar} alt="logo" width="80px" height="80px"/>
                 <Typography variant="h6" fontSize="20px" color="primary">Your History</Typography>
               </Box>
             </AccordionSummary>
