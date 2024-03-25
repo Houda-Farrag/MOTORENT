@@ -184,7 +184,7 @@ export default function EditCarForm({car = {}}) {
                   id="priceForDay"
                   defaultValue={editValues?.priceForDay}
                   label="Rate Per Day"
-                  {...register("priceForDay", { required: "Rate Per Day is Required" ,  min : {value : 0 , message : "minus values are not allowed"}})}
+                  {...register("priceForDay", { required: "Rate Per Day is Required" ,  min : {value : 250 , message : "minimum value 250"} , max : {value : 2500 , message : "maximum 2500"}})}
                   error={errors?.priceForDay?.message}
                   helperText={
                     !errors?.priceForDay?.message ? "" : errors?.priceForDay?.message
