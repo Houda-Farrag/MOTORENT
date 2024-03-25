@@ -17,8 +17,6 @@ const CarDetails = () => {
   const { car: carDetails } = location?.state || {};
   console.log(carDetails)
 
-
-
   return <>
     <Grid container>
         <Grid item xs={12}>

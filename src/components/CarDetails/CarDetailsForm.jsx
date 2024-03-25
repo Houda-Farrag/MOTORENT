@@ -104,7 +104,7 @@ Location
     fontWeight:700,
     font:"Plus Jakarta Sans",
     textTransform:"unset"
-    }} disabled={car.status !== "available"} onClick={() => navigate("/rentalInfo", { state: { car } })}>{car.status !== "available" ? "Not Avail" : "Rent Noe"}</Button>
+    }} disabled={car.status !== "available"} onClick={() => navigate("/rentalInfo", { state: { car } })}>{car.status !== "available" ? "Not Avail" : "Rent Now"}</Button>
 </Grid>
 </Grid>
 </Card>

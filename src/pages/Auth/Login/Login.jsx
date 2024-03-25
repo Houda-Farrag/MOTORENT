@@ -14,7 +14,6 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@
 
 function Login() {
 
-
   const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, formState } = useForm({
