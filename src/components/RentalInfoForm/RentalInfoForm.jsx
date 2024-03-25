@@ -22,7 +22,8 @@ const RentalInfoForm =()=>{
     const [isLoading , setIsLoading] = useState(false)
     const {register , formState , handleSubmit} = useForm({mode:"all"})
     const {errors}=formState
-    console.log(carLocation)
+    
+
    async function submit(val){
       const values = {
         car : carId,
@@ -102,8 +103,9 @@ const RentalInfoForm =()=>{
               padding : "18px",
               marginTop : "22px"
             }}
-            {...register("from" , {required : "This Field is required"})}
-            />        
+            {...register("from" , {required : "This Field is required" , min : {value : new Date().toISOString().split('T')[0] , message : "Not allowed"}})}
+            />
+            <span style={{color : "red"}}>{errors?.from?.message}</span>        
       </FormControl>
         </Grid>
        </Grid>

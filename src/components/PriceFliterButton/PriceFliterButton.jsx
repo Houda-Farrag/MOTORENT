@@ -23,7 +23,7 @@ const PriceFliterButton = ({ selectedPrice, handleChangePrice }) => {
       onChange={handleChangePrice}
       valueLabelDisplay='on'
       aria-label='range-slider'
-      min={500}
+      min={250}
       max={2500}
       />
        <Typography sx={{color:'#90A3BF',font:"Plus Jakarta Sans",lineHeight:'30px',
